@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{p['index.veza_slanje_poruke']}</title>
+        <h:outputStylesheet library="css" name="osnovna.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandLink action="#{slanjePoruka.promjeniJezik()}" value="#{p['index.naslov']}" />
+            &nbsp;
+            <h:commandLink action="#{slanjePoruka.pregledPoruka()}" value="#{p['index.veza_pregled_poruka']}" />
+            &nbsp;
+            <h:commandLink action="#{slanjePoruka.pregledDnevnika()}" value="#{p['index.veza_pregled_dnevnika']}" />
+            &nbsp;
+        </h:form>
+
+        #{p['index.veza_slanje_poruke']}
+
+        <h:form>
+            <h:outputLabel value="Prima:"/>
+            <h:inputText value="#{slanjePoruka.prima}" />
+            <br/>
+
+            <h:outputLabel value="Salje"/>
+            <h:inputText value="#{slanjePoruka.salje}" />
+            <br/>
+
+            <h:outputLabel value="Predmet"/>
+            <h:inputText value="#{slanjePoruka.predmet}" />
+            <br/>
+
+            <h:outputLabel value="Poruka"/>
+            <h:panelGrid columns="2">
+                <h:inputTextarea cols="40" rows="10" value="#{slanjePoruka.privitak}" />
+
+                <h:selectOneListbox size="5" value="#{slanjePoruka.odabranaDatoteka}">
+                    <f:selectItems value="#{slanjePoruka.popisDatoteka}" var="d" itemLabel="#{d}" itemValue="#{d}"/>
+                </h:selectOneListbox>
+
+                <h:commandButton value="Šalji poruku" action="#{slanjePoruka.saljiPoruku()}" />
+
+                <h:commandButton value="Preuzmi" action="#{slanjePoruka.preuzmiSadrzaj()}" />
+                
+                <h:commandButton value="Obriši" action="#{slanjePoruka.obrisiPoruku()}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
