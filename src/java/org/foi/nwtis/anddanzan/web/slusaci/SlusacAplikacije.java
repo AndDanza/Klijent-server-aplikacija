@@ -34,7 +34,7 @@ public class SlusacAplikacije implements ServletContextListener {
             BP_Konfiguracija bpk = new BP_Konfiguracija(puniNaziv);
             kontekst.setAttribute("BP_Konfig", bpk);    //atributi na razini aplikacije
 
-            obrada = new ObradaPoruka(bpk);
+            obrada = new ObradaPoruka();
             obrada.start();
         }
         catch(NemaKonfiguracije | NeispravnaKonfiguracija ex) {

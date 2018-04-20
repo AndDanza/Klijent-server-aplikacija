@@ -1,20 +1,17 @@
 package org.foi.nwtis.anddanzan.web.dretve;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.servlet.ServletContext;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.kontrole.DatotekaRadaDretve;
-import org.nwtis.anddanzan.konfiguracije.NeispravnaKonfiguracija;
-import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
+import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
  * Dretva koja je pokrenuta prilikom inicijalizacije samog konteksta.
@@ -25,6 +22,12 @@ import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
  * @author Andrea
  */
 public class ObradaPoruka extends Thread {
+
+    //varijable sesije i mapa za mailove
+    Session session;
+    Store store;
+    Folder folder;
+    Folder nwtisMapa;
 
     BP_Konfiguracija konfiguracija;
 
@@ -46,8 +49,8 @@ public class ObradaPoruka extends Thread {
     private String mapaNwtisPoruka;
     private String logDatoteka;
 
-    public ObradaPoruka(BP_Konfiguracija konfiguracijeBaze) {
-        this.konfiguracija = konfiguracijeBaze;
+    public ObradaPoruka() {
+        this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
     }
 
     @Override
@@ -81,10 +84,6 @@ public class ObradaPoruka extends Thread {
 
                 logObrade = new DatotekaRadaDretve();
 
-                Session session;
-                Store store;
-                Folder folder;
-
                 // Start the session
                 Properties properties = System.getProperties();
                 properties.put("mail.smtp.host", this.mailServer);
@@ -99,25 +98,33 @@ public class ObradaPoruka extends Thread {
                 folder = store.getFolder("INBOX");
                 folder.open(Folder.READ_ONLY);
 
+                nwtisMapa = provjeraNwtisMape();
+
+                //TODO ne dohvaćati sve poruke odjednom nego ih po grupama dohvatiti (numMessagesToRead)
                 Message[] messages = null;
-                //TODO ne dohvaćati sve poruke odjednom nego ih po grupama dohvatiti (10 po 10 itd.)
                 messages = folder.getMessages();
 
+                //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
                     //TODO pretražiti tzv. nwtis poruke i obraditi ih 
-                    System.out.println(messages[i].getSubject());
+                    //System.out.println("poruka glasi: " + getMailContent(messages[i]) + messages[i].getContentType() + " - is json: " + messages[i].isMimeType("text/json"));
+                    sortirajMail(messages[i]);
+//                    if (!) {
+//                        zapisiUDnevnik("neispravna");
+//                    }
                 }
 
                 folder.close(false);
                 store.close();
 
-                System.out.println("Završila iteracija: " + (broj++));
                 logObrade.pohraniPodatke(logDatoteka);
+                System.out.println("Završila iteracija: " + (broj++));
 
                 long trajanje = System.currentTimeMillis() - start;
                 long sleepTime = this.milisecSpavanje - trajanje;
 
                 Thread.sleep(sleepTime);
+                logObrade = null;
             }
         }
         catch(MessagingException | InterruptedException ex) {
@@ -125,4 +132,63 @@ public class ObradaPoruka extends Thread {
         }
     }
 
+    /**
+     * Provjera je li dobivena poruka NWTiS ili neNWTiS te shodno tome
+     * premještanje u zadanu mapu za NWTiS poruke
+     *
+     * @param message mail
+     * @return true () ili false
+     */
+    private void sortirajMail(Message message) {
+        try {
+            String privitak = message.getFileName();
+
+            if (privitak.contains(this.oznakaNwtisPoruke)) {
+                System.out.println("Imate NWTiS poruku");
+                Message[] msg = new Message[]{message};
+                folder.copyMessages(msg, nwtisMapa);
+                message.setFlag(Flags.Flag.DELETED, true);
+                folder.expunge();
+            }
+            else {
+                System.out.println("Imate neNWTiS poruku");
+            }
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Zapisivanje u dnevnik u bazi podataka
+     *
+     * @param sadrzaj sadržaj koji se zapisuje u log (nastale promjene)
+     */
+    private void zapisiUDnevnik(String sadrzaj) {
+        switch (sadrzaj) {
+            case "neispravna":
+                break;
+        }
+    }
+
+    /**
+     * Provjera postoji li zadana mapa za NWTiS poruke, ako ne kreira se nova i
+     * vraća u obliku tipa <code>Folder</code>
+     *
+     * @return
+     */
+    private Folder provjeraNwtisMape() {
+        try {
+            Folder nwtisFolder = store.getFolder(this.mapaNwtisPoruka);
+            if (!nwtisFolder.exists()) {
+                nwtisFolder.create(Folder.HOLDS_MESSAGES);
+            }
+            nwtisFolder.open(Folder.READ_ONLY);
+            return nwtisFolder;
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

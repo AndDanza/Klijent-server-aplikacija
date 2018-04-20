@@ -1,10 +1,13 @@
 package org.foi.nwtis.anddanzan.web.zrna;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.sun.mail.imap.IMAPInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
@@ -36,16 +40,17 @@ public class SlanjePoruka {
     private List<String> popisDatoteka;
     private String odabranaDatoteka;
 
+    BP_Konfiguracija konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
+
     /**
      * Creates a new instance of SlanjePoruka
      */
     public SlanjePoruka() {
-        //TODO učitat podatke iz konf
         this.privitak = "{}";
-        this.posluzitelj = "127.0.0.1";
-        this.prima = "servis@nwtis.nastava.foi.hr";
-        this.salje = "admin@nwtis.nastava.foi.hr";
-        this.predmet = "IOT";
+        this.posluzitelj = konfiguracija.getMailServer();
+        this.prima = konfiguracija.getMailUsernameThread();
+        this.salje = konfiguracija.getUsernameEmail();
+        this.predmet = konfiguracija.getSubjectEmail();
 
         this.popisDatoteka = dohvatiJsonDatoteke();
     }
@@ -118,6 +123,10 @@ public class SlanjePoruka {
         return "pregledDnevnika";
     }
 
+    /**
+     * Metoda za slanje maila
+     * @return 
+     */
     public String saljiPoruku() {
         try {
             // Create the JavaMail session
@@ -141,6 +150,7 @@ public class SlanjePoruka {
             message.setSubject(this.predmet);
             //message.setText(this.privitak);
             message.setContent(this.privitak, "text/json");
+            message.setFileName(this.odabranaDatoteka);
 
             Transport.send(message);
 
@@ -152,6 +162,10 @@ public class SlanjePoruka {
         return "";
     }
 
+    /**
+     * Metoda za učitavanje sadržaja dane json datoteke
+     * @return 
+     */
     public String preuzmiSadrzaj() {
         try {
             String json = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka))));
@@ -162,7 +176,7 @@ public class SlanjePoruka {
             catch(JsonSyntaxException ex) {
                 this.privitak = "{ Neispravan format JSON datoteke }";
             }
-            
+
             return "";
         }
         catch(IOException ex) {
@@ -171,11 +185,19 @@ public class SlanjePoruka {
         }
     }
 
+    /**
+     * Metoda za brisanje sadržaja maila
+     * @return 
+     */
     public String obrisiPoruku() {
         this.privitak = "{}";
         return "";
     }
 
+    /**
+     * Metoda za dohvaćanje svih json datoteka unutar mape WEB-INF
+     * @return Lista tipa <code>String</code> s nazivima json datoteka
+     */
     private List<String> dohvatiJsonDatoteke() {
         List<String> datoteke = new ArrayList<>();
 
@@ -191,5 +213,31 @@ public class SlanjePoruka {
         }
 
         return datoteke;
+    }
+
+    /**
+     * Metoda za pretvaranje <code>IMAPInputStream</code> maila u <code>String</code>
+     * @param message mail
+     * @return <code>String</code> vrijednost samog sadržaja maila
+     */
+    private String getMailContent(Message message) {
+        String read = "";
+
+        try {
+            IMAPInputStream imapStream = (IMAPInputStream) message.getContent();
+            BufferedReader br = new BufferedReader(new InputStreamReader(imapStream, Charset.defaultCharset()));
+            char cbuf[] = new char[2048];
+            int len;
+            StringBuilder sbuf = new StringBuilder();
+            while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
+                sbuf.append(cbuf, 0, len);
+            }
+            read = sbuf.toString();
+        }
+        catch(IOException | MessagingException ex) {
+            read = "";
+        }
+
+        return read;
     }
 }
