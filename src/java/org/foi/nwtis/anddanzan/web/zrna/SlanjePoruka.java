@@ -1,13 +1,14 @@
 package org.foi.nwtis.anddanzan.web.zrna;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.mail.Address;
@@ -138,7 +139,8 @@ public class SlanjePoruka {
 
             // Set the subject and text
             message.setSubject(this.predmet);
-            message.setText(this.privitak);
+            //message.setText(this.privitak);
+            message.setContent(this.privitak, "text/json");
 
             Transport.send(message);
 
@@ -152,8 +154,15 @@ public class SlanjePoruka {
 
     public String preuzmiSadrzaj() {
         try {
-            //TODO preuzmi sadržaj datoteke čij je naziv u varijabli odabrana datoteka
-            this.privitak = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/"+this.odabranaDatoteka))));
+            String json = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka))));
+            try {
+                new JsonParser().parse(json).getAsJsonObject();
+                this.privitak = json;
+            }
+            catch(JsonSyntaxException ex) {
+                this.privitak = "{ Neispravan format JSON datoteke }";
+            }
+            
             return "";
         }
         catch(IOException ex) {
@@ -163,22 +172,24 @@ public class SlanjePoruka {
     }
 
     public String obrisiPoruku() {
+        this.privitak = "{}";
         return "";
     }
 
     private List<String> dohvatiJsonDatoteke() {
         List<String> datoteke = new ArrayList<>();
-        
+
         File da = new File(SlusacAplikacije.kontekst.getRealPath("/WEB-INF"));
         File[] listOfFiles = da.listFiles();
 
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                if(file.getName().endsWith(".json"))
+                if (file.getName().endsWith(".json")) {
                     datoteke.add(file.getName());
+                }
             }
         }
-        
+
         return datoteke;
     }
 }
