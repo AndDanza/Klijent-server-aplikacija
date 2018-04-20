@@ -19,6 +19,8 @@ import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
 @WebListener
 public class SlusacAplikacije implements ServletContextListener {
 
+    ObradaPoruka obrada;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext kontekst = sce.getServletContext();
@@ -31,17 +33,19 @@ public class SlusacAplikacije implements ServletContextListener {
             BP_Konfiguracija bpk = new BP_Konfiguracija(puniNaziv);
             kontekst.setAttribute("BP_Konfig", bpk);    //atributi na razini aplikacije
 
-            ObradaPoruka obradaPoruka = new ObradaPoruka(bpk);
-            //TODO ovo makni kada james bude konfiguriran
-            obradaPoruka.start();
-        } catch (NemaKonfiguracije | NeispravnaKonfiguracija ex) {
+            obrada = new ObradaPoruka(bpk);
+            obrada.start();
+        }
+        catch(NemaKonfiguracije | NeispravnaKonfiguracija ex) {
             Logger.getLogger(SlusacAplikacije.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ServletContext sc = sce.getServletContext();
+        sc.removeAttribute("BP_Konfig");
+
+        obrada.interrupt();
     }
 }

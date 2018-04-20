@@ -1,6 +1,7 @@
 package org.foi.nwtis.anddanzan.web.dretve;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,8 +10,11 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.servlet.ServletContext;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.kontrole.DatotekaRadaDretve;
+import org.nwtis.anddanzan.konfiguracije.NeispravnaKonfiguracija;
+import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
 
 /**
  * Dretva koja je pokrenuta prilikom inicijalizacije samog konteksta.
@@ -23,19 +27,19 @@ import org.foi.nwtis.anddanzan.web.kontrole.DatotekaRadaDretve;
 public class ObradaPoruka extends Thread {
 
     BP_Konfiguracija konfiguracija;
-    
+
     public static DatotekaRadaDretve logObrade = null;
-    
+
     //spajanje na mail server
     private String mailServer;
     private int imapPort;
     private String korisnickoIme;
     private String lozinka;
-    
+
     //rad dretve (trajanje ciklusa i prekidanje)
-    private int spavanje;
-    private boolean radi;
-    
+    private int milisecSpavanje;
+    private boolean radi = true;
+
     //obrada primljene poruke
     private int numMessagesToRead;
     private String oznakaNwtisPoruke;
@@ -58,22 +62,23 @@ public class ObradaPoruka extends Thread {
         this.mailServer = konfiguracija.getMailServer();
         this.korisnickoIme = konfiguracija.getMailUsernameThread();
         this.lozinka = konfiguracija.getMailPasswordThread();
-        this.spavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
+        this.milisecSpavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
         this.numMessagesToRead = konfiguracija.getNumMessagesToRead();
         this.oznakaNwtisPoruke = konfiguracija.getAttachmentFilename();
         this.mapaNwtisPoruka = konfiguracija.getFolderNWTiS();
         this.logDatoteka = konfiguracija.getThreadCycleLog();
-        
+
         super.start();
     }
 
     @Override
     public void run() {
         int broj = 0;
-        
+
         try {
             while (this.radi) {
-                
+                long start = System.currentTimeMillis();
+
                 logObrade = new DatotekaRadaDretve();
 
                 Session session;
@@ -100,23 +105,22 @@ public class ObradaPoruka extends Thread {
 
                 for (int i = 0; i < messages.length; i++) {
                     //TODO pretražiti tzv. nwtis poruke i obraditi ih 
+                    System.out.println(messages[i].getSubject());
                 }
 
                 folder.close(false);
                 store.close();
 
                 System.out.println("Završila iteracija: " + (broj++));
-
-                //TODO spavanje u intervalu (kao kod serijalizatora u prvoj zadaći)
-                Thread.sleep(this.spavanje);
-                
                 logObrade.pohraniPodatke(logDatoteka);
+
+                long trajanje = System.currentTimeMillis() - start;
+                long sleepTime = this.milisecSpavanje - trajanje;
+
+                Thread.sleep(sleepTime);
             }
         }
         catch(MessagingException | InterruptedException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(IOException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
