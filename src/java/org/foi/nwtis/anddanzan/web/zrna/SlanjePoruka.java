@@ -1,7 +1,13 @@
 package org.foi.nwtis.anddanzan.web.zrna;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.mail.Address;
@@ -11,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
  *
@@ -39,11 +46,7 @@ public class SlanjePoruka {
         this.salje = "admin@nwtis.nastava.foi.hr";
         this.predmet = "IOT";
 
-        this.popisDatoteka = new ArrayList<>();
-        //TODO preuzmi nazive datoteka s web-inf direktorija
-        for (int i = 0; i < 10; i++) {
-            this.popisDatoteka.add("primjer" + i + ".json");
-        }
+        this.popisDatoteka = dohvatiJsonDatoteke();
     }
 
     public String getPosluzitelj() {
@@ -115,7 +118,6 @@ public class SlanjePoruka {
     }
 
     public String saljiPoruku() {
-
         try {
             // Create the JavaMail session
             java.util.Properties properties = System.getProperties();
@@ -140,7 +142,8 @@ public class SlanjePoruka {
 
             Transport.send(message);
 
-        } catch (MessagingException e) {
+        }
+        catch(MessagingException e) {
             e.printStackTrace();
         }
 
@@ -148,12 +151,34 @@ public class SlanjePoruka {
     }
 
     public String preuzmiSadrzaj() {
-        //TODO preuzmi sadržaj datoteke čij je naziv u varijabli odabrana datoteka
-        this.privitak = this.odabranaDatoteka;
-        return "";
+        try {
+            //TODO preuzmi sadržaj datoteke čij je naziv u varijabli odabrana datoteka
+            this.privitak = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/"+this.odabranaDatoteka))));
+            return "";
+        }
+        catch(IOException ex) {
+            this.privitak = "{}";
+            return "";
+        }
     }
 
     public String obrisiPoruku() {
         return "";
+    }
+
+    private List<String> dohvatiJsonDatoteke() {
+        List<String> datoteke = new ArrayList<>();
+        
+        File da = new File(SlusacAplikacije.kontekst.getRealPath("/WEB-INF"));
+        File[] listOfFiles = da.listFiles();
+
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                if(file.getName().endsWith(".json"))
+                    datoteke.add(file.getName());
+            }
+        }
+        
+        return datoteke;
     }
 }

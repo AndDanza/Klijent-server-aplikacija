@@ -20,10 +20,11 @@ import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
 public class SlusacAplikacije implements ServletContextListener {
 
     ObradaPoruka obrada;
+    public static ServletContext kontekst;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ServletContext kontekst = sce.getServletContext();
+        kontekst = sce.getServletContext();
 
         String datoteka = kontekst.getInitParameter("konfiguracija");
         String putanja = kontekst.getRealPath("/WEB-INF") + java.io.File.separator;
@@ -43,8 +44,8 @@ public class SlusacAplikacije implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        ServletContext sc = sce.getServletContext();
-        sc.removeAttribute("BP_Konfig");
+        kontekst.removeAttribute("BP_Konfig");
+        kontekst = null;
 
         obrada.interrupt();
     }
