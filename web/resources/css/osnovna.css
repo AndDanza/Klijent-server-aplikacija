@@ -11,3 +11,74 @@ and open the template in the editor.
 body{
     background-color: lightgray;
 }
+
+.body_index{
+    width: 30%;
+    margin-top: 2%;
+}
+.navigacija{
+    width: 100%;
+    text-align: center;
+}
+
+.body_index h1{
+    width: 100%;
+    text-align: center;
+}
+
+.forma_jezik{
+    width: 100%;
+    text-align: center;
+}
+
+.body_slanje{
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 40%;
+}
+
+.forma_slanje table{
+    width: 70%;
+}
+
+.slanje_input{
+    width: 80%;
+}
+
+.slanje_komande{
+    width: 70%;
+    text-align: center;
+}
+
+.slanje_komande input{
+    margin-left: 2%;
+    margin-right: 4%;
+}
+
+.pregled_poruke{
+    width: 100%;
+}
+
+.pregled_tablica{
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom:0;
+    background: white;
+}
+
+.pregled_tablica td, .pregled_tablica th{
+    padding: 5px;
+    text-align: left;
+    font-family: Arial, Verdana, sans-serif;
+    border: 2px solid #000; /* this can be seen as cellspacing... */
+    border-bottom:0;
+}
+
+.pregled_tablica thead{
+    background: antiquewhite;
+}
+
+.dnevnik_forma{
+    width: 50%;
+    float: left;
+}
