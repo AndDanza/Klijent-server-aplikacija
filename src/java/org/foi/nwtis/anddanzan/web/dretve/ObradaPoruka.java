@@ -1,5 +1,17 @@
 package org.foi.nwtis.anddanzan.web.dretve;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.sun.mail.imap.IMAPInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,6 +120,7 @@ public class ObradaPoruka extends Thread {
                 for (int i = 0; i < messages.length; i++) {
                     //TODO pretražiti tzv. nwtis poruke i obraditi ih 
                     //System.out.println("poruka glasi: " + getMailContent(messages[i]) + messages[i].getContentType() + " - is json: " + messages[i].isMimeType("text/json"));
+//                    messages[i].setFlag(Flags.Flag.DELETED, true);
                     sortirajMail(messages[i]);
 //                    if (!) {
 //                        zapisiUDnevnik("neispravna");
@@ -145,6 +158,9 @@ public class ObradaPoruka extends Thread {
 
             if (privitak.contains(this.oznakaNwtisPoruke)) {
                 System.out.println("Imate NWTiS poruku");
+
+                obradiNwtisPoruku(message);
+
                 Message[] msg = new Message[]{message};
                 folder.copyMessages(msg, nwtisMapa);
                 message.setFlag(Flags.Flag.DELETED, true);
@@ -160,15 +176,112 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
+     * Metoda za obradu NWTiS poruke. Sadržaj poruke obrađuje se kao
+     * <code>JsonObject</code>
+     *
+     * @param message
+     */
+    private void obradiNwtisPoruku(Message message) {
+        try {
+            //spajanje na bazu
+            String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
+            Connection con = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
+
+            //kreiranje i izvršavanje upita
+            Statement stmt = con.createStatement();
+            String jsonString = getMailContent(message);
+
+            //dohvaćanje jsona unutar mail
+            JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+            String komanda = jsonObject.get("komanda").getAsString();
+            String naziv = jsonObject.get("naziv").getAsString();
+            int idUredaja = jsonObject.get("id").getAsInt();
+
+            String upit = "";
+            if (komanda.equalsIgnoreCase("dodaj") && provjeriID(stmt, idUredaja) == -1) {
+                String kreiranje = jsonObject.get("vrijeme").getAsString();
+                upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
+                        + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
+            }
+            else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(stmt, idUredaja) != -1) {
+                upit = "UPDATE `uredaji` SET `sadrzaj`='" + jsonString + "' WHERE `id` = " + idUredaja;
+            }
+            zapisiUDnevnik(stmt, jsonString);
+            stmt.execute(upit);
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
      * Zapisivanje u dnevnik u bazi podataka
      *
      * @param sadrzaj sadržaj koji se zapisuje u log (nastale promjene)
      */
-    private void zapisiUDnevnik(String sadrzaj) {
-        switch (sadrzaj) {
-            case "neispravna":
-                break;
+    private void zapisiUDnevnik(Statement stmt, String sadrzaj) {
+        try {
+            String upit = "INSERT INTO `dnevnik`(`sadrzaj`) VALUES ('"+sadrzaj+"')";
+            stmt.execute(upit);
         }
+        catch(SQLException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Metoda za provjeru postoji li dani id i u bazi podataka te je li id manji
+     * od 4 (u zadatku je raspon id-a uređaja dan od 1 do 4)
+     *
+     * @param stmt kreirani <code>Statement</code> za bazu podataka
+     * @param naziv naziv uređaja zadan u jason-u
+     * @param id identifikator uređaja (int)
+     * @return -1 (uređaj s danim id-em ne postoji) u suprotnom vraća se id
+     * uređaja
+     */
+    private int provjeriID(Statement stmt, int id) {
+        if (id <= 4 && id > 0) {
+            try {
+                String upit = "SELECT `id` FROM `uredaji` WHERE `id` = " + id;
+                ResultSet podaci = stmt.executeQuery(upit);
+                if (podaci.next()) {
+                    return podaci.getInt("id");
+                }
+            }
+            catch(SQLException ex) {
+                System.out.println("Greška prilikom provjera ID-a u bazi podataka");
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Metoda za pretvaranje <code>IMAPInputStream</code> maila u
+     * <code>String</code>
+     *
+     * @param message mail
+     * @return <code>String</code> vrijednost samog sadržaja maila
+     */
+    public static String getMailContent(Message message) {
+        String read = "";
+
+        try {
+            IMAPInputStream imapStream = (IMAPInputStream) message.getContent();
+            BufferedReader br = new BufferedReader(new InputStreamReader(imapStream, Charset.defaultCharset()));
+            char cbuf[] = new char[2048];
+            int len;
+            StringBuilder sbuf = new StringBuilder();
+            while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
+                sbuf.append(cbuf, 0, len);
+            }
+            read = sbuf.toString();
+        }
+        catch(IOException | MessagingException ex) {
+            read = "";
+        }
+
+        return read;
     }
 
     /**
@@ -191,4 +304,5 @@ public class ObradaPoruka extends Thread {
             return null;
         }
     }
+
 }

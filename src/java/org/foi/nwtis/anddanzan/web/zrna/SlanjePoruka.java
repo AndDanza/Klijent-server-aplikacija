@@ -125,7 +125,8 @@ public class SlanjePoruka {
 
     /**
      * Metoda za slanje maila
-     * @return 
+     *
+     * @return
      */
     public String saljiPoruku() {
         try {
@@ -164,7 +165,8 @@ public class SlanjePoruka {
 
     /**
      * Metoda za učitavanje sadržaja dane json datoteke
-     * @return 
+     *
+     * @return
      */
     public String preuzmiSadrzaj() {
         try {
@@ -187,7 +189,8 @@ public class SlanjePoruka {
 
     /**
      * Metoda za brisanje sadržaja maila
-     * @return 
+     *
+     * @return
      */
     public String obrisiPoruku() {
         this.privitak = "{}";
@@ -196,6 +199,7 @@ public class SlanjePoruka {
 
     /**
      * Metoda za dohvaćanje svih json datoteka unutar mape WEB-INF
+     *
      * @return Lista tipa <code>String</code> s nazivima json datoteka
      */
     private List<String> dohvatiJsonDatoteke() {
@@ -213,31 +217,5 @@ public class SlanjePoruka {
         }
 
         return datoteke;
-    }
-
-    /**
-     * Metoda za pretvaranje <code>IMAPInputStream</code> maila u <code>String</code>
-     * @param message mail
-     * @return <code>String</code> vrijednost samog sadržaja maila
-     */
-    private String getMailContent(Message message) {
-        String read = "";
-
-        try {
-            IMAPInputStream imapStream = (IMAPInputStream) message.getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(imapStream, Charset.defaultCharset()));
-            char cbuf[] = new char[2048];
-            int len;
-            StringBuilder sbuf = new StringBuilder();
-            while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
-                sbuf.append(cbuf, 0, len);
-            }
-            read = sbuf.toString();
-        }
-        catch(IOException | MessagingException ex) {
-            read = "";
-        }
-
-        return read;
     }
 }

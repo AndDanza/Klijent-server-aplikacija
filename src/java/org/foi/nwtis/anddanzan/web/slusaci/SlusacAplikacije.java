@@ -33,11 +33,15 @@ public class SlusacAplikacije implements ServletContextListener {
         try {
             BP_Konfiguracija bpk = new BP_Konfiguracija(puniNaziv);
             kontekst.setAttribute("BP_Konfig", bpk);    //atributi na razini aplikacije
+            Class.forName("com.mysql.jdbc.Driver"); //registriranje jdbc drivera
 
             obrada = new ObradaPoruka();
             obrada.start();
         }
         catch(NemaKonfiguracije | NeispravnaKonfiguracija ex) {
+            Logger.getLogger(SlusacAplikacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch(ClassNotFoundException ex) {
             Logger.getLogger(SlusacAplikacije.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

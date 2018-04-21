@@ -17,7 +17,7 @@
 <entry key="mail.imap.port">143</entry>
 <entry key="mail.usernameThread">servis@nwtis.nastava.foi.hr</entry>
 <entry key="mail.passwordThread">123456</entry>
-<entry key="mail.timeSecThreadCycle">10</entry>
+<entry key="mail.timeSecThreadCycle">60</entry>
 <entry key="mail.numMessagesToRead">10</entry>
 <entry key="mail.attachmentFilename">NWTiS_privitak.json</entry>
 <entry key="mail.folderNWTiS">NWTiS dkermek poruke</entry>
