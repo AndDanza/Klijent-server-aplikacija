@@ -3,6 +3,7 @@ package org.foi.nwtis.anddanzan.web.dretve;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.sun.mail.imap.IMAPInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,7 +44,10 @@ public class ObradaPoruka extends Thread {
     Folder folder;
     Folder nwtisMapa;
 
+    //podaci za bazu i spajanje
     BP_Konfiguracija konfiguracija;
+    Connection connection;
+    Statement statement;
 
     public static DatotekaRadaDretve logObrade = null;
 
@@ -95,8 +99,11 @@ public class ObradaPoruka extends Thread {
         try {
             while (this.radi) {
                 long start = System.currentTimeMillis();
+                String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
+                this.connection = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
+                this.statement = this.connection.createStatement();
 
-                logObrade = new DatotekaRadaDretve();
+                this.logObrade = new DatotekaRadaDretve();
 
                 // Start the session
                 Properties properties = System.getProperties();
@@ -132,17 +139,19 @@ public class ObradaPoruka extends Thread {
                 folder.close(false);
                 store.close();
 
-                logObrade.pohraniPodatke(logDatoteka);
+                this.logObrade.pohraniPodatke(logDatoteka);
                 System.out.println("Završila iteracija: " + (broj++));
 
                 long trajanje = System.currentTimeMillis() - start;
                 long sleepTime = this.milisecSpavanje - trajanje;
 
                 Thread.sleep(sleepTime);
-                logObrade = null;
+                this.logObrade = null;
+                this.statement.close();
+                this.connection.close();
             }
         }
-        catch(MessagingException | InterruptedException ex) {
+        catch(MessagingException | InterruptedException | SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -157,6 +166,7 @@ public class ObradaPoruka extends Thread {
     private void sortirajMail(Message message) {
         try {
             String privitak = message.getFileName();
+            this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka()+1);
 
             if (privitak.contains(this.oznakaNwtisPoruke)) {
                 System.out.println("Imate NWTiS poruku");
@@ -171,8 +181,8 @@ public class ObradaPoruka extends Thread {
             else {
                 System.out.println("Imate neNWTiS poruku");
             }
-        }
-        catch(MessagingException ex) {
+        }catch(MessagingException ex) {
+            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka()+1);
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -184,38 +194,38 @@ public class ObradaPoruka extends Thread {
      * @param message
      */
     private void obradiNwtisPoruku(Message message) {
-        try {
-            //spajanje na bazu
-            String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
-            Connection con = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
-
-            //kreiranje i izvršavanje upita
-            Statement stmt = con.createStatement();
-            String jsonString = getMailContent(message);
-
+        String jsonString = getMailContent(message);
+        
+        try {         
             //dohvaćanje jsona unutar mail
             JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
             String komanda = jsonObject.get("komanda").getAsString();
             int idUredaja = jsonObject.get("id").getAsInt();
 
             String upit = "";
-            if (komanda.equalsIgnoreCase("dodaj") && provjeriID(stmt, idUredaja) == -1) {
+            if (komanda.equalsIgnoreCase("dodaj") && provjeriID(idUredaja) == -1) {
                 String naziv = jsonObject.get("naziv").getAsString();
                 String kreiranje = jsonObject.get("vrijeme").getAsString();
                 upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                         + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
-                stmt.execute(upit);
+                this.statement.execute(upit);
+                this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT()+1);
             }
-            else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(stmt, idUredaja) != -1) {
-                String azuriraniJsonString = azurirajPodatke(stmt, jsonString, idUredaja);
+            else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(idUredaja) != -1) {
+                String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
                 upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
-                stmt.execute(upit);
+                this.statement.execute(upit);
+                this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT()+1);
             }
-            zapisiUDnevnik(stmt, jsonString);
+            zapisiUDnevnik(jsonString);
 
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch(JsonSyntaxException ex){
+            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka()+1);
+            zapisiUDnevnik(jsonString);
         }
     }
 
@@ -231,12 +241,12 @@ public class ObradaPoruka extends Thread {
      * @param id identifikator uređaja
      * @return <code>String</code> vrijednost novog ažuriranog sadržajas
      */
-    private String azurirajPodatke(Statement stmt, String jsonString, int id) {
+    private String azurirajPodatke(String jsonString, int id) {
         Properties stariPodaci = null;
 
         try {
             String upit = "SELECT `sadrzaj` FROM `uredaji` WHERE `id` = " + id;
-            ResultSet podaci = stmt.executeQuery(upit);
+            ResultSet podaci = this.statement.executeQuery(upit);
             if (podaci.next()) {
                 String sadrzaj = podaci.getString("sadrzaj");
                 stariPodaci = new GsonBuilder().create().fromJson(sadrzaj, Properties.class);
@@ -248,6 +258,8 @@ public class ObradaPoruka extends Thread {
                     stariPodaci.setProperty(keyK, noviPodaci.getProperty(keyK));
                 }
             }
+            
+            podaci.close();
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
@@ -266,14 +278,16 @@ public class ObradaPoruka extends Thread {
      * @return -1 (uređaj s danim id-em ne postoji) u suprotnom vraća se id
      * uređaja
      */
-    private int provjeriID(Statement stmt, int id) {
+    private int provjeriID(int id) {
         if (id < 5 && id > 0) {
             try {
                 String upit = "SELECT `id` FROM `uredaji` WHERE `id` = " + id;
-                ResultSet podaci = stmt.executeQuery(upit);
+                ResultSet podaci = this.statement.executeQuery(upit);
                 if (podaci.next()) {
                     return podaci.getInt("id");
                 }
+                
+                podaci.close();
             }
             catch(SQLException ex) {
                 System.out.println("Greška prilikom provjera ID-a u bazi podataka");
@@ -287,10 +301,10 @@ public class ObradaPoruka extends Thread {
      *
      * @param sadrzaj sadržaj koji se zapisuje u log (nastale promjene)
      */
-    private void zapisiUDnevnik(Statement stmt, String sadrzaj) {
+    private void zapisiUDnevnik(String sadrzaj) {
         try {
             String upit = "INSERT INTO `dnevnik`(`sadrzaj`) VALUES ('" + sadrzaj + "')";
-            stmt.execute(upit);
+            this.statement.execute(upit);
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
