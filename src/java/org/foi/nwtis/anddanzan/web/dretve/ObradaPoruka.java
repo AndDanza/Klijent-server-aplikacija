@@ -1,5 +1,6 @@
 package org.foi.nwtis.anddanzan.web.dretve;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sun.mail.imap.IMAPInputStream;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Flags;
@@ -190,47 +192,56 @@ public class ObradaPoruka extends Thread {
             //kreiranje i izvršavanje upita
             Statement stmt = con.createStatement();
             String jsonString = getMailContent(message);
-            
+
             //dohvaćanje jsona unutar mail
             JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
             String komanda = jsonObject.get("komanda").getAsString();
-            String naziv = jsonObject.get("naziv").getAsString();
             int idUredaja = jsonObject.get("id").getAsInt();
             
-            System.out.println("naziv " + naziv + " - komanda " + komanda);
-
             String upit = "";
             if (komanda.equalsIgnoreCase("dodaj") && provjeriID(stmt, idUredaja) == -1) {
+                String naziv = jsonObject.get("naziv").getAsString();
                 String kreiranje = jsonObject.get("vrijeme").getAsString();
                 upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                         + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
                 stmt.execute(upit);
             }
             else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(stmt, idUredaja) != -1) {
-                upit = "UPDATE `uredaji` SET `sadrzaj` = '" + jsonString + "' WHERE `id` = " + idUredaja;
+                String azuriraniJsonString = azurirajPodatke(stmt, jsonString, idUredaja);
+                upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
                 stmt.execute(upit);
             }
             zapisiUDnevnik(stmt, jsonString);
-            
+
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
-     * Zapisivanje u dnevnik u bazi podataka
-     *
-     * @param sadrzaj sadržaj koji se zapisuje u log (nastale promjene)
-     */
-    private void zapisiUDnevnik(Statement stmt, String sadrzaj) {
+    private String azurirajPodatke(Statement stmt, String jsonString, int id) {
+        Properties stariPodaci = null;
+
         try {
-            String upit = "INSERT INTO `dnevnik`(`sadrzaj`) VALUES ('"+sadrzaj+"')";
-            stmt.execute(upit);
+            String upit = "SELECT `sadrzaj` FROM `uredaji` WHERE `id` = " + id;
+            ResultSet podaci = stmt.executeQuery(upit);
+            if (podaci.next()) {
+                String sadrzaj = podaci.getString("sadrzaj");
+                stariPodaci = new GsonBuilder().create().fromJson(sadrzaj, Properties.class);
+
+                Properties noviPodaci = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().fromJson(jsonString, Properties.class);
+
+                Set<String> keysKlijent = noviPodaci.stringPropertyNames();
+                for (String keyK : keysKlijent) {
+                    stariPodaci.setProperty(keyK, noviPodaci.getProperty(keyK));
+                }
+            }
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return new GsonBuilder().create().toJson(stariPodaci);
     }
 
     /**
@@ -257,6 +268,21 @@ public class ObradaPoruka extends Thread {
             }
         }
         return -1;
+    }
+
+    /**
+     * Zapisivanje u dnevnik u bazi podataka
+     *
+     * @param sadrzaj sadržaj koji se zapisuje u log (nastale promjene)
+     */
+    private void zapisiUDnevnik(Statement stmt, String sadrzaj) {
+        try {
+            String upit = "INSERT INTO `dnevnik`(`sadrzaj`) VALUES ('" + sadrzaj + "')";
+            stmt.execute(upit);
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
