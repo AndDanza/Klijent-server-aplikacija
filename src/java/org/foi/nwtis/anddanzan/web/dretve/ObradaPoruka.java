@@ -115,12 +115,12 @@ public class ObradaPoruka extends Thread {
                 nwtisMapa = provjeraNwtisMape();
 
                 //TODO ne dohvaćati sve poruke odjednom nego ih po grupama dohvatiti (numMessagesToRead)
+                //definira koliko se poruka odjednom obrađuje this.numMessagesToRead;
                 Message[] messages = null;
                 messages = folder.getMessages();
 
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
-                    //TODO pretražiti tzv. nwtis poruke i obraditi ih 
                     //System.out.println("poruka glasi: " + getMailContent(messages[i]) + messages[i].getContentType() + " - is json: " + messages[i].isMimeType("text/json"));
 //                    messages[i].setFlag(Flags.Flag.DELETED, true);
                     sortirajMail(messages[i]);
@@ -197,7 +197,7 @@ public class ObradaPoruka extends Thread {
             JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
             String komanda = jsonObject.get("komanda").getAsString();
             int idUredaja = jsonObject.get("id").getAsInt();
-            
+
             String upit = "";
             if (komanda.equalsIgnoreCase("dodaj") && provjeriID(stmt, idUredaja) == -1) {
                 String naziv = jsonObject.get("naziv").getAsString();
@@ -219,6 +219,18 @@ public class ObradaPoruka extends Thread {
         }
     }
 
+    /**
+     * Metoda za ažuriranje sadržaja iot uređaja. Postupak ažuriranja vrši se
+     * preko dvije varijable tipa <code>Properties</code>. Jedna s novim
+     * podacima, a druga s podacima iz baze. U varijablu s podacima iz baze
+     * upisuju se novi i mijenjaju postojeći te potom sve pomoću gson-a ide u
+     * <code>String</code>
+     *
+     * @param stmt kreirani <code>Statement</code> za bazu
+     * @param jsonString json sadržaj u varijabli tipa <code>String</code>
+     * @param id identifikator uređaja
+     * @return <code>String</code> vrijednost novog ažuriranog sadržajas
+     */
     private String azurirajPodatke(Statement stmt, String jsonString, int id) {
         Properties stariPodaci = null;
 
@@ -240,7 +252,7 @@ public class ObradaPoruka extends Thread {
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return new GsonBuilder().create().toJson(stariPodaci);
     }
 
@@ -317,7 +329,7 @@ public class ObradaPoruka extends Thread {
      * Provjera postoji li zadana mapa za NWTiS poruke, ako ne kreira se nova i
      * vraća u obliku tipa <code>Folder</code>
      *
-     * @return
+     * @return <code>null</code> ako je došlo do iznike ili objekt mape
      */
     private Folder provjeraNwtisMape() {
         try {

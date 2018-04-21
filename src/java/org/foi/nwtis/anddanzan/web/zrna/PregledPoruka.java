@@ -87,7 +87,6 @@ public class PregledPoruka {
     private void preuzmiMape() {
         popisMapa = new ArrayList<>();
         popisMapa.add(new Izbornik("INBOX", "INBOX"));
-        //TODO provjeri postoji li mapa u sandučiću iz datoteki postavki
         popisMapa.add(new Izbornik("NWTiS anddanzan", "NWTiS anddanzan"));
     }
 
