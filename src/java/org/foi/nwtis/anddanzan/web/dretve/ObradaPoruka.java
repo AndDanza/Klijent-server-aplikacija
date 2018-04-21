@@ -190,24 +190,28 @@ public class ObradaPoruka extends Thread {
             //kreiranje i izvršavanje upita
             Statement stmt = con.createStatement();
             String jsonString = getMailContent(message);
-
+            
             //dohvaćanje jsona unutar mail
             JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
             String komanda = jsonObject.get("komanda").getAsString();
             String naziv = jsonObject.get("naziv").getAsString();
             int idUredaja = jsonObject.get("id").getAsInt();
+            
+            System.out.println("naziv " + naziv + " - komanda " + komanda);
 
             String upit = "";
             if (komanda.equalsIgnoreCase("dodaj") && provjeriID(stmt, idUredaja) == -1) {
                 String kreiranje = jsonObject.get("vrijeme").getAsString();
                 upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                         + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
+                stmt.execute(upit);
             }
             else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(stmt, idUredaja) != -1) {
-                upit = "UPDATE `uredaji` SET `sadrzaj`='" + jsonString + "' WHERE `id` = " + idUredaja;
+                upit = "UPDATE `uredaji` SET `sadrzaj` = '" + jsonString + "' WHERE `id` = " + idUredaja;
+                stmt.execute(upit);
             }
             zapisiUDnevnik(stmt, jsonString);
-            stmt.execute(upit);
+            
         }
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,7 +244,7 @@ public class ObradaPoruka extends Thread {
      * uređaja
      */
     private int provjeriID(Statement stmt, int id) {
-        if (id <= 4 && id > 0) {
+        if (id < 5 && id > 0) {
             try {
                 String upit = "SELECT `id` FROM `uredaji` WHERE `id` = " + id;
                 ResultSet podaci = stmt.executeQuery(upit);
@@ -252,7 +256,6 @@ public class ObradaPoruka extends Thread {
                 System.out.println("Greška prilikom provjera ID-a u bazi podataka");
             }
         }
-
         return -1;
     }
 
