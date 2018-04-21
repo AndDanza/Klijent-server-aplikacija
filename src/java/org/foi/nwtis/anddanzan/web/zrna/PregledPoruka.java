@@ -101,7 +101,7 @@ public class PregledPoruka {
     }
 
     public String slanjePoruka() {
-        return "pregledPoruka";
+        return "slanjePoruka";
     }
 
     public String pregledDnevnika() {

@@ -9,11 +9,11 @@
     </h:head>
     <h:body class="body_slanje">
         <h:form class="navigacija">
-            <h:commandLink action="#{slanjePoruka.promjeniJezik()}" value="#{p['index.naslov']}" />
+            <h:commandLink action="#{pregledPoruka.promjeniJezik()}" value="#{p['index.naslov']}" />
             &nbsp;
-            <h:commandLink action="#{slanjePoruka.pregledPoruka()}" value="#{p['veza_pregled_poruka']}" />
+            <h:commandLink action="#{pregledPoruka.slanjePoruka()}" value="#{p['veza_slanje_poruke']}" />
             &nbsp;
-            <h:commandLink action="#{slanjePoruka.pregledDnevnika()}" value="#{p['veza_pregled_dnevnika']}" />
+            <h:commandLink action="#{pregledPoruka.pregledDnevnika()}" value="#{p['veza_pregled_dnevnika']}" />
             &nbsp;
         </h:form>
         <br/>

@@ -2,11 +2,10 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="index.xhtml" x="561" y="386" zoom="false"/>
+        <Node id="index.xhtml" x="1074" y="539" zoom="false"/>
         <Node id="slanjePoruka.xhtml" x="114" y="82" zoom="false"/>
-        <Node id="slanjePoruke.xhtml" x="296" y="208" zoom="true"/>
-        <Node id="pregledDnevnika.xhtml" x="34" y="322" zoom="false"/>
         <Node id="pregledPoruka.xhtml" x="623" y="80" zoom="false"/>
+        <Node id="pregledDnevnika.xhtml" x="34" y="322" zoom="false"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

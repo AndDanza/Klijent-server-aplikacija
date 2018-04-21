@@ -35,16 +35,55 @@
     <navigation-rule>
         <from-view-id>/slanjePoruka.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{slanjePoruka.promjeniJezik()}</from-action>
             <from-outcome>promjeniJezik</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-action>#{slanjePoruka.pregledPoruka()}</from-action>
             <from-outcome>pregledPoruka</from-outcome>
             <to-view-id>/pregledPoruka.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-action>#{slanjePoruka.pregledDnevnika()}</from-action>
             <from-outcome>pregledDnevnika</from-outcome>
             <to-view-id>/pregledDnevnika.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledPoruka.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{pregledPoruka.promjeniJezik()}</from-action>
+            <from-outcome>promjeniJezik</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledPoruka.slanjePoruka()}</from-action>
+            <from-outcome>slanjePoruka</from-outcome>
+            <to-view-id>/slanjePoruka.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledPoruka.pregledDnevnika()}</from-action>
+            <from-outcome>pregledDnevnika</from-outcome>
+            <to-view-id>/pregledDnevnika.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pregledDnevnika.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{pregledDnevnika.promjeniJezik()}</from-action>
+            <from-outcome>promjeniJezik</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledDnevnika.slanjePoruka()}</from-action>
+            <from-outcome>slanjePoruka</from-outcome>
+            <to-view-id>/slanjePoruka.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledDnevnika.pregledPoruka()}</from-action>
+            <from-outcome>pregledPoruka</from-outcome>
+            <to-view-id>/pregledPoruka.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
