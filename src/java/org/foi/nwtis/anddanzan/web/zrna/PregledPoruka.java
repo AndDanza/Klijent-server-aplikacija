@@ -133,18 +133,19 @@ public class PregledPoruka {
     public void prikaziSljedece() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
-        System.out.println("kraj " + kraj);
 
-        pocetak += this.pomakCitanja;
-        kraj += this.pomakCitanja;
+        if (kraj < this.brojPorukaMape) {
+            pocetak += this.pomakCitanja;
+            kraj += this.pomakCitanja;
+        }
 
         if (kraj >= this.brojPorukaMape) {
             kraj = this.brojPorukaMape;
         }
-        
+
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
-        
+
         preuzmiPoruke(pocetak, kraj);
     }
 

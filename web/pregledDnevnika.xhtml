@@ -21,38 +21,33 @@
         <h:form>
             <h:panelGrid class="dnevnik_forma" columns="2">
                 <h:outputLabel value="#{p['pregled.od_datuma']}"/>
-                <h:inputText class="pregled_input"/>
+                <h:inputText class="pregled_input" value="#{pregledDnevnika.pocetni}"/>
 
 
                 <h:outputLabel value="#{p['pregled.do_datuma']}" />
-                <h:inputText class="pregled_input" />
+                <h:inputText class="pregled_input" value="#{pregledDnevnika.krajnji}"/>
             </h:panelGrid>
 
-            <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" />
+            <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.pretraziDnevnik()}"/>
         </h:form>
         <br/><br/>
 
         <h:dataTable styleClass = "pregled_tablica" 
                      rowClasses = "pregled_red"
-                     value="#{pregledPoruka.popisPoruka}" var="mail">
+                     value="#{pregledDnevnika.zapisi}" var="log">
             <h:column>
                 <f:facet name="header">#{p['pregled.id']}</f:facet>
-                    #{mail.id}
+                    #{log.id}
             </h:column>
 
             <h:column>
-                <f:facet name="header">#{p['pregled.predmet']}</f:facet>
-                    #{mail.predmet}
+                <f:facet name="header">#{p['dnevnik.sadrzaj']}</f:facet>
+                    #{log.sadrzaj}
             </h:column>
 
             <h:column>
-                <f:facet name="header">#{p['pregled.vrsta']}</f:facet>
-                    #{mail.vrsta}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">#{p['pregled.privitak']}</f:facet>
-                    #{mail.privitak}
+                <f:facet name="header">#{p['dnevnik.vrijeme']}</f:facet>
+                    #{log.vrijemeZapisa}
             </h:column>
         </h:dataTable>
         <br/>
@@ -60,10 +55,10 @@
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel value="#{p['dnevnik.ukupno']}"/>
-                <h:outputLabel value="55"/>
+                <h:outputLabel value="#{pregledDnevnika.brojZapisaDnevnika}"/>
                 <h:panelGrid class="slanje_komande" columns="2">
-                    <h:commandButton value="#{p['navigacija.prethodne']}" />
-                    <h:commandButton value="#{p['navigacija.sljedece']}" />
+                    <h:commandButton value="#{p['navigacija.prethodne']}" action="#{pregledDnevnika.prikaziPrethodne()}"/>
+                    <h:commandButton value="#{p['navigacija.sljedece']}" action="#{pregledDnevnika.prikaziSljedece()}"/>
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>
