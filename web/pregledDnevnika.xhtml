@@ -18,19 +18,24 @@
         </h:form>
         <br/>
 
+        <h:dataTable class="greske" value="#{pregledDnevnika.pogreske}" var="item">
+            <h:column><h:outputLabel value="#{item}" /></h:column>
+        </h:dataTable>
+        <br/>
+
         <h:form>
-            <h:panelGrid class="dnevnik_forma" columns="2">
+            <h:panelGrid class="dnevnik_forma" columns="3">
                 <h:outputLabel value="#{p['pregled.od_datuma']}"/>
                 <h:inputText class="pregled_input" value="#{pregledDnevnika.pocetni}"/>
+                <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.pretraziDnevnik()}"/>
 
 
                 <h:outputLabel value="#{p['pregled.do_datuma']}" />
                 <h:inputText class="pregled_input" value="#{pregledDnevnika.krajnji}"/>
+                <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['dnevnik.ocisti']}" action="#{pregledDnevnika.ocistiPretragu()}"/>
             </h:panelGrid>
-
-            <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.pretraziDnevnik()}"/>
         </h:form>
-        <br/><br/>
+        <br/><br/><br/>
 
         <h:dataTable styleClass = "pregled_tablica" 
                      rowClasses = "pregled_red"

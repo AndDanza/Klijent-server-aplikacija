@@ -31,7 +31,7 @@ import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 @Named(value = "slanjePoruka")
 @RequestScoped
 public class SlanjePoruka {
-    
+
     private String posluzitelj;
     private String prima;
     private String salje;
@@ -50,90 +50,14 @@ public class SlanjePoruka {
     public SlanjePoruka() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale)session.getAttribute("locale"));
+        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) session.getAttribute("locale"));
         this.privitak = "{}";
         this.posluzitelj = konfiguracija.getMailServer();
         this.prima = konfiguracija.getMailUsernameThread();
         this.salje = konfiguracija.getUsernameEmail();
         this.predmet = konfiguracija.getSubjectEmail();
 
-        this.popisDatoteka = dohvatiJsonDatoteke();        
-    }
-
-    public String getPosluzitelj() {
-        return posluzitelj;
-    }
-
-    public void setPosluzitelj(String posluzitelj) {
-        this.posluzitelj = posluzitelj;
-    }
-
-    public String getPrima() {
-        return prima;
-    }
-
-    public void setPrima(String prima) {
-        this.prima = prima;
-    }
-
-    public String getSalje() {
-        return salje;
-    }
-
-    public void setSalje(String salje) {
-        this.salje = salje;
-    }
-
-    public String getPredmet() {
-        return predmet;
-    }
-
-    public void setPredmet(String predmet) {
-        this.predmet = predmet;
-    }
-
-    public String getPrivitak() {
-        return privitak;
-    }
-
-    public void setPrivitak(String privitak) {
-        this.privitak = privitak;
-    }
-
-    public List<String> getPopisDatoteka() {
-        return popisDatoteka;
-    }
-
-    public void setPopisDatoteka(List<String> popisDatoteka) {
-        this.popisDatoteka = popisDatoteka;
-    }
-
-    public void setOdabranaDatoteka(String odabranaDatoteka) {
-        this.odabranaDatoteka = odabranaDatoteka;
-    }
-
-    public String getOdabranaDatoteka() {
-        return odabranaDatoteka;
-    }
-
-    public String promjeniJezik() {
-        return "promjeniJezik";
-    }
-
-    public String pregledPoruka() {
-        return "pregledPoruka";
-    }
-
-    public String pregledDnevnika() {
-        return "pregledDnevnika";
-    }
-
-    public List<String> getPogreske() {
-        return pogreske;
-    }
-
-    public void setPogreske(List<String> pogreske) {
-        this.pogreske = pogreske;
+        this.popisDatoteka = dohvatiJsonDatoteke();
     }
 
     /**
@@ -244,15 +168,16 @@ public class SlanjePoruka {
         if (this.predmet.length() < 10) {
             this.pogreske.add(prijevod.getString("slanje.predmet") + " - " + prijevod.getString("pogreska.predmet"));
         }
-        
-        if(this.odabranaDatoteka == null){
+
+        if (this.odabranaDatoteka == null) {
             this.pogreske.add(prijevod.getString("pogreska.datoteka"));
         }
 
         try {
             new JsonParser().parse(this.privitak).getAsJsonObject();
-            if(this.privitak.equals("{}"))
+            if (this.privitak.equals("{}")) {
                 this.pogreske.add(prijevod.getString("pogreska.privitak"));
+            }
         }
         catch(JsonSyntaxException ex) {
             this.pogreske.add(prijevod.getString("pogreska.privitak"));
@@ -264,5 +189,81 @@ public class SlanjePoruka {
         else {
             return false;
         }
+    }
+
+    public String getPosluzitelj() {
+        return posluzitelj;
+    }
+
+    public void setPosluzitelj(String posluzitelj) {
+        this.posluzitelj = posluzitelj;
+    }
+
+    public String getPrima() {
+        return prima;
+    }
+
+    public void setPrima(String prima) {
+        this.prima = prima;
+    }
+
+    public String getSalje() {
+        return salje;
+    }
+
+    public void setSalje(String salje) {
+        this.salje = salje;
+    }
+
+    public String getPredmet() {
+        return predmet;
+    }
+
+    public void setPredmet(String predmet) {
+        this.predmet = predmet;
+    }
+
+    public String getPrivitak() {
+        return privitak;
+    }
+
+    public void setPrivitak(String privitak) {
+        this.privitak = privitak;
+    }
+
+    public List<String> getPopisDatoteka() {
+        return popisDatoteka;
+    }
+
+    public void setPopisDatoteka(List<String> popisDatoteka) {
+        this.popisDatoteka = popisDatoteka;
+    }
+
+    public void setOdabranaDatoteka(String odabranaDatoteka) {
+        this.odabranaDatoteka = odabranaDatoteka;
+    }
+
+    public String getOdabranaDatoteka() {
+        return odabranaDatoteka;
+    }
+
+    public String promjeniJezik() {
+        return "promjeniJezik";
+    }
+
+    public String pregledPoruka() {
+        return "pregledPoruka";
+    }
+
+    public String pregledDnevnika() {
+        return "pregledDnevnika";
+    }
+
+    public List<String> getPogreske() {
+        return pogreske;
+    }
+
+    public void setPogreske(List<String> pogreske) {
+        this.pogreske = pogreske;
     }
 }

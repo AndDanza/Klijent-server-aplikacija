@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
@@ -35,8 +36,9 @@ public class PregledDnevnika {
     private int pomakCitanja = 0;
     private int brojZapisaDnevnika;
     private List<Dnevnik> zapisi;
-    private String pocetni = null;
-    private String krajnji = null;
+    private String pocetni = "";
+    private String krajnji = "";
+    private List<String> pogreske = new ArrayList<>();
 
     private Connection connection;
     private Statement statement;
@@ -57,11 +59,12 @@ public class PregledDnevnika {
 
             this.pomakCitanja = this.konfiguracija.getNumLogItemsToShow();
 
-            String upit = "SELECT COUNT(*) AS broj FROM `dnevnik`";
-            ResultSet podaci = this.statement.executeQuery(upit);
-            if (podaci.next()) {
-                this.brojZapisaDnevnika = podaci.getInt("broj");
+            if (this.session.getAttribute("pocetni_datum") != null && this.session.getAttribute("krajnji_datum") != null) {
+                this.pocetni = (String) this.session.getAttribute("pocetni_datum");
+                this.krajnji = (String) this.session.getAttribute("krajnji_datum");
             }
+
+            brojZapisa();
 
             int pocetak = 0;
             int kraj = 0;
@@ -84,7 +87,7 @@ public class PregledDnevnika {
         try {
             zapisi = new ArrayList<>();
             String upit = "";
-            if (this.pocetni == null && this.krajnji == null) {
+            if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
                 upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` ORDER BY `vrijeme` DESC LIMIT " + odZapisa + "," + doZapisa;
             }
             else {
@@ -101,9 +104,42 @@ public class PregledDnevnika {
         catch(SQLException | ParseException ex) {
             Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        brojZapisa();
     }
 
     public void pretraziDnevnik() {
+        if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
+            Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+            ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
+            
+            if (!provjeriDatum(this.pocetni)) {
+                this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+            }
+            if (!provjeriDatum(this.krajnji)) {
+                this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+            }
+
+            this.session.setAttribute("pocetni_datum", this.pocetni);
+            this.session.setAttribute("krajnji_datum", this.krajnji);
+
+            prikaziDnevnik(0, this.pomakCitanja);
+            brojZapisa();
+        }
+
+    }
+
+    public void ocistiPretragu() {
+        this.pocetni = "";
+        this.krajnji = "";
+        this.session.removeAttribute("pocetni_datum");
+        this.session.removeAttribute("krajnji_datum");
+
+        this.session.setAttribute("kreni_dnevnik", 0);
+        this.session.setAttribute("stani_dnevnik", this.pomakCitanja);
+        prikaziDnevnik(0, this.pomakCitanja);
+
+        brojZapisa();
     }
 
     public void prikaziSljedece() {
@@ -126,7 +162,6 @@ public class PregledDnevnika {
     }
 
     public void prikaziPrethodne() {
-        System.out.println("da");
         int pocetak = (int) this.session.getAttribute("kreni_dnevnik");
         int kraj = (int) this.session.getAttribute("stani_dnevnik");
 
@@ -142,6 +177,45 @@ public class PregledDnevnika {
         this.session.setAttribute("stani_dnevnik", kraj);
 
         prikaziDnevnik(pocetak, kraj);
+    }
+
+    private void brojZapisa() {
+        try {
+            String upit;
+            if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
+                upit = "SELECT COUNT(*) AS broj FROM `dnevnik`";
+            }
+            else {
+                upit = "SELECT COUNT(*) AS broj FROM `dnevnik` "
+                        + "WHERE `vrijeme` BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "'";
+            }
+            ResultSet podaci = this.statement.executeQuery(upit);
+            if (podaci.next()) {
+                this.brojZapisaDnevnika = podaci.getInt("broj");
+            }
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private boolean provjeriDatum(String datum) {
+        try {
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            formatter.parse(datum);
+            return true;
+        }
+        catch(ParseException ex) {
+            return false;
+        }
+    }
+
+    public List<String> getPogreske() {
+        return pogreske;
+    }
+
+    public void setPogreske(List<String> pogreske) {
+        this.pogreske = pogreske;
     }
 
     public int getBrojZapisaDnevnika() {
