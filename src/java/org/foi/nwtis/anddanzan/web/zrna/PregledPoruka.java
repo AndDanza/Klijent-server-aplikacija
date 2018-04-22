@@ -20,6 +20,7 @@ import org.foi.nwtis.anddanzan.web.kontrole.Poruka;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
+ * JSF Managed BEan za pregledavanje mailova u danim mapama
  *
  * @author Andrea
  */
@@ -42,8 +43,6 @@ public class PregledPoruka {
     private HttpSession session;
 
     private int pomakCitanja = 0;
-    private boolean status_prev_hide = true;
-    private boolean status_next_hide = false;
 
     /**
      * Creates a new instance of PregledPoruka
@@ -77,6 +76,9 @@ public class PregledPoruka {
         preuzmiPoruke(pocetak, kraj);
     }
 
+    /**
+     * Dohvaćanje mapa za pohranu maila za zadanog korisnika
+     */
     private void preuzmiMape() {
         try {
             this.store = sesija.getStore("imap");
@@ -94,6 +96,12 @@ public class PregledPoruka {
         }
     }
 
+    /**
+     * Dohvaćanje unaprijed određenog broja poruka u trenutnoj mapi
+     *
+     * @param start index početka raspona mailova
+     * @param end index kraja raspona mailova
+     */
     public void preuzmiPoruke(int start, int end) {
         if (start == 1 && end == 1) {
             end = this.pomakCitanja;
@@ -130,6 +138,11 @@ public class PregledPoruka {
         }
     }
 
+    /**
+     * Metoda za obradu klika za sljedeću stranicu mailova. Na klik korisnika na
+     * temelju zadanog broj prikaza mialova pomiču se početni i završni index
+     * maila u mapi
+     */
     public void prikaziSljedece() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
@@ -149,6 +162,11 @@ public class PregledPoruka {
         preuzmiPoruke(pocetak, kraj);
     }
 
+    /**
+     * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika na
+     * temelju zadanog broj prikaza mialova pomiču se početni i završni index
+     * maila u mapi
+     */
     public void prikaziPrethodne() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
@@ -165,22 +183,6 @@ public class PregledPoruka {
         this.session.setAttribute("stani_mail", kraj);
 
         preuzmiPoruke(pocetak, kraj);
-    }
-
-    public boolean isStatus_prev_hide() {
-        return status_prev_hide;
-    }
-
-    public void setStatus_prev_hide(boolean status_prev_hide) {
-        this.status_prev_hide = status_prev_hide;
-    }
-
-    public boolean isStatus_next_hide() {
-        return status_next_hide;
-    }
-
-    public void setStatus_next_hide(boolean status_next_hide) {
-        this.status_next_hide = status_next_hide;
     }
 
     public int getBrojPorukaMape() {

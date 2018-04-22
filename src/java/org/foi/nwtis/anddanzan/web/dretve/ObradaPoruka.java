@@ -67,6 +67,10 @@ public class ObradaPoruka extends Thread {
     private String mapaNwtisPoruka;
     private String logDatoteka;
 
+    /**
+     * Konstruktor dretve u kojem je dohvaćen kontekst u kojem je pohranjena
+     * konfiguracija za pristupanje bazi podataka
+     */
     public ObradaPoruka() {
         this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
     }
@@ -79,29 +83,34 @@ public class ObradaPoruka extends Thread {
 
     @Override
     public synchronized void start() {
-        this.imapPort = konfiguracija.getImapPort();
-        this.mailServer = konfiguracija.getMailServer();
-        this.korisnickoIme = konfiguracija.getMailUsernameThread();
-        this.lozinka = konfiguracija.getMailPasswordThread();
-        this.milisecSpavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
-        this.numMessagesToRead = konfiguracija.getNumMessagesToRead();
-        this.oznakaNwtisPoruke = konfiguracija.getAttachmentFilename();
-        this.mapaNwtisPoruka = konfiguracija.getFolderNWTiS();
-        this.logDatoteka = konfiguracija.getThreadCycleLog();
+        try {
+            this.imapPort = konfiguracija.getImapPort();
+            this.mailServer = konfiguracija.getMailServer();
+            this.korisnickoIme = konfiguracija.getMailUsernameThread();
+            this.lozinka = konfiguracija.getMailPasswordThread();
+            this.milisecSpavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
+            this.numMessagesToRead = konfiguracija.getNumMessagesToRead();
+            this.oznakaNwtisPoruke = konfiguracija.getAttachmentFilename();
+            this.mapaNwtisPoruka = konfiguracija.getFolderNWTiS();
+            this.logDatoteka = konfiguracija.getThreadCycleLog();
 
-        super.start();
+            String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
+            this.connection = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
+            this.statement = this.connection.createStatement();
+
+            super.start();
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void run() {
-        int broj = 0;
 
-        try {
-            while (this.radi) {
+        while (this.radi) {
+            try {
                 long start = System.currentTimeMillis();
-                String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
-                this.connection = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
-                this.statement = this.connection.createStatement();
 
                 this.logObrade = new DatotekaRadaDretve();
 
@@ -110,7 +119,6 @@ public class ObradaPoruka extends Thread {
                 properties.put("mail.smtp.host", this.mailServer);
                 properties.put("mail.imap.port", this.imapPort);
                 this.session = Session.getInstance(properties, null);
-                
                 SlusacAplikacije.kontekst.setAttribute("mail_session", this.session);
 
                 // Connect to the store
@@ -125,8 +133,7 @@ public class ObradaPoruka extends Thread {
 
                 //TODO ne dohvaćati sve poruke odjednom nego ih po grupama dohvatiti (numMessagesToRead)
                 //definira koliko se poruka odjednom obrađuje this.numMessagesToRead;
-                Message[] messages = null;
-                messages = folder.getMessages();
+                Message[] messages = folder.getMessages();
 
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
@@ -135,22 +142,39 @@ public class ObradaPoruka extends Thread {
                     sortirajMail(messages[i]);
                 }
 
-                folder.close(false);
-                store.close();
-
                 this.logObrade.pohraniPodatke(logDatoteka);
-                System.out.println("Završila iteracija: " + (broj++));
 
-                long trajanje = System.currentTimeMillis() - start;
-                long sleepTime = this.milisecSpavanje - trajanje;
+                long sleepTime = this.milisecSpavanje - (System.currentTimeMillis() - start);
 
                 Thread.sleep(sleepTime);
-                this.logObrade = null;
-                this.statement.close();
-                this.connection.close();
+
+                zatvoriResurse();
+            }
+            catch(InterruptedException ex) {
+                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch(MessagingException ex) {
+                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        catch(MessagingException | InterruptedException | SQLException ex) {
+    }
+
+    /**
+     * Metoda za zatvaranje resursa (close) i postavljanje objekata na null kako
+     * bi ih GC očistio
+     */
+    private void zatvoriResurse() {
+        try {
+            folder.close(false);
+            store.close();
+            this.logObrade = null;
+            this.statement.close();
+            this.connection.close();
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -165,7 +189,7 @@ public class ObradaPoruka extends Thread {
     private void sortirajMail(Message message) {
         try {
             String privitak = message.getFileName();
-            this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka()+1);
+            this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
 
             if (privitak.contains(this.oznakaNwtisPoruke)) {
                 System.out.println("Imate NWTiS poruku");
@@ -180,22 +204,26 @@ public class ObradaPoruka extends Thread {
             else {
                 System.out.println("Imate neNWTiS poruku");
             }
-        }catch(MessagingException ex) {
-            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka()+1);
+        }
+        catch(MessagingException ex) {
+            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Metoda za obradu NWTiS poruke. Sadržaj poruke obrađuje se kao
-     * <code>JsonObject</code>
+     * <code>JsonObject</code>. Svaka poruka ovisno o naredbi unosi se direktno
+     * u bazu podatataka (komanda dodaj) ili ažurira pomoću metode
+     * azurirajPodatke() i potom ažurira u bazi (komanda azuriraj). Neovisno o
+     * poruci sadržaj mora biti unesen u dnevnik rada.
      *
-     * @param message
+     * @param message mail poruka koju je potrebno obraditi
      */
     private void obradiNwtisPoruku(Message message) {
         String jsonString = getMailContent(message);
-        
-        try {         
+
+        try {
             //dohvaćanje jsona unutar mail
             JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
             String komanda = jsonObject.get("komanda").getAsString();
@@ -208,13 +236,13 @@ public class ObradaPoruka extends Thread {
                 upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                         + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
                 this.statement.execute(upit);
-                this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT()+1);
+                this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT() + 1);
             }
             else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(idUredaja) != -1) {
                 String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
                 upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
                 this.statement.execute(upit);
-                this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT()+1);
+                this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT() + 1);
             }
             zapisiUDnevnik(jsonString);
 
@@ -222,8 +250,8 @@ public class ObradaPoruka extends Thread {
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(JsonSyntaxException ex){
-            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka()+1);
+        catch(JsonSyntaxException ex) {
+            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
             zapisiUDnevnik(jsonString);
         }
     }
@@ -257,7 +285,7 @@ public class ObradaPoruka extends Thread {
                     stariPodaci.setProperty(keyK, noviPodaci.getProperty(keyK));
                 }
             }
-            
+
             podaci.close();
         }
         catch(SQLException ex) {
@@ -285,7 +313,7 @@ public class ObradaPoruka extends Thread {
                 if (podaci.next()) {
                     return podaci.getInt("id");
                 }
-                
+
                 podaci.close();
             }
             catch(SQLException ex) {
@@ -358,5 +386,4 @@ public class ObradaPoruka extends Thread {
             return null;
         }
     }
-
 }

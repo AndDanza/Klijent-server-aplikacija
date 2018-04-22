@@ -23,6 +23,7 @@ import org.foi.nwtis.anddanzan.web.kontrole.Dnevnik;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
+ * JSF Managed Bean za učitavanje i pregledavanje zapisa u tablici dnevnik
  *
  * @author Andrea
  */
@@ -83,6 +84,12 @@ public class PregledDnevnika {
         }
     }
 
+    /**
+     * Metoda za dohvaćanje zapisa iz tablice dnevnik
+     *
+     * @param odZapisa index početnog reda tablice
+     * @param doZapisa index završnog reda tablice
+     */
     public void prikaziDnevnik(int odZapisa, int doZapisa) {
         try {
             zapisi = new ArrayList<>();
@@ -108,11 +115,15 @@ public class PregledDnevnika {
         brojZapisa();
     }
 
+    /**
+     * Metoda za obradu klika pretraži na formi. Na temelju unesenih datuma
+     * pretražuju se zapisi u tablic koji odgovaraju uvjetu
+     */
     public void pretraziDnevnik() {
         if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
             Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
             ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
-            
+
             if (!provjeriDatum(this.pocetni)) {
                 this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
             }
@@ -129,6 +140,9 @@ public class PregledDnevnika {
 
     }
 
+    /**
+     * Metoda za pražnjenje inputa forme te učitavanje inicijalnih podataka
+     */
     public void ocistiPretragu() {
         this.pocetni = "";
         this.krajnji = "";
@@ -142,6 +156,11 @@ public class PregledDnevnika {
         brojZapisa();
     }
 
+    /**
+     * Metoda za obradu klika za sljedeću stranicu zapisa. Na klik korisnika na
+     * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
+     * i završni index retka u tablici
+     */
     public void prikaziSljedece() {
         int pocetak = (int) this.session.getAttribute("kreni_dnevnik");
         int kraj = (int) this.session.getAttribute("stani_dnevnik");
@@ -161,6 +180,11 @@ public class PregledDnevnika {
         prikaziDnevnik(pocetak, kraj);
     }
 
+    /**
+     * Metoda za obradu klika za prethodnu stranicu zapisa. Na klik korisnika na
+     * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
+     * i završni index retka u tablici
+     */
     public void prikaziPrethodne() {
         int pocetak = (int) this.session.getAttribute("kreni_dnevnik");
         int kraj = (int) this.session.getAttribute("stani_dnevnik");
@@ -179,6 +203,9 @@ public class PregledDnevnika {
         prikaziDnevnik(pocetak, kraj);
     }
 
+    /**
+     * Metoda za dohvaćanje broja zapisa u tablici podataka
+     */
     private void brojZapisa() {
         try {
             String upit;
@@ -199,6 +226,11 @@ public class PregledDnevnika {
         }
     }
 
+    /**
+     * Metoda za validaciju datuma unesenih u inpute forme
+     * @param datum
+     * @return 
+     */
     private boolean provjeriDatum(String datum) {
         try {
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

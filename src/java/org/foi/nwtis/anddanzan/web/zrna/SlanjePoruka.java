@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
+ * JSF Managed Bean za slanje maila
  *
  * @author Andrea
  */
@@ -61,7 +63,7 @@ public class SlanjePoruka {
     }
 
     /**
-     * Metoda za slanje maila
+     * Metoda za provjeru unesenih podataka i slanje maila ukoliko su podaci ispravni
      *
      * @return prazan string
      */
@@ -101,11 +103,12 @@ public class SlanjePoruka {
     /**
      * Metoda za učitavanje sadržaja dane json datoteke
      *
-     * @return
+     * @return vraća prazan string
      */
     public String preuzmiSadrzaj() {
         try {
-            this.privitak = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka))));
+            Path path = Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka));
+            this.privitak = new String(Files.readAllBytes(path));
         }
         catch(IOException ex) {
             this.privitak = "{}";
@@ -117,7 +120,7 @@ public class SlanjePoruka {
     /**
      * Metoda za brisanje sadržaja maila
      *
-     * @return
+     * @return vraća prazan string
      */
     public String obrisiPoruku() {
         this.privitak = "{}";

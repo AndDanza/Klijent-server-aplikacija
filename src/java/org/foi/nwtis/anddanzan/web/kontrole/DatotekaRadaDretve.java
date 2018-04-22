@@ -107,6 +107,9 @@ public class DatotekaRadaDretve implements Serializable {
         }
     }
 
+    /**
+     * Metoda za inicijalizaciju varijabli klase
+     */
     private void inicijalizacijaPodataka() {
         this.zavrsetak = "";
         this.trajanje = 0;
@@ -121,6 +124,11 @@ public class DatotekaRadaDretve implements Serializable {
         this.pocetak = formatter.format(date);
     }
 
+    /**
+     * Podaci iz objekta pohranjuju se u objekt tipa <code>Properties</code>
+     *
+     * @return objekt tipa <code>Properties</code>
+     */
     private Properties serijalizirajPodatke() {
         Properties podaci = new Properties();
 
