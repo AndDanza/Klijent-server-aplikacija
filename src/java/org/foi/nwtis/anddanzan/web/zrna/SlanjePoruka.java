@@ -8,8 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -17,6 +20,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
@@ -27,7 +31,7 @@ import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 @Named(value = "slanjePoruka")
 @RequestScoped
 public class SlanjePoruka {
-
+    
     private String posluzitelj;
     private String prima;
     private String salje;
@@ -35,20 +39,25 @@ public class SlanjePoruka {
     private String privitak;
     private List<String> popisDatoteka;
     private String odabranaDatoteka;
+    private List<String> pogreske;
 
     BP_Konfiguracija konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
+    private HttpSession session;
 
     /**
      * Creates a new instance of SlanjePoruka
      */
     public SlanjePoruka() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
+        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale)session.getAttribute("locale"));
         this.privitak = "{}";
         this.posluzitelj = konfiguracija.getMailServer();
         this.prima = konfiguracija.getMailUsernameThread();
         this.salje = konfiguracija.getUsernameEmail();
         this.predmet = konfiguracija.getSubjectEmail();
 
-        this.popisDatoteka = dohvatiJsonDatoteke();
+        this.popisDatoteka = dohvatiJsonDatoteke();        
     }
 
     public String getPosluzitelj() {
@@ -119,6 +128,14 @@ public class SlanjePoruka {
         return "pregledDnevnika";
     }
 
+    public List<String> getPogreske() {
+        return pogreske;
+    }
+
+    public void setPogreske(List<String> pogreske) {
+        this.pogreske = pogreske;
+    }
+
     /**
      * Metoda za slanje maila
      *
@@ -126,32 +143,28 @@ public class SlanjePoruka {
      */
     public String saljiPoruku() {
         try {
-            // Create the JavaMail session
-            java.util.Properties properties = System.getProperties();
-            properties.put("mail.smtp.host", this.posluzitelj);
+            Session session = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
-            Session session = Session.getInstance(properties, null);
+            if (provjeriUnesenePodatke()) {
+                // Construct the message
+                MimeMessage message = new MimeMessage(session);
 
-            // Construct the message
-            MimeMessage message = new MimeMessage(session);
+                // Set the from address
+                Address fromAddress = new InternetAddress(this.salje);
+                message.setFrom(fromAddress);
 
-            // Set the from address
-            Address fromAddress = new InternetAddress(this.salje);
-            message.setFrom(fromAddress);
+                // Parse and set the recipient addresses
+                Address[] toAddresses = InternetAddress.parse(this.prima);
+                message.setRecipients(Message.RecipientType.TO, toAddresses);
 
-            // Parse and set the recipient addresses
-            Address[] toAddresses = InternetAddress.parse(this.prima);
-            message.setRecipients(Message.RecipientType.TO, toAddresses);
+                // Set the subject and text
+                message.setSubject(this.predmet);
+                //message.setText(this.privitak);
+                message.setContent(this.privitak, "text/json");
+                message.setFileName(this.odabranaDatoteka);
 
-            // Set the subject and text
-            message.setSubject(this.predmet);
-            //message.setText(this.privitak);
-            message.setContent(this.privitak, "text/json");
-            message.setFileName(this.odabranaDatoteka);
-            
-            //TODO implementrat provjeru jesu li uneseni podaci dobri
-
-            Transport.send(message);
+                Transport.send(message);
+            }
 
         }
         catch(MessagingException e) {
@@ -168,21 +181,13 @@ public class SlanjePoruka {
      */
     public String preuzmiSadrzaj() {
         try {
-            String json = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka))));
-            try {
-                new JsonParser().parse(json).getAsJsonObject();
-                this.privitak = json;
-            }
-            catch(JsonSyntaxException ex) {
-                this.privitak = "{ Neispravan format JSON datoteke }";
-            }
-
-            return "";
+            this.privitak = new String(Files.readAllBytes(Paths.get(SlusacAplikacije.kontekst.getRealPath("/WEB-INF/" + this.odabranaDatoteka))));
         }
         catch(IOException ex) {
             this.privitak = "{}";
-            return "";
         }
+
+        return "";
     }
 
     /**
@@ -215,5 +220,49 @@ public class SlanjePoruka {
         }
 
         return datoteke;
+    }
+
+    /**
+     * Meoda za provjeru podataka unesenih nu formu
+     *
+     * @return true ako su podaci uredu ili false ako je jedan od unesenih
+     * podataka neispravan
+     */
+    public boolean provjeriUnesenePodatke() {
+        this.pogreske = new ArrayList<>();
+        Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
+
+        if (!this.prima.contains("@") || !this.prima.contains(".")) {
+            this.pogreske.add(prijevod.getString("slanje.prima") + " - " + prijevod.getString("pogreska.mail"));
+        }
+
+        if (!this.salje.contains("@") || !this.salje.contains(".")) {
+            this.pogreske.add(prijevod.getString("slanje.salje") + " - " + prijevod.getString("pogreska.mail"));
+        }
+
+        if (this.predmet.length() < 10) {
+            this.pogreske.add(prijevod.getString("slanje.predmet") + " - " + prijevod.getString("pogreska.predmet"));
+        }
+        
+        if(this.odabranaDatoteka == null){
+            this.pogreske.add(prijevod.getString("pogreska.datoteka"));
+        }
+
+        try {
+            new JsonParser().parse(this.privitak).getAsJsonObject();
+            if(this.privitak.equals("{}"))
+                this.pogreske.add(prijevod.getString("pogreska.privitak"));
+        }
+        catch(JsonSyntaxException ex) {
+            this.pogreske.add(prijevod.getString("pogreska.privitak"));
+        }
+
+        if (this.pogreske.isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

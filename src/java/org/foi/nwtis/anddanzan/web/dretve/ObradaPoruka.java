@@ -109,7 +109,9 @@ public class ObradaPoruka extends Thread {
                 Properties properties = System.getProperties();
                 properties.put("mail.smtp.host", this.mailServer);
                 properties.put("mail.imap.port", this.imapPort);
-                session = Session.getInstance(properties, null);
+                this.session = Session.getInstance(properties, null);
+                
+                SlusacAplikacije.kontekst.setAttribute("mail_session", this.session);
 
                 // Connect to the store
                 store = session.getStore("imap");
@@ -131,9 +133,6 @@ public class ObradaPoruka extends Thread {
                     //System.out.println("poruka glasi: " + getMailContent(messages[i]) + messages[i].getContentType() + " - is json: " + messages[i].isMimeType("text/json"));
 //                    messages[i].setFlag(Flags.Flag.DELETED, true);
                     sortirajMail(messages[i]);
-//                    if (!) {
-//                        zapisiUDnevnik("neispravna");
-//                    }
                 }
 
                 folder.close(false);

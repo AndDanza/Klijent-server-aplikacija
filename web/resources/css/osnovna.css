@@ -82,3 +82,8 @@ body{
     width: 50%;
     float: left;
 }
+
+.greske{
+    color: red;
+    font-size: x-large;
+}

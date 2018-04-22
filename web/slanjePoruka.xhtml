@@ -18,6 +18,11 @@
         </h:form>
         <br/>
 
+        <h:dataTable class="greske" value="#{slanjePoruka.pogreske}" var="item">
+            <h:column><h:outputLabel value="#{item}" /></h:column>
+        </h:dataTable>
+        <br/>
+
         <h:form class="forma_slanje">
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{p['slanje.prima']}"/>
@@ -30,7 +35,7 @@
                 <h:inputText class="slanje_input" value="#{slanjePoruka.predmet}" />
             </h:panelGrid>
             <br/>
-            
+
             <h:panelGrid columns="2">
                 <h:inputTextarea cols="50" rows="15" value="#{slanjePoruka.privitak}" />
 
@@ -41,7 +46,7 @@
                     <h:commandButton value="#{p['slanje.ucitaj']}" action="#{slanjePoruka.preuzmiSadrzaj()}" />
                 </h:panelGrid>   
             </h:panelGrid>
-            
+
             <div class="slanje_komande">
                 <h:commandButton value="#{p['slanje.salji']}" action="#{slanjePoruka.saljiPoruku()}" />
                 <h:commandButton value="#{p['slanje.obrisi']}" action="#{slanjePoruka.obrisiPoruku()}" />
