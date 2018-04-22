@@ -23,7 +23,7 @@
             <h:selectOneMenu value="#{pregledPoruka.odabranaMapa}">
                 <f:selectItems value="#{pregledPoruka.popisMapa}" var="mapa" itemLabel="#{mapa.labela}" itemValue="#{mapa.vrijednost}"/>
             </h:selectOneMenu>&nbsp;&nbsp;
-            <h:commandButton value="#{p['pregled.promjeni']}" action="#{pregledPoruka.preuzmiPoruke()}" />
+            <h:commandButton value="#{p['pregled.promjeni']}" action="#{pregledPoruka.preuzmiPoruke(1,1)}" />
         </h:form>
         <br/>
 
@@ -57,8 +57,8 @@
                 <h:outputLabel value="#{p['pregled.ukupno']}"/>
                 <h:outputLabel value="#{pregledPoruka.brojPorukaMape}"/>
                 <h:panelGrid class="slanje_komande" columns="2">
-                    <h:commandButton value="#{p['navigacija.prethodne']}" disabled="#{pregledPoruka.status_prev_hide}" action="#{pregledPoruka.prikaziPrethodne()}" />
-                    <h:commandButton value="#{p['navigacija.sljedece']}" disabled="#{pregledPoruka.status_next_hide}" action="#{pregledPoruka.prikaziSljedece()}" />
+                    <h:commandButton value="#{p['navigacija.prethodne']}" action="#{pregledPoruka.prikaziPrethodne()}" />
+                    <h:commandButton value="#{p['navigacija.sljedece']}" action="#{pregledPoruka.prikaziSljedece()}" />
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>

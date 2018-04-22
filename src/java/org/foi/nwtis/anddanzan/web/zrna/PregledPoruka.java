@@ -42,8 +42,6 @@ public class PregledPoruka {
     private HttpSession session;
 
     private int pomakCitanja = 0;
-    private int kreni = 0;
-    private int stani = 0;
     private boolean status_prev_hide = true;
     private boolean status_next_hide = false;
 
@@ -54,18 +52,118 @@ public class PregledPoruka {
         this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale)session.getAttribute("locale"));
+        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) this.session.getAttribute("locale"));
 
         this.imapPort = konfiguracija.getImapPort();
         this.posluzitelj = this.konfiguracija.getMailServer();
         this.korisnickoIme = this.konfiguracija.getMailUsernameThread();
         this.lozinka = this.konfiguracija.getMailPasswordThread();
-        this.pomakCitanja = this.stani = this.konfiguracija.getNumMessagesToShow();
+        this.pomakCitanja = this.konfiguracija.getNumMessagesToShow();
 
         this.sesija = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
+        int pocetak = 1;
+        int kraj = 1;
+        if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
+            this.session.setAttribute("kreni_mail", pocetak);
+            this.session.setAttribute("stani_mail", this.pomakCitanja);
+        }
+
+        pocetak = (int) this.session.getAttribute("kreni_mail");
+        kraj = (int) this.session.getAttribute("stani_mail");
+
         preuzmiMape();
-        preuzmiPoruke();
+        System.out.println("konstruktor - kreni: " + pocetak + " stani: " + kraj);
+        preuzmiPoruke(pocetak, kraj);
+    }
+
+    private void preuzmiMape() {
+        try {
+            this.store = sesija.getStore("imap");
+            this.store.connect(this.posluzitelj, this.imapPort, this.korisnickoIme, this.lozinka);
+            Folder[] mape = store.getDefaultFolder().list();
+            this.popisMapa = new ArrayList<>();
+
+            for (Folder folder : mape) {
+                this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
+            }
+
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void preuzmiPoruke(int start, int end) {
+        if (start == 1 && end == 1) {
+            end = this.pomakCitanja;
+            this.session.setAttribute("kreni_mail", 1);
+            this.session.setAttribute("stani_mail", end);
+        }
+        try {
+            Folder folder;
+            if (this.odabranaMapa != null) {
+                this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
+            }
+            else {
+                if (this.session.getAttribute("odabrana_mapa") == null) {
+                    this.odabranaMapa = "INBOX";
+                }
+                else {
+                    this.odabranaMapa = (String) this.session.getAttribute("odabrana_mapa");
+                }
+            }
+            folder = store.getFolder(this.odabranaMapa);
+            folder.open(Folder.READ_ONLY);
+
+            this.brojPorukaMape = folder.getMessageCount();
+
+            Message[] messages = null;
+            messages = folder.getMessages(start, end);
+
+            popisPoruka = new ArrayList<>();
+            for (int i = 0; i < this.pomakCitanja; i++) {
+                popisPoruka.add(new Poruka(Integer.toString(i), messages[i].getSentDate(), messages[i].getReceivedDate(), messages[i].getFrom()[0].toString(), messages[i].getSubject(), messages[i].getFileName(), Poruka.VrstaPoruka.NWTiS_poruka));
+            }
+        }
+        catch(MessagingException | ArrayIndexOutOfBoundsException ex) {
+        }
+    }
+
+    public void prikaziSljedece() {
+        int pocetak = (int) this.session.getAttribute("kreni_mail");
+        int kraj = (int) this.session.getAttribute("stani_mail");
+        System.out.println("kraj " + kraj);
+
+        pocetak += this.pomakCitanja;
+        kraj += this.pomakCitanja;
+
+        if (kraj >= this.brojPorukaMape) {
+            kraj = this.brojPorukaMape;
+        }
+        
+        this.session.setAttribute("kreni_mail", pocetak);
+        this.session.setAttribute("stani_mail", kraj);
+        
+        preuzmiPoruke(pocetak, kraj);
+    }
+
+    public void prikaziPrethodne() {
+        int pocetak = (int) this.session.getAttribute("kreni_mail");
+        int kraj = (int) this.session.getAttribute("stani_mail");
+
+        kraj = pocetak - 1;
+        pocetak -= this.pomakCitanja;
+
+        if (pocetak <= 1) {
+            pocetak = 1;
+            kraj = this.pomakCitanja + 1;
+        }
+
+        this.session.setAttribute("kreni_mail", pocetak);
+        this.session.setAttribute("stani_mail", kraj);
+
+        preuzmiPoruke(pocetak, kraj);
     }
 
     public boolean isStatus_prev_hide() {
@@ -138,61 +236,6 @@ public class PregledPoruka {
 
     public void setPopisPoruka(List<Poruka> popisPoruka) {
         this.popisPoruka = popisPoruka;
-    }
-
-    private void preuzmiMape() {
-        try {
-            this.store = sesija.getStore("imap");
-            this.store.connect(this.posluzitelj, this.imapPort, this.korisnickoIme, this.lozinka);
-            Folder[] mape = store.getDefaultFolder().list();
-            this.popisMapa = new ArrayList<>();
-
-            for (Folder folder : mape) {
-                this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
-            }
-
-        }
-        catch(MessagingException ex) {
-            Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void preuzmiPoruke() {
-        try {
-            Folder folder;
-            if (this.odabranaMapa != null) {
-                folder = store.getFolder(this.odabranaMapa);
-            }
-            else {
-                folder = store.getFolder("INBOX");
-            }
-            folder.open(Folder.READ_ONLY);
-
-            this.brojPorukaMape = folder.getMessageCount();
-
-            Message[] messages = null;
-            messages = folder.getMessages();
-
-            int end;
-            if (this.brojPorukaMape < this.pomakCitanja) {
-                end = this.brojPorukaMape;
-            }
-            else {
-                end = this.pomakCitanja;
-            }
-
-            popisPoruka = new ArrayList<>();
-            for (int i = 0; i < end; i++) {
-                popisPoruka.add(new Poruka(Integer.toString(i), messages[i].getSentDate(), messages[i].getReceivedDate(), messages[i].getFrom()[0].toString(), messages[i].getSubject(), messages[i].getFileName(), Poruka.VrstaPoruka.NWTiS_poruka));
-            }
-        }
-        catch(MessagingException ex) {
-            Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void prikaziSljedece() {
-        System.out.println("next");
     }
 
     public String promjeniJezik() {
