@@ -26,6 +26,7 @@ import javax.mail.Session;
 import javax.mail.Store;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.kontrole.DatotekaRadaDretve;
+import org.foi.nwtis.anddanzan.web.kontrole.Poruka;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 
 /**
@@ -202,7 +203,7 @@ public class ObradaPoruka extends Thread {
                 folder.expunge();
             }
             else {
-                System.out.println("Imate neNWTiS poruku");
+                System.out.println("Imate neNWTiS poruku "+message.getSubject());
             }
         }
         catch(MessagingException ex) {
@@ -221,7 +222,7 @@ public class ObradaPoruka extends Thread {
      * @param message mail poruka koju je potrebno obraditi
      */
     private void obradiNwtisPoruku(Message message) {
-        String jsonString = getMailContent(message);
+        String jsonString = Poruka.getMailContent(message);
 
         try {
             //dohvaćanje jsona unutar mail
@@ -336,34 +337,6 @@ public class ObradaPoruka extends Thread {
         catch(SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Metoda za pretvaranje <code>IMAPInputStream</code> maila u
-     * <code>String</code>
-     *
-     * @param message mail
-     * @return <code>String</code> vrijednost samog sadržaja maila
-     */
-    public static String getMailContent(Message message) {
-        String read = "";
-
-        try {
-            IMAPInputStream imapStream = (IMAPInputStream) message.getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(imapStream, Charset.defaultCharset()));
-            char cbuf[] = new char[2048];
-            int len;
-            StringBuilder sbuf = new StringBuilder();
-            while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
-                sbuf.append(cbuf, 0, len);
-            }
-            read = sbuf.toString();
-        }
-        catch(IOException | MessagingException ex) {
-            read = "";
-        }
-
-        return read;
     }
 
     /**

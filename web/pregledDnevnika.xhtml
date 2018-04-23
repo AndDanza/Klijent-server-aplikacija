@@ -52,7 +52,9 @@
 
             <h:column>
                 <f:facet name="header">#{p['dnevnik.vrijeme']}</f:facet>
-                    #{log.vrijemeZapisa}
+                <h:outputText value = "#{log.vrijemeZapisa}" >
+                    <f:convertDateTime pattern = "dd-MM-yyyy" />
+                </h:outputText>                
             </h:column>
         </h:dataTable>
         <br/>

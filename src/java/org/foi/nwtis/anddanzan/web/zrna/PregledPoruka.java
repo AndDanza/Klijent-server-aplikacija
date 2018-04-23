@@ -1,6 +1,7 @@
 package org.foi.nwtis.anddanzan.web.zrna;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ public class PregledPoruka {
     private String odabranaMapa;
     private int brojPorukaMape = 0;
     private List<Poruka> popisPoruka;
+    private String folderNwtis;
 
     private final BP_Konfiguracija konfiguracija;
     private Session sesija;
@@ -58,6 +60,7 @@ public class PregledPoruka {
         this.korisnickoIme = this.konfiguracija.getMailUsernameThread();
         this.lozinka = this.konfiguracija.getMailPasswordThread();
         this.pomakCitanja = this.konfiguracija.getNumMessagesToShow();
+        this.folderNwtis = this.konfiguracija.getFolderNWTiS();
 
         this.sesija = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
@@ -72,8 +75,7 @@ public class PregledPoruka {
         kraj = (int) this.session.getAttribute("stani_mail");
 
         preuzmiMape();
-        System.out.println("konstruktor - kreni: " + pocetak + " stani: " + kraj);
-        preuzmiPoruke(pocetak, kraj);
+        preuzmiPoruke(1, 1);
     }
 
     /**
@@ -83,10 +85,15 @@ public class PregledPoruka {
         try {
             this.store = sesija.getStore("imap");
             this.store.connect(this.posluzitelj, this.imapPort, this.korisnickoIme, this.lozinka);
-            Folder[] mape = store.getDefaultFolder().list();
-            this.popisMapa = new ArrayList<>();
 
-            for (Folder folder : mape) {
+            this.popisMapa = new ArrayList<>();
+            Folder folder = store.getFolder("INBOX");
+            if (folder != null) {
+                this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
+            }
+
+            folder = store.getFolder(this.folderNwtis);
+            if (folder != null) {
                 this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
             }
 
@@ -103,11 +110,6 @@ public class PregledPoruka {
      * @param end index kraja raspona mailova
      */
     public void preuzmiPoruke(int start, int end) {
-        if (start == 1 && end == 1) {
-            end = this.pomakCitanja;
-            this.session.setAttribute("kreni_mail", 1);
-            this.session.setAttribute("stani_mail", end);
-        }
         try {
             Folder folder;
             if (this.odabranaMapa != null) {
@@ -126,15 +128,49 @@ public class PregledPoruka {
 
             this.brojPorukaMape = folder.getMessageCount();
 
-            Message[] messages = null;
-            messages = folder.getMessages(start, end);
-
-            popisPoruka = new ArrayList<>();
+            if (start == 1 && end == 1) {
+                if (this.pomakCitanja > this.brojPorukaMape) {
+                    end = this.brojPorukaMape;
+                }
+                else {
+                    end = this.pomakCitanja;
+                }
+                this.session.setAttribute("kreni_mail", 1);
+                this.session.setAttribute("stani_mail", end);
+            }
+            
+            Message[] messages = folder.getMessages(start, end);
+            
+            this.popisPoruka = new ArrayList<>();
             for (int i = 0; i < this.pomakCitanja; i++) {
-                popisPoruka.add(new Poruka(Integer.toString(i), messages[i].getSentDate(), messages[i].getReceivedDate(), messages[i].getFrom()[0].toString(), messages[i].getSubject(), messages[i].getFileName(), Poruka.VrstaPoruka.NWTiS_poruka));
+                popisPoruka.add(kreirajPoruku(messages[i], i));
             }
         }
         catch(MessagingException | ArrayIndexOutOfBoundsException ex) {
+        }
+    }
+
+    private Poruka kreirajPoruku(Message poruka, int i) {
+        try {
+            String salje = poruka.getFrom()[0].toString();
+            Date sent = poruka.getSentDate();
+            Date sentOn = poruka.getSentDate();
+            String subject = poruka.getSubject();
+            String attachment = poruka.getFileName();
+
+            Poruka mail = null;
+            if (attachment.equals(this.konfiguracija.getAttachmentFilename())) {
+                String content = Poruka.getMailContent(poruka);
+                mail = new Poruka(Integer.toString(i), sent, sentOn, salje, subject, content, Poruka.VrstaPoruka.NWTiS_poruka);
+            }
+            else {
+                mail = new Poruka(Integer.toString(i), sent, sentOn, salje, subject, "", Poruka.VrstaPoruka.neNWTiS_poruka);
+            }
+
+            return mail;
+        }
+        catch(MessagingException ex) {
+            return null;
         }
     }
 
@@ -163,20 +199,24 @@ public class PregledPoruka {
     }
 
     /**
-     * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika na
-     * temelju zadanog broj prikaza mialova pomiču se početni i završni index
+     * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika
+     * na temelju zadanog broj prikaza mialova pomiču se početni i završni index
      * maila u mapi
      */
     public void prikaziPrethodne() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
 
-        kraj = pocetak - 1;
-        pocetak -= this.pomakCitanja;
-
         if (pocetak <= 1) {
             pocetak = 1;
-            kraj = this.pomakCitanja + 1;
+            if(this.pomakCitanja > this.brojPorukaMape)
+                kraj = this.brojPorukaMape;
+            else
+                kraj = this.pomakCitanja;
+        }
+        else if(pocetak > this.pomakCitanja) {
+            kraj = pocetak;
+            pocetak -= this.pomakCitanja;
         }
 
         this.session.setAttribute("kreni_mail", pocetak);

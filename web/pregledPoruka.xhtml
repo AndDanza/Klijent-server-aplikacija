@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>#{p['veza_pregled_poruka']}</title>
         <h:outputStylesheet library="css" name="osnovna.css" />
@@ -31,8 +32,16 @@
                      rowClasses = "pregled_red"
                      value="#{pregledPoruka.popisPoruka}" var="mail">
             <h:column>
-                <f:facet name="header">#{p['pregled.id']}</f:facet>
-                    #{mail.id}
+                <f:facet name="header">#{p['slanje.salje']}</f:facet>
+                    #{mail.salje}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">#{p['dnevnik.vrijeme']}</f:facet>
+                <h:outputText value = "#{mail.vrijemeSlanja}" >
+                    <f:convertDateTime pattern = "dd.MM.yyyy HH:mm:ss" />
+                </h:outputText>  
+
             </h:column>
 
             <h:column>
