@@ -4,11 +4,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-import com.sun.mail.imap.IMAPInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -84,26 +79,17 @@ public class ObradaPoruka extends Thread {
 
     @Override
     public synchronized void start() {
-        try {
-            this.imapPort = konfiguracija.getImapPort();
-            this.mailServer = konfiguracija.getMailServer();
-            this.korisnickoIme = konfiguracija.getMailUsernameThread();
-            this.lozinka = konfiguracija.getMailPasswordThread();
-            this.milisecSpavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
-            this.numMessagesToRead = konfiguracija.getNumMessagesToRead();
-            this.oznakaNwtisPoruke = konfiguracija.getAttachmentFilename();
-            this.mapaNwtisPoruka = konfiguracija.getFolderNWTiS();
-            this.logDatoteka = konfiguracija.getThreadCycleLog();
+        this.imapPort = konfiguracija.getImapPort();
+        this.mailServer = konfiguracija.getMailServer();
+        this.korisnickoIme = konfiguracija.getMailUsernameThread();
+        this.lozinka = konfiguracija.getMailPasswordThread();
+        this.milisecSpavanje = konfiguracija.getTimeSecThreadCycle() * 1000;
+        this.numMessagesToRead = konfiguracija.getNumMessagesToRead();
+        this.oznakaNwtisPoruke = konfiguracija.getAttachmentFilename();
+        this.mapaNwtisPoruka = konfiguracija.getFolderNWTiS();
+        this.logDatoteka = konfiguracija.getThreadCycleLog();
 
-            String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
-            this.connection = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
-            this.statement = this.connection.createStatement();
-
-            super.start();
-        }
-        catch(SQLException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        super.start();
     }
 
     @Override
@@ -151,13 +137,26 @@ public class ObradaPoruka extends Thread {
 
                 zatvoriResurse();
             }
-            catch(InterruptedException ex) {
-                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch(MessagingException ex) {
+            catch(InterruptedException | MessagingException ex) {
                 Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    /**
+     * Metoda za spajanje na bazu podatka i kreiranje statement-a za operacije
+     * nad bazom
+     */
+    public void inicijalizirajResurse() {
+        try {
+            String url = konfiguracija.getServerDatabase() + konfiguracija.getUserDatabase();
+            this.connection = DriverManager.getConnection(url, konfiguracija.getUserUsername(), konfiguracija.getUserPassword());
+            this.statement = this.connection.createStatement();
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -172,10 +171,7 @@ public class ObradaPoruka extends Thread {
             this.statement.close();
             this.connection.close();
         }
-        catch(MessagingException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(SQLException ex) {
+        catch(MessagingException | SQLException ex) {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -193,17 +189,12 @@ public class ObradaPoruka extends Thread {
             this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
 
             if (privitak.contains(this.oznakaNwtisPoruke)) {
-                System.out.println("Imate NWTiS poruku");
-
                 obradiNwtisPoruku(message);
 
                 Message[] msg = new Message[]{message};
                 folder.copyMessages(msg, nwtisMapa);
                 message.setFlag(Flags.Flag.DELETED, true);
                 folder.expunge();
-            }
-            else {
-                System.out.println("Imate neNWTiS poruku "+message.getSubject());
             }
         }
         catch(MessagingException ex) {
@@ -314,14 +305,13 @@ public class ObradaPoruka extends Thread {
                 if (podaci.next()) {
                     return podaci.getInt("id");
                 }
-
                 podaci.close();
             }
             catch(SQLException ex) {
-                System.out.println("Greška prilikom provjera ID-a u bazi podataka");
+                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return -1;
+        return 0;
     }
 
     /**

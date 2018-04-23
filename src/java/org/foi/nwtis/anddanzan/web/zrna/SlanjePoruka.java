@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -88,6 +89,7 @@ public class SlanjePoruka {
                 //message.setText(this.privitak);
                 message.setContent(this.privitak, "text/json");
                 message.setFileName(this.odabranaDatoteka);
+                message.setSentDate(new Date());
 
                 Transport.send(message);
             }

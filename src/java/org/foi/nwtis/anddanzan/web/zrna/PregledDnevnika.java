@@ -170,10 +170,6 @@ public class PregledDnevnika {
             kraj += this.pomakCitanja;
         }
 
-        if (kraj >= this.brojZapisaDnevnika) {
-            kraj = this.brojZapisaDnevnika;
-        }
-
         this.session.setAttribute("kreni_dnevnik", pocetak);
         this.session.setAttribute("stani_dnevnik", kraj);
 
@@ -228,12 +224,13 @@ public class PregledDnevnika {
 
     /**
      * Metoda za validaciju datuma unesenih u inpute forme
+     *
      * @param datum
-     * @return 
+     * @return
      */
     private boolean provjeriDatum(String datum) {
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             formatter.parse(datum);
             return true;
         }
