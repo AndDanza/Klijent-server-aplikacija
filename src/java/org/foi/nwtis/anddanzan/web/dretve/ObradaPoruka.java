@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
@@ -97,7 +98,11 @@ public class ObradaPoruka extends Thread {
 
         while (this.radi) {
             try {
+                inicijalizirajResurse();
+                
                 long start = System.currentTimeMillis();
+                
+                System.out.println("Pocetak obrade poruka "+new Date());
 
                 this.logObrade = new DatotekaRadaDretve();
 
@@ -124,8 +129,6 @@ public class ObradaPoruka extends Thread {
 
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
-                    //System.out.println("poruka glasi: " + getMailContent(messages[i]) + messages[i].getContentType() + " - is json: " + messages[i].isMimeType("text/json"));
-//                    messages[i].setFlag(Flags.Flag.DELETED, true);
                     sortirajMail(messages[i]);
                 }
 
