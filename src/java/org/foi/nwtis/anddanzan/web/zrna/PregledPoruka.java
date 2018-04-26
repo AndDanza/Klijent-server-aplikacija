@@ -29,15 +29,15 @@ import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
 @RequestScoped
 public class PregledPoruka {
 
-    private String posluzitelj;
+    private final String posluzitelj;
     private final int imapPort;
-    private String korisnickoIme;
-    private String lozinka;
+    private final String korisnickoIme;
+    private final String lozinka;
     private List<Izbornik> popisMapa;
     private String odabranaMapa;
     private int brojPorukaMape = 0;
     private List<Poruka> popisPoruka;
-    private String folderNwtis;
+    private final String folderNwtis;
 
     private final BP_Konfiguracija konfiguracija;
     private Session sesija;
@@ -65,18 +65,19 @@ public class PregledPoruka {
         this.sesija = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
         preuzmiMape();
-        promjeniMapu();
-
-        if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
-            preuzmiPoruke(1, 1);
-        }
+        odaberiMapu();
     }
 
-    public void promjeniMapu() {
+    public void promjeniMapu(){
+        this.session.removeAttribute("kreni_mail");
+        this.session.removeAttribute("stani_mail");
+        this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
+
+        odaberiMapu();
+    }
+    
+    public void odaberiMapu() {
         try {
-            this.session.removeAttribute("kreni_mail");
-            this.session.removeAttribute("stani_mail");
-            
             Folder folder;
             if (this.odabranaMapa != null) {
                 this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
@@ -84,12 +85,17 @@ public class PregledPoruka {
             else {
                 this.odabranaMapa = session.getAttribute("odabrana_mapa") == null ? "INBOX" : (String) session.getAttribute("odabrana_mapa");
             }
-            
+
             folder = store.getFolder(this.odabranaMapa);
             folder.open(Folder.READ_ONLY);
 
             this.brojPorukaMape = folder.getMessageCount();
-            preuzmiPoruke(1, 1);
+            
+            if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
+                System.out.println("mapa "+this.odabranaMapa);
+                preuzmiPoruke(-1, -1);
+            }
+
         }
         catch(MessagingException ex) {
             Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,8 +120,6 @@ public class PregledPoruka {
             if (folder != null) {
                 this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
             }
-            
-            promjeniMapu();
         }
         catch(MessagingException ex) {
             Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,9 +139,9 @@ public class PregledPoruka {
 
             this.brojPorukaMape = folder.getMessageCount();
 
-            if (start == 1 && end == 1) {
+            if (start == -1 && end == -1) {
                 end = this.brojPorukaMape;
-                start = (end - this.pomakCitanja) <= 0 ? 1 : end - this.pomakCitanja + 1;
+                start = (end - this.pomakCitanja) < 1 ? 1 : end - this.pomakCitanja + 1;
 
                 this.session.setAttribute("kreni_mail", start);
                 this.session.setAttribute("stani_mail", end);
@@ -152,6 +156,50 @@ public class PregledPoruka {
         }
         catch(MessagingException | ArrayIndexOutOfBoundsException ex) {
         }
+    }
+
+    /**
+     * Metoda za obradu klika za sljedeću stranicu mailova. Na klik korisnika na
+     * temelju zadanog broj prikaza mialova pomiču se početni i završni index
+     * maila u mapi
+     */
+    public void prikaziSljedece() {
+        int pocetak = (int) this.session.getAttribute("kreni_mail");
+        int kraj = (int) this.session.getAttribute("stani_mail");
+        System.out.println("sljed dohvaceno: kreni " + pocetak + " stani " + kraj);
+
+        if (pocetak > 1) {
+            kraj = pocetak - 1;
+            pocetak = (pocetak - this.pomakCitanja) < 1 ? 1 : (pocetak - this.pomakCitanja);
+        }
+
+        this.session.setAttribute("kreni_mail", pocetak);
+        this.session.setAttribute("stani_mail", kraj);
+        System.out.println("sljed spremljeno: kreni " + pocetak + " stani " + kraj);
+
+        preuzmiPoruke(pocetak, kraj);
+    }
+
+    /**
+     * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika
+     * na temelju zadanog broj prikaza mialova pomiču se početni i završni index
+     * maila u mapi
+     */
+    public void prikaziPrethodne() {
+        int pocetak = (int) this.session.getAttribute("kreni_mail");
+        int kraj = (int) this.session.getAttribute("stani_mail");
+        System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
+
+        if (kraj < this.brojPorukaMape) {
+            pocetak = kraj + 1;
+            kraj = kraj + this.pomakCitanja;
+        }
+
+        this.session.setAttribute("kreni_mail", pocetak);
+        this.session.setAttribute("stani_mail", kraj);
+        System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
+
+        preuzmiPoruke(pocetak, kraj);
     }
 
     private Poruka kreirajPoruku(Message poruka, int i) {
@@ -178,48 +226,6 @@ public class PregledPoruka {
         }
     }
 
-    /**
-     * Metoda za obradu klika za sljedeću stranicu mailova. Na klik korisnika na
-     * temelju zadanog broj prikaza mialova pomiču se početni i završni index
-     * maila u mapi
-     */
-    public void prikaziSljedece() {
-        int pocetak = (int) this.session.getAttribute("kreni_mail");
-        int kraj = (int) this.session.getAttribute("stani_mail");
-
-        if (pocetak > 1) {
-            kraj = pocetak - 1;
-            pocetak = (pocetak - this.pomakCitanja) <= 0 ? 1 : pocetak - this.pomakCitanja;
-        }
-
-        this.session.setAttribute("kreni_mail", pocetak);
-        this.session.setAttribute("stani_mail", kraj);
-
-        preuzmiPoruke(pocetak, kraj);
-    }
-
-    /**
-     * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika
-     * na temelju zadanog broj prikaza mialova pomiču se početni i završni index
-     * maila u mapi
-     */
-    public void prikaziPrethodne() {
-        int pocetak = (int) this.session.getAttribute("kreni_mail");
-        int kraj = (int) this.session.getAttribute("stani_mail");
-        System.out.println("prije poziva kreni " + pocetak + " stani " + kraj);
-
-        if (kraj < this.brojPorukaMape) {
-            pocetak = kraj + 1;
-            kraj += this.pomakCitanja;
-        }
-
-        this.session.setAttribute("kreni_mail", pocetak);
-        this.session.setAttribute("stani_mail", kraj);
-
-        System.out.println("poslije poziva kreni " + pocetak + " stani " + kraj);
-        preuzmiPoruke(pocetak, kraj);
-    }
-
     public int getBrojPorukaMape() {
         return brojPorukaMape;
     }
@@ -232,24 +238,12 @@ public class PregledPoruka {
         return posluzitelj;
     }
 
-    public void setPosluzitelj(String posluzitelj) {
-        this.posluzitelj = posluzitelj;
-    }
-
     public String getKorisnickoIme() {
         return korisnickoIme;
     }
 
-    public void setKorisnickoIme(String korisnickoIme) {
-        this.korisnickoIme = korisnickoIme;
-    }
-
     public String getLozinka() {
         return lozinka;
-    }
-
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
     }
 
     public List<Izbornik> getPopisMapa() {
