@@ -64,8 +64,8 @@
                 <h:outputLabel value="#{p['dnevnik.ukupno']}"/>
                 <h:outputLabel value="#{pregledDnevnika.brojZapisaDnevnika}"/>
                 <h:panelGrid class="slanje_komande" columns="2">
-                    <h:commandButton value="#{p['navigacija.prethodne']}" action="#{pregledDnevnika.prikaziPrethodne()}"/>
-                    <h:commandButton value="#{p['navigacija.sljedece']}" action="#{pregledDnevnika.prikaziSljedece()}"/>
+                    <h:commandButton value="#{p['navigacija.prethodne']}" rendered="#{pregledDnevnika.render_prev}" action="#{pregledDnevnika.prikaziPrethodne()}"/>
+                    <h:commandButton value="#{p['navigacija.sljedece']}" rendered="#{pregledDnevnika.render_next}" action="#{pregledDnevnika.prikaziSljedece()}"/>
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>

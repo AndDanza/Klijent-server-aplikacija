@@ -46,6 +46,9 @@ public class PregledDnevnika {
 
     private Connection connection;
     private Statement statement;
+    
+    private boolean render_prev = true;
+    private boolean render_next = true;
 
     /**
      * Creates a new instance of PregledDnevnika
@@ -94,10 +97,27 @@ public class PregledDnevnika {
     public void prikaziDnevnik(int brojStranice) {
         try {
             zapisi = new ArrayList<>();
-
+            
+            brojZapisa();
             brojStranice = brojStranice * this.pomakCitanja;
+            
+//            if (this.brojPorukaMape < this.pomakCitanja) {
+//                this.render_prev = false;
+//                this.render_next = false;
+//            }
+//            else if (start == (this.brojPorukaMape - this.pomakCitanja + 1)) {
+//                this.render_prev = false;
+//            }
+        
+            System.out.println("br stran "+brojStranice);
+            System.out.println(brojStranice+this.pomakCitanja >= this.brojZapisaDnevnika);
+            if (brojStranice == 0) {
+                this.render_prev = false;
+            }
+            if (brojStranice+this.pomakCitanja >= this.brojZapisaDnevnika){
+                this.render_next = false;
+            }
 
-            System.out.println("od datuma " + this.pocetni + " do datuma " + this.krajnji);
             String upit = "";
             if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
                 upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` "
@@ -109,7 +129,6 @@ public class PregledDnevnika {
                         + "ORDER BY `vrijeme` DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
             }
 
-            System.out.println("upit " + upit);
             ResultSet podaci = this.statement.executeQuery(upit);
             while (podaci.next()) {
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -121,7 +140,7 @@ public class PregledDnevnika {
             Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        brojZapisa();
+        
     }
 
     /**
@@ -247,6 +266,22 @@ public class PregledDnevnika {
         catch(ParseException ex) {
             return "ERROR";
         }
+    }
+
+    public boolean isRender_prev() {
+        return render_prev;
+    }
+
+    public void setRender_prev(boolean render_prev) {
+        this.render_prev = render_prev;
+    }
+
+    public boolean isRender_next() {
+        return render_next;
+    }
+
+    public void setRender_next(boolean render_next) {
+        this.render_next = render_next;
     }
 
     public String getOdDatuma() {
