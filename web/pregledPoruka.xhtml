@@ -66,8 +66,8 @@
                 <h:outputLabel value="#{p['pregled.ukupno']}"/>
                 <h:outputLabel value="#{pregledPoruka.brojPorukaMape}"/>
                 <h:panelGrid class="slanje_komande" columns="2">
-                    <h:commandButton value="#{p['navigacija.prethodne']}" action="#{pregledPoruka.prikaziPrethodne()}" />
-                    <h:commandButton value="#{p['navigacija.sljedece']}" action="#{pregledPoruka.prikaziSljedece()}" />
+                    <h:commandButton value="#{p['navigacija.prethodne']}" rendered="#{pregledPoruka.render_prev}" action="#{pregledPoruka.prikaziPrethodne()}" />
+                    <h:commandButton value="#{p['navigacija.sljedece']}" rendered="#{pregledPoruka.render_next}" action="#{pregledPoruka.prikaziSljedece()}" />
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>

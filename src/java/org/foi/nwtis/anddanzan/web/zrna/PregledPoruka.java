@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -46,6 +47,9 @@ public class PregledPoruka {
 
     private int pomakCitanja = 0;
 
+    private boolean render_prev = true;
+    private boolean render_next = true;
+
     /**
      * Creates a new instance of PregledPoruka
      */
@@ -68,14 +72,14 @@ public class PregledPoruka {
         odaberiMapu();
     }
 
-    public void promjeniMapu(){
+    public void promjeniMapu() {
         this.session.removeAttribute("kreni_mail");
         this.session.removeAttribute("stani_mail");
         this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
 
         odaberiMapu();
     }
-    
+
     public void odaberiMapu() {
         try {
             Folder folder;
@@ -90,9 +94,9 @@ public class PregledPoruka {
             folder.open(Folder.READ_ONLY);
 
             this.brojPorukaMape = folder.getMessageCount();
-            
+
             if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
-                System.out.println("mapa "+this.odabranaMapa);
+                System.out.println("mapa " + this.odabranaMapa);
                 preuzmiPoruke(-1, -1);
             }
 
@@ -147,6 +151,17 @@ public class PregledPoruka {
                 this.session.setAttribute("stani_mail", end);
             }
 
+            if (this.brojPorukaMape < this.pomakCitanja) {
+                this.render_prev = false;
+                this.render_next = false;
+            }
+            else if (start == (this.brojPorukaMape - this.pomakCitanja + 1)) {
+                this.render_prev = false;
+            }
+            else if (end == 1) {
+                this.render_next = false;
+            }
+
             Message[] messages = folder.getMessages(start, end);
 
             this.popisPoruka = new ArrayList<>();
@@ -171,6 +186,9 @@ public class PregledPoruka {
         if (pocetak > 1) {
             kraj = pocetak - 1;
             pocetak = (pocetak - this.pomakCitanja) < 1 ? 1 : (pocetak - this.pomakCitanja);
+//            if (pocetak <= 1) {
+//                this.render_prev = true;
+//            }
         }
 
         this.session.setAttribute("kreni_mail", pocetak);
@@ -194,6 +212,9 @@ public class PregledPoruka {
             pocetak = kraj + 1;
             kraj = kraj + this.pomakCitanja;
         }
+//        if (kraj == this.brojPorukaMape) {
+//            this.render_prev = false;
+//        }
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
@@ -224,6 +245,22 @@ public class PregledPoruka {
         catch(MessagingException ex) {
             return null;
         }
+    }
+
+    public boolean isRender_prev() {
+        return render_prev;
+    }
+
+    public void setRender_prev(boolean render_prev) {
+        this.render_prev = render_prev;
+    }
+
+    public boolean isRender_next() {
+        return render_next;
+    }
+
+    public void setRender_next(boolean render_next) {
+        this.render_next = render_next;
     }
 
     public int getBrojPorukaMape() {
