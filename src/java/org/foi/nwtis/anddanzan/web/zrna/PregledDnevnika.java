@@ -62,8 +62,6 @@ public class PregledDnevnika {
 
             FacesContext facesContext = FacesContext.getCurrentInstance();
             this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
-            FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) session.getAttribute("locale"));
-
             this.pomakCitanja = this.konfiguracija.getNumLogItemsToShow();
 
             if (this.session.getAttribute("pocetni_datum") != null && this.session.getAttribute("krajnji_datum") != null) {

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class Lokalizacija implements Serializable {
 
     private String odabraniJezik;
+    private Locale language;
     private HttpSession session;
 
     /**
@@ -25,6 +26,7 @@ public class Lokalizacija implements Serializable {
     public Lokalizacija() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         this.session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        this.language = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
     }
 
     /**
@@ -45,8 +47,7 @@ public class Lokalizacija implements Serializable {
     public Object odaberiJezik(String jezik) {
         Locale locale = new Locale(jezik);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-        session.setAttribute("locale", locale);
-        System.out.println("sesija id " + session.getId());
+        this.language = locale;
         return "";
     }
 
@@ -60,5 +61,13 @@ public class Lokalizacija implements Serializable {
 
     public String pregledDnevnika() {
         return "pregledDnevnika";
+    }
+
+    public Locale getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Locale language) {
+        this.language = language;
     }
 }

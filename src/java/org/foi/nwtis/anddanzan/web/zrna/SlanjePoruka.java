@@ -53,7 +53,6 @@ public class SlanjePoruka {
     public SlanjePoruka() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) session.getAttribute("locale"));
         this.privitak = "{}";
         this.posluzitelj = konfiguracija.getMailServer();
         this.prima = konfiguracija.getMailUsernameThread();

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -57,7 +56,6 @@ public class PregledPoruka {
         this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         this.session = (HttpSession) facesContext.getExternalContext().getSession(false);
-        FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) this.session.getAttribute("locale"));
 
         this.imapPort = konfiguracija.getImapPort();
         this.posluzitelj = this.konfiguracija.getMailServer();
