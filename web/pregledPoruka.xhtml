@@ -24,7 +24,7 @@
             <h:selectOneMenu value="#{pregledPoruka.odabranaMapa}">
                 <f:selectItems value="#{pregledPoruka.popisMapa}" var="mapa" itemLabel="#{mapa.labela}" itemValue="#{mapa.vrijednost}"/>
             </h:selectOneMenu>&nbsp;&nbsp;
-            <h:commandButton value="#{p['pregled.promjeni']}" action="#{pregledPoruka.preuzmiPoruke(1,1)}" />
+            <h:commandButton value="#{p['pregled.promjeni']}" action="#{pregledPoruka.promjeniMapu()}" />
         </h:form>
         <br/>
 

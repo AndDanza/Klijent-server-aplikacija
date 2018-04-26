@@ -26,12 +26,12 @@
         <h:form>
             <h:panelGrid class="dnevnik_forma" columns="3">
                 <h:outputLabel value="#{p['pregled.od_datuma']}"/>
-                <h:inputText class="pregled_input" value="#{pregledDnevnika.pocetni}"/>
+                <h:inputText class="pregled_input" value="#{pregledDnevnika.odDatuma}"/>
                 <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.pretraziDnevnik()}"/>
 
 
                 <h:outputLabel value="#{p['pregled.do_datuma']}" />
-                <h:inputText class="pregled_input" value="#{pregledDnevnika.krajnji}"/>
+                <h:inputText class="pregled_input" value="#{pregledDnevnika.doDatuma}"/>
                 <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['dnevnik.ocisti']}" action="#{pregledDnevnika.ocistiPretragu()}"/>
             </h:panelGrid>
         </h:form>
@@ -53,8 +53,8 @@
             <h:column>
                 <f:facet name="header">#{p['dnevnik.vrijeme']}</f:facet>
                 <h:outputText value = "#{log.vrijemeZapisa}" >
-                    <f:convertDateTime pattern = "dd-MM-yyyy" />
-                </h:outputText>                
+                    <f:convertDateTime pattern = "dd.MM.yyyy HH:mm:ss" />
+                </h:outputText>                 
             </h:column>
         </h:dataTable>
         <br/>

@@ -64,18 +64,36 @@ public class PregledPoruka {
 
         this.sesija = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
-        int pocetak = 1;
-        int kraj = 1;
-        if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
-            this.session.setAttribute("kreni_mail", pocetak);
-            this.session.setAttribute("stani_mail", this.pomakCitanja);
-        }
-
-        pocetak = (int) this.session.getAttribute("kreni_mail");
-        kraj = (int) this.session.getAttribute("stani_mail");
-
         preuzmiMape();
-        preuzmiPoruke(1, 1);
+        promjeniMapu();
+
+        if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
+            preuzmiPoruke(1, 1);
+        }
+    }
+
+    public void promjeniMapu() {
+        try {
+            this.session.removeAttribute("kreni_mail");
+            this.session.removeAttribute("stani_mail");
+            
+            Folder folder;
+            if (this.odabranaMapa != null) {
+                this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
+            }
+            else {
+                this.odabranaMapa = session.getAttribute("odabrana_mapa") == null ? "INBOX" : (String) session.getAttribute("odabrana_mapa");
+            }
+            
+            folder = store.getFolder(this.odabranaMapa);
+            folder.open(Folder.READ_ONLY);
+
+            this.brojPorukaMape = folder.getMessageCount();
+            preuzmiPoruke(1, 1);
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -96,7 +114,8 @@ public class PregledPoruka {
             if (folder != null) {
                 this.popisMapa.add(new Izbornik(folder.getName(), folder.getFullName()));
             }
-
+            
+            promjeniMapu();
         }
         catch(MessagingException ex) {
             Logger.getLogger(PregledPoruka.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,38 +130,23 @@ public class PregledPoruka {
      */
     public void preuzmiPoruke(int start, int end) {
         try {
-            Folder folder;
-            if (this.odabranaMapa != null) {
-                this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
-            }
-            else {
-                if (this.session.getAttribute("odabrana_mapa") == null) {
-                    this.odabranaMapa = "INBOX";
-                }
-                else {
-                    this.odabranaMapa = (String) this.session.getAttribute("odabrana_mapa");
-                }
-            }
-            folder = store.getFolder(this.odabranaMapa);
+            Folder folder = store.getFolder(this.odabranaMapa);
             folder.open(Folder.READ_ONLY);
 
             this.brojPorukaMape = folder.getMessageCount();
 
             if (start == 1 && end == 1) {
-                if (this.pomakCitanja > this.brojPorukaMape) {
-                    end = this.brojPorukaMape;
-                }
-                else {
-                    end = this.pomakCitanja;
-                }
-                this.session.setAttribute("kreni_mail", 1);
+                end = this.brojPorukaMape;
+                start = (end - this.pomakCitanja) <= 0 ? 1 : end - this.pomakCitanja + 1;
+
+                this.session.setAttribute("kreni_mail", start);
                 this.session.setAttribute("stani_mail", end);
             }
-            
+
             Message[] messages = folder.getMessages(start, end);
-            
+
             this.popisPoruka = new ArrayList<>();
-            for (int i = 0; i < this.pomakCitanja; i++) {
+            for (int i = messages.length - 1; i >= 0; i--) {
                 popisPoruka.add(kreirajPoruku(messages[i], i));
             }
         }
@@ -183,13 +187,9 @@ public class PregledPoruka {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
 
-        if (kraj < this.brojPorukaMape) {
-            pocetak += this.pomakCitanja;
-            kraj += this.pomakCitanja;
-        }
-
-        if (kraj >= this.brojPorukaMape) {
-            kraj = this.brojPorukaMape;
+        if (pocetak > 1) {
+            kraj = pocetak - 1;
+            pocetak = (pocetak - this.pomakCitanja) <= 0 ? 1 : pocetak - this.pomakCitanja;
         }
 
         this.session.setAttribute("kreni_mail", pocetak);
@@ -206,22 +206,17 @@ public class PregledPoruka {
     public void prikaziPrethodne() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
+        System.out.println("prije poziva kreni " + pocetak + " stani " + kraj);
 
-        if (pocetak <= 1) {
-            pocetak = 1;
-            if(this.pomakCitanja > this.brojPorukaMape)
-                kraj = this.brojPorukaMape;
-            else
-                kraj = this.pomakCitanja;
-        }
-        else if(pocetak > this.pomakCitanja) {
-            kraj = pocetak;
-            pocetak -= this.pomakCitanja;
+        if (kraj < this.brojPorukaMape) {
+            pocetak = kraj + 1;
+            kraj += this.pomakCitanja;
         }
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
 
+        System.out.println("poslije poziva kreni " + pocetak + " stani " + kraj);
         preuzmiPoruke(pocetak, kraj);
     }
 

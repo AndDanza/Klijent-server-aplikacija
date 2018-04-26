@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -39,6 +40,8 @@ public class PregledDnevnika {
     private List<Dnevnik> zapisi;
     private String pocetni = "";
     private String krajnji = "";
+    private String odDatuma = "";
+    private String doDatuma = "";
     private List<String> pogreske = new ArrayList<>();
 
     private Connection connection;
@@ -64,20 +67,18 @@ public class PregledDnevnika {
                 this.pocetni = (String) this.session.getAttribute("pocetni_datum");
                 this.krajnji = (String) this.session.getAttribute("krajnji_datum");
             }
+            if (this.session.getAttribute("uneseni_pocetni") != null && this.session.getAttribute("uneseni_krajnji") != null) {
+                this.odDatuma = (String) this.session.getAttribute("uneseni_pocetni");
+                this.doDatuma = (String) this.session.getAttribute("uneseni_krajnji");
+            }
 
             brojZapisa();
 
-            int pocetak = 0;
-            int kraj = 0;
-            if (this.session.getAttribute("kreni_dnevnik") == null && this.session.getAttribute("stani_dnevnik") == null) {
-                this.session.setAttribute("kreni_dnevnik", pocetak);
-                this.session.setAttribute("stani_dnevnik", this.pomakCitanja);
+            if (this.session.getAttribute("stranica_dnevnik") == null) {
+                this.session.setAttribute("stranica_dnevnik", 0);
+                prikaziDnevnik(0);
             }
 
-            pocetak = (int) this.session.getAttribute("kreni_dnevnik");
-            kraj = (int) this.session.getAttribute("stani_dnevnik");
-
-            prikaziDnevnik(pocetak, kraj);
         }
         catch(SQLException ex) {
             Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,20 +88,28 @@ public class PregledDnevnika {
     /**
      * Metoda za dohvaćanje zapisa iz tablice dnevnik
      *
-     * @param odZapisa index početnog reda tablice
-     * @param doZapisa index završnog reda tablice
+     * @param brojStranice trenutna stranica (množi se s pomakom čitanja kako bi
+     * se odredio početni red u tablici)
      */
-    public void prikaziDnevnik(int odZapisa, int doZapisa) {
+    public void prikaziDnevnik(int brojStranice) {
         try {
             zapisi = new ArrayList<>();
+
+            brojStranice = brojStranice * this.pomakCitanja;
+
+            System.out.println("od datuma " + this.pocetni + " do datuma " + this.krajnji);
             String upit = "";
             if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` ORDER BY `vrijeme` DESC LIMIT " + odZapisa + "," + doZapisa;
+                upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` "
+                        + "ORDER BY `vrijeme` DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
             }
             else {
                 upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` "
-                        + "WHERE `vrijeme` BETWEEN '" + pocetni + "' AND '" + krajnji + "' ORDER BY `vrijeme` DESC LIMIT " + odZapisa + "," + doZapisa;
+                        + "WHERE `vrijeme` BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "' "
+                        + "ORDER BY `vrijeme` DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
             }
+
+            System.out.println("upit " + upit);
             ResultSet podaci = this.statement.executeQuery(upit);
             while (podaci.next()) {
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -120,23 +129,29 @@ public class PregledDnevnika {
      * pretražuju se zapisi u tablic koji odgovaraju uvjetu
      */
     public void pretraziDnevnik() {
-        if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
-            Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-            ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
+        Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+        ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
 
-            if (!provjeriDatum(this.pocetni)) {
-                this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
-            }
-            if (!provjeriDatum(this.krajnji)) {
-                this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
-            }
-
-            this.session.setAttribute("pocetni_datum", this.pocetni);
-            this.session.setAttribute("krajnji_datum", this.krajnji);
-
-            prikaziDnevnik(0, this.pomakCitanja);
-            brojZapisa();
+        if (!this.odDatuma.isEmpty() && !this.doDatuma.isEmpty()) {
+            this.session.setAttribute("uneseni_pocetni", this.odDatuma);
+            this.session.setAttribute("uneseni_krajnji", this.doDatuma);
         }
+
+        this.pocetni = provjeriDatum(this.odDatuma);
+        if (this.pocetni.equals("ERROR")) {
+            this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+        }
+
+        this.krajnji = provjeriDatum(this.doDatuma);
+        if (this.krajnji.equals("ERROR")) {
+            this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+        }
+
+        this.session.setAttribute("pocetni_datum", this.pocetni);
+        this.session.setAttribute("krajnji_datum", this.krajnji);
+
+        prikaziDnevnik(0);
+        brojZapisa();
 
     }
 
@@ -144,15 +159,19 @@ public class PregledDnevnika {
      * Metoda za pražnjenje inputa forme te učitavanje inicijalnih podataka
      */
     public void ocistiPretragu() {
-        this.pocetni = "";
-        this.krajnji = "";
+        this.pocetni = this.krajnji = "";
+        this.odDatuma = this.doDatuma = "";
+
         this.session.removeAttribute("pocetni_datum");
         this.session.removeAttribute("krajnji_datum");
+        this.session.removeAttribute("stranica_dnevnik");
 
-        this.session.setAttribute("kreni_dnevnik", 0);
-        this.session.setAttribute("stani_dnevnik", this.pomakCitanja);
-        prikaziDnevnik(0, this.pomakCitanja);
+        this.session.removeAttribute("uneseni_pocetni");
+        this.session.removeAttribute("uneseni_krajnji");
 
+        this.session.setAttribute("stranica_dnevnik", 0);
+
+        prikaziDnevnik(0);
         brojZapisa();
     }
 
@@ -162,18 +181,14 @@ public class PregledDnevnika {
      * i završni index retka u tablici
      */
     public void prikaziSljedece() {
-        int pocetak = (int) this.session.getAttribute("kreni_dnevnik");
-        int kraj = (int) this.session.getAttribute("stani_dnevnik");
+        int stranica = (int) this.session.getAttribute("stranica_dnevnik");
 
-        if (kraj < this.brojZapisaDnevnika) {
-            pocetak += this.pomakCitanja;
-            kraj += this.pomakCitanja;
+        if ((stranica * this.pomakCitanja) < (this.brojZapisaDnevnika - this.pomakCitanja)) {
+            stranica++;
+            this.session.setAttribute("stranica_dnevnik", stranica);
         }
 
-        this.session.setAttribute("kreni_dnevnik", pocetak);
-        this.session.setAttribute("stani_dnevnik", kraj);
-
-        prikaziDnevnik(pocetak, kraj);
+        prikaziDnevnik(stranica);
     }
 
     /**
@@ -182,21 +197,14 @@ public class PregledDnevnika {
      * i završni index retka u tablici
      */
     public void prikaziPrethodne() {
-        int pocetak = (int) this.session.getAttribute("kreni_dnevnik");
-        int kraj = (int) this.session.getAttribute("stani_dnevnik");
+        int stranica = (int) this.session.getAttribute("stranica_dnevnik");
 
-        kraj = pocetak;
-        pocetak -= this.pomakCitanja;
-
-        if (pocetak <= 0) {
-            pocetak = 0;
-            kraj = this.pomakCitanja;
+        if (stranica > 0) {
+            stranica--;
+            this.session.setAttribute("stranica_dnevnik", stranica);
         }
 
-        this.session.setAttribute("kreni_dnevnik", pocetak);
-        this.session.setAttribute("stani_dnevnik", kraj);
-
-        prikaziDnevnik(pocetak, kraj);
+        prikaziDnevnik(stranica);
     }
 
     /**
@@ -228,15 +236,33 @@ public class PregledDnevnika {
      * @param datum
      * @return
      */
-    private boolean provjeriDatum(String datum) {
+    private String provjeriDatum(String datum) {
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            formatter.parse(datum);
-            return true;
+            DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            Date date = formatter.parse(datum);
+            formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return formatter.format(date);
+
         }
         catch(ParseException ex) {
-            return false;
+            return "ERROR";
         }
+    }
+
+    public String getOdDatuma() {
+        return odDatuma;
+    }
+
+    public void setOdDatuma(String odDatuma) {
+        this.odDatuma = odDatuma;
+    }
+
+    public String getDoDatuma() {
+        return doDatuma;
+    }
+
+    public void setDoDatuma(String doDatuma) {
+        this.doDatuma = doDatuma;
     }
 
     public List<String> getPogreske() {
