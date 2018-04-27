@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,8 +24,11 @@ import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.internet.MimeBodyPart;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.kontrole.DatotekaRadaDretve;
 import org.foi.nwtis.anddanzan.web.kontrole.Poruka;
@@ -205,20 +209,26 @@ public class ObradaPoruka extends Thread {
      */
     private void sortirajMail(Message message) {
         try {
-            String privitak = message.getFileName();
+            if (message.getContentType().contains("multipart")) {
+                Multipart multiPart = (Multipart) message.getContent();
 
-            if (privitak.contains(this.oznakaNwtisPoruke)) {
-                obradiNwtisPoruku(message);
-
-                Message[] msg = new Message[]{message};
-                folder.copyMessages(msg, nwtisMapa);
-                message.setFlag(Flags.Flag.DELETED, true);
-                folder.expunge();
+                if (multiPart.getCount() == 1) {
+                    MimeBodyPart attachment = (MimeBodyPart) multiPart.getBodyPart(0);
+                    if (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition())) {
+                        if (attachment.getFileName().contains(this.oznakaNwtisPoruke)) {
+                            if (obradiNwtisPoruku(message)) {
+                                Message[] msg = new Message[]{message};
+                                folder.copyMessages(msg, nwtisMapa);
+                                message.setFlag(Flags.Flag.DELETED, true);
+                                folder.expunge();
+                            }
+                        }
+                    }
+                }
             }
         }
-        catch(MessagingException ex) {
+        catch(MessagingException | IOException ex) {
             this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
@@ -233,9 +243,10 @@ public class ObradaPoruka extends Thread {
      *
      * @param message mail poruka koju je potrebno obraditi
      */
-    private void obradiNwtisPoruku(Message message) {
+    private boolean obradiNwtisPoruku(Message message) {
         String jsonString = Poruka.getMailContent(message);
-        
+        boolean porukaUredu = false;
+
         if (provjeriPrivitak(jsonString)) {
             try {
                 //dohvaćanje jsona unutar mail
@@ -244,30 +255,30 @@ public class ObradaPoruka extends Thread {
                 int idUredaja = jsonObject.get("id").getAsInt();
 
                 String upit = "";
-                if (komanda.equalsIgnoreCase("dodaj") && provjeriID(idUredaja) == -1) {
+                if (komanda.equalsIgnoreCase("dodaj")) {
                     String naziv = jsonObject.get("naziv").getAsString();
                     String kreiranje = jsonObject.get("vrijeme").getAsString();
                     upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                             + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
                     this.statement.execute(upit);
                     this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT() + 1);
+                    porukaUredu = true;
                 }
-                else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(idUredaja) != -1) {
+                else if (komanda.equalsIgnoreCase("azuriraj")) {
                     String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
                     upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
                     this.statement.execute(upit);
                     this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT() + 1);
+                    porukaUredu = true;
                 }
             }
-            catch(SQLException ex) {
-                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch(JsonSyntaxException ex) {
+            catch(SQLException | JsonSyntaxException | NullPointerException ex) {
                 this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
-                zapisiUDnevnik(jsonString);
             }
         }
         zapisiUDnevnik(jsonString);
+
+        return porukaUredu;
     }
 
     /**
@@ -282,58 +293,26 @@ public class ObradaPoruka extends Thread {
      * @param id identifikator uređaja
      * @return <code>String</code> vrijednost novog ažuriranog sadržajas
      */
-    private String azurirajPodatke(String jsonString, int id) {
+    private String azurirajPodatke(String jsonString, int id) throws SQLException {
         Properties stariPodaci = null;
 
-        try {
-            String upit = "SELECT `sadrzaj` FROM `uredaji` WHERE `id` = " + id;
-            ResultSet podaci = this.statement.executeQuery(upit);
-            if (podaci.next()) {
-                String sadrzaj = podaci.getString("sadrzaj");
-                stariPodaci = new GsonBuilder().create().fromJson(sadrzaj, Properties.class);
+        String upit = "SELECT `sadrzaj` FROM `uredaji` WHERE `id` = " + id;
+        ResultSet podaci = this.statement.executeQuery(upit);
+        if (podaci.next()) {
+            String sadrzaj = podaci.getString("sadrzaj");
+            stariPodaci = new GsonBuilder().create().fromJson(sadrzaj, Properties.class);
 
-                Properties noviPodaci = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().fromJson(jsonString, Properties.class);
+            Properties noviPodaci = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().fromJson(jsonString, Properties.class);
 
-                Set<String> keysKlijent = noviPodaci.stringPropertyNames();
-                for (String keyK : keysKlijent) {
-                    stariPodaci.setProperty(keyK, noviPodaci.getProperty(keyK));
-                }
+            Set<String> keysKlijent = noviPodaci.stringPropertyNames();
+            for (String keyK : keysKlijent) {
+                stariPodaci.setProperty(keyK, noviPodaci.getProperty(keyK));
             }
+        }
 
-            podaci.close();
-        }
-        catch(SQLException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        podaci.close();
 
         return new GsonBuilder().create().toJson(stariPodaci);
-    }
-
-    /**
-     * Metoda za provjeru postoji li dani id i u bazi podataka te je li id manji
-     * od 4 (u zadatku je raspon id-a uređaja dan od 1 do 4)
-     *
-     * @param stmt kreirani <code>Statement</code> za bazu podataka
-     * @param naziv naziv uređaja zadan u jason-u
-     * @param id identifikator uređaja (int)
-     * @return -1 (uređaj s danim id-em ne postoji) u suprotnom vraća se id
-     * uređaja
-     */
-    private int provjeriID(int id) {
-        if (id < 5 && id > 0) {
-            try {
-                String upit = "SELECT `id` FROM `uredaji` WHERE `id` = " + id;
-                ResultSet podaci = this.statement.executeQuery(upit);
-                if (podaci.next()) {
-                    return podaci.getInt("id");
-                }
-                podaci.close();
-            }
-            catch(SQLException ex) {
-                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return 0;
     }
 
     /**
@@ -343,11 +322,19 @@ public class ObradaPoruka extends Thread {
      */
     private void zapisiUDnevnik(String sadrzaj) {
         try {
-            String upit = "INSERT INTO `dnevnik`(`sadrzaj`) VALUES ('" + sadrzaj + "')";
+            JsonObject jsonObject = new JsonParser().parse(sadrzaj).getAsJsonObject();
+            int idUredaja = jsonObject.get("id").getAsInt();
+            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES ("+idUredaja+", '" + sadrzaj + "')";
             this.statement.execute(upit);
         }
-        catch(SQLException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
+        catch(SQLException | JsonSyntaxException | NullPointerException ex) {
+            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES (-1, '" + sadrzaj + "')";
+            try {
+                this.statement.execute(upit);
+            }
+            catch(SQLException ex1) {
+                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
 
@@ -388,10 +375,11 @@ public class ObradaPoruka extends Thread {
             if (!komanda.equalsIgnoreCase("dodaj") && !komanda.equalsIgnoreCase("azuriraj")) {
                 return false;
             }
-            else if (komanda.equalsIgnoreCase("dodaj")) {
+            else if (komanda.equalsIgnoreCase("azuriraj")) {
                 sadrzaj.remove("komanda");
-                sadrzaj.getProperty("naziv");
-                sadrzaj.remove("naziv");
+                if (sadrzaj.getProperty("naziv") != null) {
+                    sadrzaj.remove("naziv");
+                }
             }
 
             DateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -423,18 +411,15 @@ public class ObradaPoruka extends Thread {
                         if (intBroj < 1 || intBroj > 999) {
                             return false;
                         }
-                        System.out.println("int broj");
                     }
                     catch(NumberFormatException ex) {
                         Pattern pattern = Pattern.compile("^\\d{1,3}\\.\\d{1,2}$");
                         Matcher m = pattern.matcher(vrijednost);
                         if (m.matches()) {
-                            System.out.println("float broj");
                             return true;
                         }
 
                         if (vrijednost.length() >= 1 || vrijednost.length() <= 30) {
-                            System.out.println("ipak string");
                             return true;
                         }
                     }
