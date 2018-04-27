@@ -22,13 +22,15 @@ public class SlusacAplikacije implements ServletContextListener {
     ObradaPoruka obrada;
 
     /**
-     *
+     * Globalni kontekst za dohvaćanje kongifuracije
      */
     public static ServletContext kontekst;
 
     /**
+     * Metoda za kreiranje konteksta, učitavanje konfiguracije te sesije za
+     * bazu.
      *
-     * @param sce
+     * @param sce event kreiranja konteksta
      */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -55,6 +57,7 @@ public class SlusacAplikacije implements ServletContextListener {
     }
 
     /**
+     * Metoda za uništavanje konteksta. Briše kontekst i prekida obradu
      *
      * @param sce
      */

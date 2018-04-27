@@ -58,7 +58,8 @@ public class SlanjePoruka {
     private HttpSession session;
 
     /**
-     * Creates a new instance of SlanjePoruka
+     * Konstruktor managed beana za inicijalizaciju. Učitavaju se parametri
+     * potrebni za spajanje na bazu i početni podaci na formi.
      */
     public SlanjePoruka() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -101,6 +102,7 @@ public class SlanjePoruka {
                 // Set the subject and text
                 message.setSubject(this.predmet);
 
+                //TODO provjerit ako radi i bez ovog
                 message.setFileName(this.odabranaDatoteka);
 
                 File atachment = pripremiPrivitakZaSlanje();
@@ -131,6 +133,12 @@ public class SlanjePoruka {
         return "";
     }
 
+    /**
+     * Metoda za kreiranje privremene datoteke koja se šalje kao privitak u
+     * mailu.
+     *
+     * @return objekt datoteke tipa <code>File</code> s podacima iz forme
+     */
     private File pripremiPrivitakZaSlanje() {
         File temp = null;
         try {
@@ -147,7 +155,7 @@ public class SlanjePoruka {
     }
 
     /**
-     * Metoda za učitavanje sadržaja dane json datoteke
+     * Metoda za učitavanje sadržaja iz dane json datoteke
      *
      * @return vraća prazan string
      */
@@ -201,7 +209,8 @@ public class SlanjePoruka {
     }
 
     /**
-     * Meoda za provjeru podataka unesenih nu formu
+     * Meoda za provjeru podataka unesenih nu formu. Provjeravaju se uneseni
+     * podaci na formi te valjanost json objekta.
      *
      * @return true ako su podaci uredu ili false ako je jedan od unesenih
      * podataka neispravan
@@ -249,164 +258,154 @@ public class SlanjePoruka {
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje varijable poslužitelja
+     * @return naziv poslužitelja
      */
     public String getPosluzitelj() {
         return posluzitelj;
     }
 
     /**
-     *
-     * @param posluzitelj
+     * Postavljanje varijable poslužitelja
+     * @param posluzitelj naziv poslužitelja za pohranu
      */
     public void setPosluzitelj(String posluzitelj) {
         this.posluzitelj = posluzitelj;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje adrese primatelja
+     * @return adresa primatelja
      */
     public String getPrima() {
         return prima;
     }
 
     /**
-     *
-     * @param prima
+     * Postavljanje varijable primatelja
+     * @param prima adresa primatelja za pohranu
      */
     public void setPrima(String prima) {
         this.prima = prima;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje adrese primatelja
+     * @return adresa primatelja poruke
      */
     public String getSalje() {
         return salje;
     }
 
     /**
-     *
-     * @param salje
+     * Postavljanje adrese pošiljatelja
+     * @param salje adresa pošiljatelja
      */
     public void setSalje(String salje) {
         this.salje = salje;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje predmeta poruka
+     * @return predemet poruke
      */
     public String getPredmet() {
         return predmet;
     }
 
     /**
-     *
-     * @param predmet
+     * Postavljanje predmeta poruke
+     * @param predmet novi predmet poruke
      */
     public void setPredmet(String predmet) {
         this.predmet = predmet;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje sadržaja privitka
+     * @return sadržaj privitka
      */
     public String getPrivitak() {
         return privitak;
     }
 
     /**
-     *
-     * @param privitak
+     * Postavljanje sadržaja privitka
+     * @param privitak novi sadržaj privetka
      */
     public void setPrivitak(String privitak) {
         this.privitak = privitak;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje popisa datoteka json
+     * @return lists json datoteka
      */
     public List<String> getPopisDatoteka() {
         return popisDatoteka;
     }
 
     /**
-     *
-     * @param popisDatoteka
+     * Punjenje liste json datoteka
+     * @param popisDatoteka nova lista datoteka
      */
     public void setPopisDatoteka(List<String> popisDatoteka) {
         this.popisDatoteka = popisDatoteka;
     }
 
     /**
-     *
-     * @param odabranaDatoteka
+     * Postavljanje odabrane datoteke
+     * @param odabranaDatoteka nova odabrana datoteka
      */
     public void setOdabranaDatoteka(String odabranaDatoteka) {
         this.odabranaDatoteka = odabranaDatoteka;
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje odabrane datoteke
+     * @return naziv odabrane datoteke
      */
     public String getOdabranaDatoteka() {
         return odabranaDatoteka;
     }
 
     /**
-     *
-     * @return
+     * Metoda za navigaciju
+     * @return promjenaJezika
      */
     public String promjeniJezik() {
         return "promjeniJezik";
     }
 
     /**
-     *
-     * @return
+     * Metoda za navigaciju
+     * @return pregledPoruka
      */
     public String pregledPoruka() {
         return "pregledPoruka";
     }
 
     /**
-     *
-     * @return
+     * Metoda za navigaciju
+     * @return pregledDnevnika
      */
     public String pregledDnevnika() {
         return "pregledDnevnika";
     }
 
     /**
-     *
-     * @return
+     * Dohvaćanje liste pogrešaka
+     * @return lista pogrešaka
      */
     public List<String> getPogreske() {
         return pogreske;
     }
 
     /**
-     *
-     * @param pogreske
+     * Postavljanje liste pogreški
+     * @param pogreske nova lista pogreški
      */
     public void setPogreske(List<String> pogreske) {
         this.pogreske = pogreske;
-    }
-
-    private void citajMessage(MimeMessage message) {
-        try {
-            String contentType = message.getContentType();
-            System.out.println("content "+contentType);
-        }
-        catch(MessagingException ex) {
-            Logger.getLogger(SlanjePoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

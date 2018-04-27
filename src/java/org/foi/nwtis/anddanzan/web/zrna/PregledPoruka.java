@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -50,7 +49,8 @@ public class PregledPoruka {
     private boolean render_next = true;
 
     /**
-     * Creates a new instance of PregledPoruka
+     * Konstruktor managed beana za inicijalizaciju. Učitavaju se parametri
+     * potrebni za spajanje na bazu i početni podaci na formi.
      */
     public PregledPoruka() {
         this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
@@ -71,7 +71,7 @@ public class PregledPoruka {
     }
 
     /**
-     *
+     * Metoda za promjenu mape na klik tipke
      */
     public void promjeniMapu() {
         this.session.removeAttribute("kreni_mail");
@@ -82,7 +82,8 @@ public class PregledPoruka {
     }
 
     /**
-     *
+     * Odabir trenutne mape za priakz poruka. Mapa je određena varijablom klase
+     * <code>odabranaMapa</code>, sesijom ili je defultno INBOX
      */
     public void odaberiMapu() {
         try {
@@ -227,6 +228,14 @@ public class PregledPoruka {
         preuzmiPoruke(pocetak, kraj);
     }
 
+    /**
+     * Metoda za kreiranje objekat tipa <code>Poruka</code> koja sadrži sve
+     * podatke iz maila (<code>Message</code>)
+     *
+     * @param poruka mail s podacima i privitkom
+     * @param i identifikator objekta
+     * @return <code>Poruka</code> koja sadrži sve podatke iz maila
+     */
     private Poruka kreirajPoruku(Message poruka, int i) {
         try {
             String salje = poruka.getFrom()[0].toString();
@@ -252,144 +261,162 @@ public class PregledPoruka {
     }
 
     /**
+     * Provjera vidljivosti tipke prethodne
      *
-     * @return
+     * @return <code>boolean</code> vrijednost zastavice
      */
     public boolean isRender_prev() {
         return render_prev;
     }
 
     /**
+     * Postavljanje vidljivosti tipke prethodne
      *
-     * @param render_prev
+     * @param render_prev nova <code>boolean</code> vrijednost zastavice
      */
     public void setRender_prev(boolean render_prev) {
         this.render_prev = render_prev;
     }
 
     /**
+     * Provejravanje je li postavljena zastavica za tipku sljedeca
      *
-     * @return
+     * @return <code>boolean</code> vrijednost zastavice
      */
     public boolean isRender_next() {
         return render_next;
     }
 
     /**
+     * Postavljanje vidljivosti tipke sljedece
      *
-     * @param render_next
+     * @param render_next nova <code>boolean</code> vrijednost zastavice
      */
     public void setRender_next(boolean render_next) {
         this.render_next = render_next;
     }
 
     /**
+     * Dohvaćanje broja poruka u mapi
      *
-     * @return
+     * @return broj poruka u mapi
      */
     public int getBrojPorukaMape() {
         return brojPorukaMape;
     }
 
     /**
+     * Postavljanje broj poruka u mapi
      *
-     * @param brojPorukaMape
+     * @param brojPorukaMape novi broj poruka u mapi
      */
     public void setBrojPorukaMape(int brojPorukaMape) {
         this.brojPorukaMape = brojPorukaMape;
     }
 
     /**
+     * Dohvaćanje poslužitelja
      *
-     * @return
+     * @return poslužitelj
      */
     public String getPosluzitelj() {
         return posluzitelj;
     }
 
     /**
+     * Dohvaćanje korisničkog imena
      *
-     * @return
+     * @return korisničko ime
      */
     public String getKorisnickoIme() {
         return korisnickoIme;
     }
 
     /**
+     * Dohvaćanje lozinke
      *
-     * @return
+     * @return lozinka
      */
     public String getLozinka() {
         return lozinka;
     }
 
     /**
+     * Dohvaćanje liste mapa
      *
-     * @return
+     * @return lista mapa
      */
     public List<Izbornik> getPopisMapa() {
         return popisMapa;
     }
 
     /**
+     * Postavljanje liste mapa
      *
-     * @param popisMapa
+     * @param popisMapa nova lista mapa
      */
     public void setPopisMapa(List<Izbornik> popisMapa) {
         this.popisMapa = popisMapa;
     }
 
     /**
+     * Dohvaćanje odabrane mape
      *
-     * @return
+     * @return odabrana mapa
      */
     public String getOdabranaMapa() {
         return odabranaMapa;
     }
 
     /**
+     * Postavljanje odabrane mape
      *
-     * @param odabranaMapa
+     * @param odabranaMapa nova odabrana mapa
      */
     public void setOdabranaMapa(String odabranaMapa) {
         this.odabranaMapa = odabranaMapa;
     }
 
     /**
+     * DOhvaćanje liste poruka
      *
-     * @return
+     * @return lista poruka
      */
     public List<Poruka> getPopisPoruka() {
         return popisPoruka;
     }
 
     /**
+     * Postavljanje liste poruka
      *
-     * @param popisPoruka
+     * @param popisPoruka nova lista poruka
      */
     public void setPopisPoruka(List<Poruka> popisPoruka) {
         this.popisPoruka = popisPoruka;
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return pregledDnevnika
      */
     public String promjeniJezik() {
         return "promjeniJezik";
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return pregledDnevnika
      */
     public String slanjePoruka() {
         return "slanjePoruka";
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return pregledDnevnika
      */
     public String pregledDnevnika() {
         return "pregledDnevnika";

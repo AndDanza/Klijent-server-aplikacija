@@ -46,12 +46,13 @@ public class PregledDnevnika {
 
     private Connection connection;
     private Statement statement;
-    
+
     private boolean render_prev = true;
     private boolean render_next = true;
 
     /**
-     * Creates a new instance of PregledDnevnika
+     * Konstruktor managed beana za inicijalizaciju. Učitavaju se parametri
+     * potrebni za spajanje na bazu i početni podaci na formi.
      */
     public PregledDnevnika() {
         try {
@@ -95,10 +96,10 @@ public class PregledDnevnika {
     public void prikaziDnevnik(int brojStranice) {
         try {
             zapisi = new ArrayList<>();
-            
+
             brojZapisa();
             brojStranice = brojStranice * this.pomakCitanja;
-            
+
 //            if (this.brojPorukaMape < this.pomakCitanja) {
 //                this.render_prev = false;
 //                this.render_next = false;
@@ -106,13 +107,12 @@ public class PregledDnevnika {
 //            else if (start == (this.brojPorukaMape - this.pomakCitanja + 1)) {
 //                this.render_prev = false;
 //            }
-        
-            System.out.println("br stran "+brojStranice);
-            System.out.println(brojStranice+this.pomakCitanja >= this.brojZapisaDnevnika);
+            System.out.println("br stran " + brojStranice);
+            System.out.println(brojStranice + this.pomakCitanja >= this.brojZapisaDnevnika);
             if (brojStranice == 0) {
                 this.render_prev = false;
             }
-            if (brojStranice+this.pomakCitanja >= this.brojZapisaDnevnika){
+            if (brojStranice + this.pomakCitanja >= this.brojZapisaDnevnika) {
                 this.render_next = false;
             }
 
@@ -138,7 +138,6 @@ public class PregledDnevnika {
             Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
     }
 
     /**
@@ -267,168 +266,189 @@ public class PregledDnevnika {
     }
 
     /**
+     * Provjera vidljivosti tipke prethodne
      *
-     * @return
+     * @return <code>boolean</code> vrijednost zastavice
      */
     public boolean isRender_prev() {
         return render_prev;
     }
 
     /**
+     * Postavljanje vidljivosti tipke prethodne
      *
-     * @param render_prev
+     * @param render_prev nova <code>boolean</code> vrijednost zastavice
      */
     public void setRender_prev(boolean render_prev) {
         this.render_prev = render_prev;
     }
 
     /**
+     * Provejravanje je li postavljena zastavica za tipku sljedeca
      *
-     * @return
+     * @return <code>boolean</code> vrijednost zastavice
      */
     public boolean isRender_next() {
         return render_next;
     }
 
     /**
+     * Postavljanje vidljivosti tipke sljedece
      *
-     * @param render_next
+     * @param render_next nova <code>boolean</code> vrijednost zastavice
      */
     public void setRender_next(boolean render_next) {
         this.render_next = render_next;
     }
 
     /**
+     * Dohvati početni datum
      *
-     * @return
+     * @return početni datum u <code>String</code> tipu
      */
     public String getOdDatuma() {
         return odDatuma;
     }
 
     /**
+     * Postavi početni datum
      *
-     * @param odDatuma
+     * @param odDatuma novi datum u <code>String</code> tipu
      */
     public void setOdDatuma(String odDatuma) {
         this.odDatuma = odDatuma;
     }
 
     /**
+     * Dohvaćanje završnog datum pretrage
      *
-     * @return
+     * @return završni datum u <code>String</code> tipu
      */
     public String getDoDatuma() {
         return doDatuma;
     }
 
     /**
+     * Postavljanje završnog datuma pretrage
      *
-     * @param doDatuma
+     * @param doDatuma datum u <code>String</code> tipu
      */
     public void setDoDatuma(String doDatuma) {
         this.doDatuma = doDatuma;
     }
 
     /**
+     * Dohvaćanje liste pogrešaka
      *
-     * @return
+     * @return lista pogrešaka
      */
     public List<String> getPogreske() {
         return pogreske;
     }
 
     /**
+     * Postavljanje liste pogrešaka
      *
-     * @param pogreske
+     * @param pogreske nova lista pogrešaka
      */
     public void setPogreske(List<String> pogreske) {
         this.pogreske = pogreske;
     }
 
     /**
+     * DOhvaćanje broja zapisa u tablici
      *
-     * @return
+     * @return broj zapisa u tablici dnevnik
      */
     public int getBrojZapisaDnevnika() {
         return brojZapisaDnevnika;
     }
 
     /**
+     * Postavljanje broja zapisa u tablici
      *
-     * @param brojZapisaDnevnika
+     * @param brojZapisaDnevnika novi broj zapisa u tablici
      */
     public void setBrojZapisaDnevnika(int brojZapisaDnevnika) {
         this.brojZapisaDnevnika = brojZapisaDnevnika;
     }
 
     /**
+     * Dohvaćanje početnog datuma za pretragu u bazi (formatiran za bazu)
      *
-     * @return
+     * @return početni datum tipa <code>String</code>
      */
     public String getPocetni() {
         return pocetni;
     }
 
     /**
+     * Postavljanje početnog datuma za pretragu u bazi (formatiran za bazu)
      *
-     * @param pocetni
+     * @param pocetni novi početni datum <code>String</code>
      */
     public void setPocetni(String pocetni) {
         this.pocetni = pocetni;
     }
 
     /**
+     * Dohvaćanje krajnjeg datuma za pretragu u bazi (formatiran za bazu)
      *
-     * @return
+     * @return <code>String</code> datum
      */
     public String getKrajnji() {
         return krajnji;
     }
 
     /**
+     * Postavljanje krajnjeg datuma za pretragu u bazi (formatiran za bazu)
      *
-     * @param krajnji
+     * @param krajnji novi datum tipa <code>String</code>
      */
     public void setKrajnji(String krajnji) {
         this.krajnji = krajnji;
     }
 
     /**
+     * Dohvaćanje liste zapisa iz dnevnika
      *
-     * @return
+     * @return lista zapisa iz dnevnika
      */
     public List<Dnevnik> getZapisi() {
         return zapisi;
     }
 
     /**
+     * Postavljanje liste zapisa
      *
-     * @param zapisi
+     * @param zapisi nova lista zapisa
      */
     public void setZapisi(List<Dnevnik> zapisi) {
         this.zapisi = zapisi;
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return slanjePoruka
      */
     public String slanjePoruka() {
         return "slanjePoruka";
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return pregledPoruka
      */
     public String pregledPoruka() {
         return "pregledPoruka";
     }
 
     /**
+     * Metoda za navigaciju
      *
-     * @return
+     * @return promjeniJezik
      */
     public String promjeniJezik() {
         return "promjeniJezik";

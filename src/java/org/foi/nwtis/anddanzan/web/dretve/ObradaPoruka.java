@@ -56,7 +56,7 @@ public class ObradaPoruka extends Thread {
     Statement statement;
 
     /**
-     *
+     * Objekt dretve rada koji služi za pohranu evidencije rada dretve
      */
     public static DatotekaRadaDretve logObrade = null;
 
@@ -85,7 +85,7 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
-     *
+     * Metoda za prekidanje dretve
      */
     @Override
     public void interrupt() {
@@ -94,7 +94,7 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
-     *
+     * MEtoda za iniciranje početnih varijabli i pokretanje dretve
      */
     @Override
     public synchronized void start() {
@@ -112,7 +112,7 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
-     *
+     * Metoda dretve
      */
     @Override
     public void run() {
@@ -324,7 +324,7 @@ public class ObradaPoruka extends Thread {
         try {
             JsonObject jsonObject = new JsonParser().parse(sadrzaj).getAsJsonObject();
             int idUredaja = jsonObject.get("id").getAsInt();
-            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES ("+idUredaja+", '" + sadrzaj + "')";
+            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES (" + idUredaja + ", '" + sadrzaj + "')";
             this.statement.execute(upit);
         }
         catch(SQLException | JsonSyntaxException | NullPointerException ex) {
@@ -359,6 +359,13 @@ public class ObradaPoruka extends Thread {
         }
     }
 
+    /**
+     * Metoda za probjeru privitka json iz maila. Vrši se zadana provjera ako
+     * postoji id, komanda i vrijeme te zadana provjera za preostale atribute
+     *
+     * @param privitak <code>String</code> json-a
+     * @return true ili false je li json pravilno formiran
+     */
     private boolean provjeriPrivitak(String privitak) {
         try {
             Properties sadrzaj = new GsonBuilder().create().fromJson(privitak, Properties.class);
@@ -397,6 +404,14 @@ public class ObradaPoruka extends Thread {
         }
     }
 
+    /**
+     * Metoda za provjeru atributa pozvana iz metode za provjeru privitka.
+     * Provjerava se postoji 1-5 atributa te zadovoljavaju li ključevi i
+     * vrijedsnot-
+     *
+     * @param sadrzaj json atributi pretvoeni u <code>Properties</code>
+     * @return true ili false jesu li atributi pravilni
+     */
     private boolean provjeriAtribute(Properties sadrzaj) {
         if (sadrzaj.size() >= 1 || sadrzaj.size() <= 5) {
             Set<String> keysKlijent = sadrzaj.stringPropertyNames();

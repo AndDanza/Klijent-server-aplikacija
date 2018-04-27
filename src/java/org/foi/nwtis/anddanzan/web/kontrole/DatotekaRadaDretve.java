@@ -1,6 +1,5 @@
 package org.foi.nwtis.anddanzan.web.kontrole;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -42,91 +41,10 @@ public class DatotekaRadaDretve implements Serializable {
     }
 
     /**
-     *
-     * @return
-     */
-    public int getBrojObrade() {
-        return DatotekaRadaDretve.brojObrade;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPocetak() {
-        return pocetak;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getBrojObradenihPoruka() {
-        return brojObradenihPoruka;
-    }
-
-    /**
-     *
-     * @param brojObradenihPoruka
-     */
-    public void setBrojObradenihPoruka(int brojObradenihPoruka) {
-        this.brojObradenihPoruka = brojObradenihPoruka;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getBrojDodanihIOT() {
-        return brojDodanihIOT;
-    }
-
-    /**
-     *
-     * @param brojDodanihIOT
-     */
-    public void setBrojDodanihIOT(int brojDodanihIOT) {
-        this.brojDodanihIOT = brojDodanihIOT;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getBrojAzuriranihIOT() {
-        return brojAzuriranihIOT;
-    }
-
-    /**
-     *
-     * @param brojAzuriranihIOT
-     */
-    public void setBrojAzuriranihIOT(int brojAzuriranihIOT) {
-        this.brojAzuriranihIOT = brojAzuriranihIOT;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getBrojNeispravnihPoruka() {
-        return brojNeispravnihPoruka;
-    }
-
-    /**
-     *
-     * @param brojNeispravnihPoruka
-     */
-    public void setBrojNeispravnihPoruka(int brojNeispravnihPoruka) {
-        this.brojNeispravnihPoruka = brojNeispravnihPoruka;
-    }
-
-    /**
      * Metoda za pohranu podataka o radu dretve. Pohrana se vrši pomoću
      * serijalizacije (File i Object OutputStream-ovima)
      *
      * @param datoteka datoteka u koju se pohranjuju podaci o radu dretve
-     * @throws IOException
      */
     public void pohraniPodatke(String datoteka) {
         try {
@@ -182,5 +100,95 @@ public class DatotekaRadaDretve implements Serializable {
         podaci.put("Broj.neispravnih.poruka", String.valueOf(this.brojNeispravnihPoruka));
 
         return podaci;
+    }
+
+    /**
+     * Dohvaćanje broja obrade
+     *
+     * @return vrijednost statičnog brojača
+     */
+    public int getBrojObrade() {
+        return DatotekaRadaDretve.brojObrade;
+    }
+
+    /**
+     * Dohvaćanje datuma početka tipa <code>String</code>
+     *
+     * @return početni datum
+     */
+    public String getPocetak() {
+        return pocetak;
+    }
+
+    /**
+     * Dohvaćanje broja obrađenih poruka u iteraciji
+     *
+     * @return broj obrađenih poruka
+     */
+    public int getBrojObradenihPoruka() {
+        return brojObradenihPoruka;
+    }
+
+    /**
+     * Postavljanje broja obrađenih poruka
+     *
+     * @param brojObradenihPoruka novi broj obrađenih poruka
+     */
+    public void setBrojObradenihPoruka(int brojObradenihPoruka) {
+        this.brojObradenihPoruka = brojObradenihPoruka;
+    }
+
+    /**
+     * Dohvaćanje broja obrađenih IOT zapisa
+     *
+     * @return broj obrađenih IOT uređaja
+     */
+    public int getBrojDodanihIOT() {
+        return brojDodanihIOT;
+    }
+
+    /**
+     * Postavljanje broja obrađenih IOT sadržaja
+     *
+     * @param brojDodanihIOT novi broj odrađenih IOT sadržaja
+     */
+    public void setBrojDodanihIOT(int brojDodanihIOT) {
+        this.brojDodanihIOT = brojDodanihIOT;
+    }
+
+    /**
+     * DOhvaćanje broja ažuriranih IOT zapisa
+     *
+     * @return broj ažuriranih IOT uređaja
+     */
+    public int getBrojAzuriranihIOT() {
+        return brojAzuriranihIOT;
+    }
+
+    /**
+     * Postavljanje broja ažuriranih IOT zapisa
+     *
+     * @param brojAzuriranihIOT novi broj ažuriranih IOT zapisa
+     */
+    public void setBrojAzuriranihIOT(int brojAzuriranihIOT) {
+        this.brojAzuriranihIOT = brojAzuriranihIOT;
+    }
+
+    /**
+     * Dohvaćanje broja neispravnih poruka
+     *
+     * @return broj neispravnih poruka
+     */
+    public int getBrojNeispravnihPoruka() {
+        return brojNeispravnihPoruka;
+    }
+
+    /**
+     * Postavljanje broja neispravnih poruka
+     *
+     * @param brojNeispravnihPoruka novi broj neispravnih poruka
+     */
+    public void setBrojNeispravnihPoruka(int brojNeispravnihPoruka) {
+        this.brojNeispravnihPoruka = brojNeispravnihPoruka;
     }
 }
