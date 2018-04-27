@@ -51,6 +51,9 @@ public class ObradaPoruka extends Thread {
     Connection connection;
     Statement statement;
 
+    /**
+     *
+     */
     public static DatotekaRadaDretve logObrade = null;
 
     //spajanje na mail server
@@ -77,12 +80,18 @@ public class ObradaPoruka extends Thread {
         this.konfiguracija = (BP_Konfiguracija) SlusacAplikacije.kontekst.getAttribute("BP_Konfig");
     }
 
+    /**
+     *
+     */
     @Override
     public void interrupt() {
         this.radi = false;
         super.interrupt();
     }
 
+    /**
+     *
+     */
     @Override
     public synchronized void start() {
         this.imapPort = konfiguracija.getImapPort();
@@ -98,6 +107,9 @@ public class ObradaPoruka extends Thread {
         super.start();
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
 
@@ -402,7 +414,6 @@ public class ObradaPoruka extends Thread {
             Set<String> keysKlijent = sadrzaj.stringPropertyNames();
             for (String keyK : keysKlijent) {
                 if (keyK.length() < 1 || keyK.length() > 30) {
-                    System.out.print(" keyK " + keyK);
                     return false;
                 }
                 else {

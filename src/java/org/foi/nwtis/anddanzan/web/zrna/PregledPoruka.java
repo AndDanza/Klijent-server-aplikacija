@@ -70,6 +70,9 @@ public class PregledPoruka {
         odaberiMapu();
     }
 
+    /**
+     *
+     */
     public void promjeniMapu() {
         this.session.removeAttribute("kreni_mail");
         this.session.removeAttribute("stani_mail");
@@ -78,6 +81,9 @@ public class PregledPoruka {
         odaberiMapu();
     }
 
+    /**
+     *
+     */
     public void odaberiMapu() {
         try {
             Folder folder;
@@ -245,74 +251,146 @@ public class PregledPoruka {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRender_prev() {
         return render_prev;
     }
 
+    /**
+     *
+     * @param render_prev
+     */
     public void setRender_prev(boolean render_prev) {
         this.render_prev = render_prev;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRender_next() {
         return render_next;
     }
 
+    /**
+     *
+     * @param render_next
+     */
     public void setRender_next(boolean render_next) {
         this.render_next = render_next;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojPorukaMape() {
         return brojPorukaMape;
     }
 
+    /**
+     *
+     * @param brojPorukaMape
+     */
     public void setBrojPorukaMape(int brojPorukaMape) {
         this.brojPorukaMape = brojPorukaMape;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPosluzitelj() {
         return posluzitelj;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getKorisnickoIme() {
         return korisnickoIme;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLozinka() {
         return lozinka;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Izbornik> getPopisMapa() {
         return popisMapa;
     }
 
+    /**
+     *
+     * @param popisMapa
+     */
     public void setPopisMapa(List<Izbornik> popisMapa) {
         this.popisMapa = popisMapa;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOdabranaMapa() {
         return odabranaMapa;
     }
 
+    /**
+     *
+     * @param odabranaMapa
+     */
     public void setOdabranaMapa(String odabranaMapa) {
         this.odabranaMapa = odabranaMapa;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Poruka> getPopisPoruka() {
         return popisPoruka;
     }
 
+    /**
+     *
+     * @param popisPoruka
+     */
     public void setPopisPoruka(List<Poruka> popisPoruka) {
         this.popisPoruka = popisPoruka;
     }
 
+    /**
+     *
+     * @return
+     */
     public String promjeniJezik() {
         return "promjeniJezik";
     }
 
+    /**
+     *
+     * @return
+     */
     public String slanjePoruka() {
         return "slanjePoruka";
     }
 
+    /**
+     *
+     * @return
+     */
     public String pregledDnevnika() {
         return "pregledDnevnika";
     }

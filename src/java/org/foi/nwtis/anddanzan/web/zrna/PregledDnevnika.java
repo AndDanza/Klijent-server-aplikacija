@@ -266,86 +266,170 @@ public class PregledDnevnika {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRender_prev() {
         return render_prev;
     }
 
+    /**
+     *
+     * @param render_prev
+     */
     public void setRender_prev(boolean render_prev) {
         this.render_prev = render_prev;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRender_next() {
         return render_next;
     }
 
+    /**
+     *
+     * @param render_next
+     */
     public void setRender_next(boolean render_next) {
         this.render_next = render_next;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOdDatuma() {
         return odDatuma;
     }
 
+    /**
+     *
+     * @param odDatuma
+     */
     public void setOdDatuma(String odDatuma) {
         this.odDatuma = odDatuma;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDoDatuma() {
         return doDatuma;
     }
 
+    /**
+     *
+     * @param doDatuma
+     */
     public void setDoDatuma(String doDatuma) {
         this.doDatuma = doDatuma;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getPogreske() {
         return pogreske;
     }
 
+    /**
+     *
+     * @param pogreske
+     */
     public void setPogreske(List<String> pogreske) {
         this.pogreske = pogreske;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojZapisaDnevnika() {
         return brojZapisaDnevnika;
     }
 
+    /**
+     *
+     * @param brojZapisaDnevnika
+     */
     public void setBrojZapisaDnevnika(int brojZapisaDnevnika) {
         this.brojZapisaDnevnika = brojZapisaDnevnika;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPocetni() {
         return pocetni;
     }
 
+    /**
+     *
+     * @param pocetni
+     */
     public void setPocetni(String pocetni) {
         this.pocetni = pocetni;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getKrajnji() {
         return krajnji;
     }
 
+    /**
+     *
+     * @param krajnji
+     */
     public void setKrajnji(String krajnji) {
         this.krajnji = krajnji;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Dnevnik> getZapisi() {
         return zapisi;
     }
 
+    /**
+     *
+     * @param zapisi
+     */
     public void setZapisi(List<Dnevnik> zapisi) {
         this.zapisi = zapisi;
     }
 
+    /**
+     *
+     * @return
+     */
     public String slanjePoruka() {
         return "slanjePoruka";
     }
 
+    /**
+     *
+     * @return
+     */
     public String pregledPoruka() {
         return "pregledPoruka";
     }
 
+    /**
+     *
+     * @return
+     */
     public String promjeniJezik() {
         return "promjeniJezik";
     }

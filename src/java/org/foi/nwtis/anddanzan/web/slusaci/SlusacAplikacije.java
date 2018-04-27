@@ -20,8 +20,16 @@ import org.nwtis.anddanzan.konfiguracije.NemaKonfiguracije;
 public class SlusacAplikacije implements ServletContextListener {
 
     ObradaPoruka obrada;
+
+    /**
+     *
+     */
     public static ServletContext kontekst;
 
+    /**
+     *
+     * @param sce
+     */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         kontekst = sce.getServletContext();
@@ -46,6 +54,10 @@ public class SlusacAplikacije implements ServletContextListener {
         }
     }
 
+    /**
+     *
+     * @param sce
+     */
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         kontekst.removeAttribute("BP_Konfig");

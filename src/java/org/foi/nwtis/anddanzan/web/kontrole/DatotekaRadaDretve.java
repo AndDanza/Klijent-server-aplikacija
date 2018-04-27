@@ -41,42 +41,82 @@ public class DatotekaRadaDretve implements Serializable {
         inicijalizacijaPodataka();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojObrade() {
         return DatotekaRadaDretve.brojObrade;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPocetak() {
         return pocetak;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojObradenihPoruka() {
         return brojObradenihPoruka;
     }
 
+    /**
+     *
+     * @param brojObradenihPoruka
+     */
     public void setBrojObradenihPoruka(int brojObradenihPoruka) {
         this.brojObradenihPoruka = brojObradenihPoruka;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojDodanihIOT() {
         return brojDodanihIOT;
     }
 
+    /**
+     *
+     * @param brojDodanihIOT
+     */
     public void setBrojDodanihIOT(int brojDodanihIOT) {
         this.brojDodanihIOT = brojDodanihIOT;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojAzuriranihIOT() {
         return brojAzuriranihIOT;
     }
 
+    /**
+     *
+     * @param brojAzuriranihIOT
+     */
     public void setBrojAzuriranihIOT(int brojAzuriranihIOT) {
         this.brojAzuriranihIOT = brojAzuriranihIOT;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBrojNeispravnihPoruka() {
         return brojNeispravnihPoruka;
     }
 
+    /**
+     *
+     * @param brojNeispravnihPoruka
+     */
     public void setBrojNeispravnihPoruka(int brojNeispravnihPoruka) {
         this.brojNeispravnihPoruka = brojNeispravnihPoruka;
     }

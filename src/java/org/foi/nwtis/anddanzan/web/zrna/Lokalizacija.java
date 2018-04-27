@@ -51,22 +51,42 @@ public class Lokalizacija implements Serializable {
         return "";
     }
 
+    /**
+     *
+     * @return
+     */
     public String slanjePoruka() {
         return "slanjePoruka";
     }
 
+    /**
+     *
+     * @return
+     */
     public String pregledPoruka() {
         return "pregledPoruka";
     }
 
+    /**
+     *
+     * @return
+     */
     public String pregledDnevnika() {
         return "pregledDnevnika";
     }
 
+    /**
+     *
+     * @return
+     */
     public Locale getLanguage() {
         return language;
     }
 
+    /**
+     *
+     * @param language
+     */
     public void setLanguage(Locale language) {
         this.language = language;
     }

@@ -15,8 +15,19 @@ import javax.mail.MessagingException;
  */
 public class Poruka {
 
+    /**
+     *
+     */
     public static enum VrstaPoruka {
+
+        /**
+         *
+         */
         NWTiS_poruka,
+
+        /**
+         *
+         */
         neNWTiS_poruka
     }
 
@@ -28,6 +39,16 @@ public class Poruka {
     private String privitak;
     private VrstaPoruka vrsta;
 
+    /**
+     *
+     * @param id
+     * @param vrijemeSlanja
+     * @param vrijemePrijema
+     * @param salje
+     * @param predmet
+     * @param privitak
+     * @param vrsta
+     */
     public Poruka(String id, Date vrijemeSlanja, Date vrijemePrijema, String salje, String predmet, String privitak, VrstaPoruka vrsta) {
         this.id = id;
         this.vrijemeSlanja = vrijemeSlanja;
@@ -38,30 +59,58 @@ public class Poruka {
         this.vrsta = vrsta;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getVrijemeSlanja() {
         return vrijemeSlanja;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getVrijemePrijema() {
         return vrijemePrijema;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPredmet() {
         return predmet;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSalje() {
         return salje;
     }
 
+    /**
+     *
+     * @return
+     */
     public VrstaPoruka getVrsta() {
         return vrsta;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPrivitak() {
         return privitak;
     }
