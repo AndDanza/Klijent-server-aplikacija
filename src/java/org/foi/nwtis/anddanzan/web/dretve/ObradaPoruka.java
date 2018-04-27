@@ -9,11 +9,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -99,10 +104,10 @@ public class ObradaPoruka extends Thread {
         while (this.radi) {
             try {
                 inicijalizirajResurse();
-                
+
                 long start = System.currentTimeMillis();
-                
-                System.out.println("Pocetak obrade poruka "+new Date());
+
+                System.out.println("Pocetak obrade poruka " + new Date());
 
                 this.logObrade = new DatotekaRadaDretve();
 
@@ -189,7 +194,6 @@ public class ObradaPoruka extends Thread {
     private void sortirajMail(Message message) {
         try {
             String privitak = message.getFileName();
-            this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
 
             if (privitak.contains(this.oznakaNwtisPoruke)) {
                 obradiNwtisPoruku(message);
@@ -204,6 +208,8 @@ public class ObradaPoruka extends Thread {
             this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
     }
 
     /**
@@ -217,38 +223,39 @@ public class ObradaPoruka extends Thread {
      */
     private void obradiNwtisPoruku(Message message) {
         String jsonString = Poruka.getMailContent(message);
+        
+        if (provjeriPrivitak(jsonString)) {
+            try {
+                //dohvaćanje jsona unutar mail
+                JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+                String komanda = jsonObject.get("komanda").getAsString();
+                int idUredaja = jsonObject.get("id").getAsInt();
 
-        try {
-            //dohvaćanje jsona unutar mail
-            JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
-            String komanda = jsonObject.get("komanda").getAsString();
-            int idUredaja = jsonObject.get("id").getAsInt();
-
-            String upit = "";
-            if (komanda.equalsIgnoreCase("dodaj") && provjeriID(idUredaja) == -1) {
-                String naziv = jsonObject.get("naziv").getAsString();
-                String kreiranje = jsonObject.get("vrijeme").getAsString();
-                upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
-                        + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
-                this.statement.execute(upit);
-                this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT() + 1);
+                String upit = "";
+                if (komanda.equalsIgnoreCase("dodaj") && provjeriID(idUredaja) == -1) {
+                    String naziv = jsonObject.get("naziv").getAsString();
+                    String kreiranje = jsonObject.get("vrijeme").getAsString();
+                    upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
+                            + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
+                    this.statement.execute(upit);
+                    this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT() + 1);
+                }
+                else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(idUredaja) != -1) {
+                    String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
+                    upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
+                    this.statement.execute(upit);
+                    this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT() + 1);
+                }
             }
-            else if (komanda.equalsIgnoreCase("azuriraj") && provjeriID(idUredaja) != -1) {
-                String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
-                upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
-                this.statement.execute(upit);
-                this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT() + 1);
+            catch(SQLException ex) {
+                Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
             }
-            zapisiUDnevnik(jsonString);
-
+            catch(JsonSyntaxException ex) {
+                this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
+                zapisiUDnevnik(jsonString);
+            }
         }
-        catch(SQLException ex) {
-            Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(JsonSyntaxException ex) {
-            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
-            zapisiUDnevnik(jsonString);
-        }
+        zapisiUDnevnik(jsonString);
     }
 
     /**
@@ -352,4 +359,78 @@ public class ObradaPoruka extends Thread {
             return null;
         }
     }
+
+    private boolean provjeriPrivitak(String privitak) {
+        try {
+            Properties sadrzaj = new GsonBuilder().create().fromJson(privitak, Properties.class);
+
+            int id = Integer.valueOf(sadrzaj.getProperty("id"));
+            if (id < 1 || id > 9999) {
+                return false;
+            }
+            else {
+                sadrzaj.remove("id");
+            }
+
+            String komanda = sadrzaj.getProperty("komanda");
+            if (!komanda.equalsIgnoreCase("dodaj") && !komanda.equalsIgnoreCase("azuriraj")) {
+                return false;
+            }
+            else if (komanda.equalsIgnoreCase("dodaj")) {
+                sadrzaj.remove("komanda");
+                sadrzaj.getProperty("naziv");
+                sadrzaj.remove("naziv");
+            }
+
+            DateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+            formatter.parse(sadrzaj.getProperty("vrijeme"));
+            sadrzaj.remove("vrijeme");
+
+            if (!provjeriAtribute(sadrzaj)) {
+                return false;
+            }
+
+            return true;
+        }
+        catch(JsonSyntaxException | NumberFormatException | ParseException ex) {
+            return false;
+        }
+    }
+
+    private boolean provjeriAtribute(Properties sadrzaj) {
+        if (sadrzaj.size() >= 1 || sadrzaj.size() <= 5) {
+            Set<String> keysKlijent = sadrzaj.stringPropertyNames();
+            for (String keyK : keysKlijent) {
+                if (keyK.length() < 1 || keyK.length() > 30) {
+                    System.out.print(" keyK " + keyK);
+                    return false;
+                }
+                else {
+                    String vrijednost = sadrzaj.getProperty(keyK);
+                    try {
+                        int intBroj = Integer.valueOf(vrijednost);
+                        if (intBroj < 1 || intBroj > 999) {
+                            return false;
+                        }
+                        System.out.println("int broj");
+                    }
+                    catch(NumberFormatException ex) {
+                        Pattern pattern = Pattern.compile("^\\d{1,3}\\.\\d{1,2}$");
+                        Matcher m = pattern.matcher(vrijednost);
+                        if (m.matches()) {
+                            System.out.println("float broj");
+                            return true;
+                        }
+
+                        if (vrijednost.length() >= 1 || vrijednost.length() <= 30) {
+                            System.out.println("ipak string");
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
