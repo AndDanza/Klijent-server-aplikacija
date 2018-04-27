@@ -1,9 +1,10 @@
 package org.foi.nwtis.anddanzan.web.zrna;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +14,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -22,7 +28,9 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 import org.foi.nwtis.anddanzan.konfiguracije.bp.BP_Konfiguracija;
 import org.foi.nwtis.anddanzan.web.slusaci.SlusacAplikacije;
@@ -74,6 +82,7 @@ public class SlanjePoruka {
      * @return prazan string
      */
     public String saljiPoruku() {
+        this.pogreske.removeAll(pogreske);
         try {
             Session session = (Session) SlusacAplikacije.kontekst.getAttribute("mail_session");
 
@@ -91,20 +100,50 @@ public class SlanjePoruka {
 
                 // Set the subject and text
                 message.setSubject(this.predmet);
-                //message.setText(this.privitak);
-                message.setContent(this.privitak, "text/json");
+
                 message.setFileName(this.odabranaDatoteka);
-                message.setSentDate(new Date());
 
-                //Transport.send(message);
+                File atachment = pripremiPrivitakZaSlanje();
+
+                if (atachment != null) {
+                    MimeBodyPart messageBodyPart = new MimeBodyPart();
+                    MimeMultipart multipart = new MimeMultipart();
+                    DataSource source = new FileDataSource(atachment);
+                    messageBodyPart.setDataHandler(new DataHandler(source));
+                    messageBodyPart.setFileName(this.odabranaDatoteka);
+                    multipart.addBodyPart(messageBodyPart);
+                    messageBodyPart.setHeader("Content-Type", "application/json");
+
+                    message.setContent(multipart);
+                    message.setSentDate(new Date());
+
+                    Transport.send(message);
+                }
+                else {
+                    this.pogreske.add(this.prijevod.getString("slanje.nije_poslano"));
+                }
             }
-
         }
         catch(MessagingException e) {
-            e.printStackTrace();
+            this.pogreske.add(this.prijevod.getString("slanje.nije_poslano"));
         }
 
         return "";
+    }
+
+    private File pripremiPrivitakZaSlanje() {
+        File temp = null;
+        try {
+            temp = File.createTempFile("privitak", ".json");
+            BufferedWriter out = new BufferedWriter(new FileWriter(temp));
+            out.write(this.privitak);
+            out.close();
+        }
+        catch(IOException ex) {
+            Logger.getLogger(SlanjePoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return temp;
     }
 
     /**
@@ -189,10 +228,11 @@ public class SlanjePoruka {
         if (this.privitak.isEmpty()) {
             this.pogreske.add(prijevod.getString("pogreska.sadrzaj"));
         }
-        else {            
+        else {
             try {
-                if(!this.privitak.equals("{}"))
+                if (!this.privitak.equals("{}")) {
                     new JsonParser().parse(this.privitak);
+                }
             }
             catch(JsonSyntaxException ex) {
                 this.pogreske.add(prijevod.getString("pogreska.sadrzaj"));
@@ -358,5 +398,15 @@ public class SlanjePoruka {
      */
     public void setPogreske(List<String> pogreske) {
         this.pogreske = pogreske;
+    }
+
+    private void citajMessage(MimeMessage message) {
+        try {
+            String contentType = message.getContentType();
+            System.out.println("content "+contentType);
+        }
+        catch(MessagingException ex) {
+            Logger.getLogger(SlanjePoruka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
