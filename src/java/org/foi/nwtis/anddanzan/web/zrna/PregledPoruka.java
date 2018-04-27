@@ -3,7 +3,6 @@ package org.foi.nwtis.anddanzan.web.zrna;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
@@ -162,7 +161,7 @@ public class PregledPoruka {
             else if (start == (this.brojPorukaMape - this.pomakCitanja + 1)) {
                 this.render_prev = false;
             }
-            else if (end == 1) {
+            else if (start == 1) {
                 this.render_next = false;
             }
 
