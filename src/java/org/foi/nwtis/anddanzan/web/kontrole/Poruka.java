@@ -6,8 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.internet.MimeBodyPart;
 
 /**
  *
@@ -24,7 +29,6 @@ public class Poruka {
          *
          */
         NWTiS_poruka,
-
         /**
          *
          */
@@ -124,20 +128,27 @@ public class Poruka {
      */
     public static String getMailContent(Message message) {
         String read = "";
-
         try {
-            IMAPInputStream imapStream = (IMAPInputStream) message.getContent();
-            BufferedReader br = new BufferedReader(new InputStreamReader(imapStream, Charset.defaultCharset()));
-            char cbuf[] = new char[2048];
-            int len;
-            StringBuilder sbuf = new StringBuilder();
-            while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
-                sbuf.append(cbuf, 0, len);
+            if (message.getContentType().contains("multipart")) {
+                Multipart multiPart = (Multipart) message.getContent();
+
+                if (multiPart.getCount() == 1) {
+                    MimeBodyPart attachment = (MimeBodyPart) multiPart.getBodyPart(0);
+                    if (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition())) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(attachment.getInputStream(), Charset.defaultCharset()));
+                        char cbuf[] = new char[2048];
+                        int len;
+                        StringBuilder sbuf = new StringBuilder();
+                        while ((len = br.read(cbuf, 0, cbuf.length)) != -1) {
+                            sbuf.append(cbuf, 0, len);
+                        }
+                        read = sbuf.toString();
+                    }
+                }
             }
-            read = sbuf.toString();
         }
-        catch(IOException | MessagingException ex) {
-            read = "";
+        catch(MessagingException | IOException ex) {
+            Logger.getLogger(Poruka.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return read;
