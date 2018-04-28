@@ -106,22 +106,19 @@ public class PregledDnevnika {
             if (brojStranice + this.pomakCitanja >= this.brojZapisaDnevnika) {
                 this.render_next = false;
             }
+            if(this.brojZapisaDnevnika == 0){
+                this.render_next = false;
+            }
 
             String upit = "";
             if (konfiguracija.getServerDatabase().contains("derby")) {
-                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                    upit = "SELECT * FROM NWTIS_G2.DNEVNIK OFFSET " + brojStranice + " ROWS FETCH FIRST " + this.pomakCitanja + " ROWS ONLY";
-                }
-                else {
-                    upit = "SELECT * FROM NWTIS_G2.DNEVNIK WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "' "
+                if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
+                    upit = "SELECT id, sadrzaj, vrijeme FROM NWTIS_G2.DNEVNIK WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "' "
                             + "OFFSET " + brojStranice + " ROWS FETCH FIRST " + this.pomakCitanja + " ROWS ONLY";
                 }
             }
             else {
-                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                    upit = "SELECT id, sadrzaj, vrijeme FROM dnevnik ORDER BY vrijeme DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
-                }
-                else {
+                if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
                     upit = "SELECT id, sadrzaj, vrijeme FROM dnevnik WHERE vrijeme BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "' "
                             + "ORDER BY vrijeme DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
                 }
@@ -195,8 +192,7 @@ public class PregledDnevnika {
 
         this.session.setAttribute("stranica_dnevnik", 0);
 
-        prikaziDnevnik(0);
-        brojZapisa();
+        prikaziDnevnik(0);        
     }
 
     /**
@@ -238,23 +234,23 @@ public class PregledDnevnika {
      */
     private void brojZapisa() {
         try {
-            String upit;
+            String upit = "";
             if (konfiguracija.getServerDatabase().contains("derby")) {                
-                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                    upit = "SELECT COUNT(*) AS broj FROM NWTIS_G2.DNEVNIK";
-                }
-                else {
+                if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
                     upit = "SELECT COUNT(*) AS broj FROM NWTIS_G2.DNEVNIK "
                             + "WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "'";
                 }
+                else{
+                    this.brojZapisaDnevnika = 0;
+                }
             }
             else {
-                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                    upit = "SELECT COUNT(*) AS broj FROM dnevnik";
-                }
-                else {
+                if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
                     upit = "SELECT COUNT(*) AS broj FROM dnevnik "
                             + "WHERE vrijeme BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "'";
+                }
+                else{
+                    this.brojZapisaDnevnika = 0;
                 }
             }
             ResultSet podaci = this.statement.executeQuery(upit);
