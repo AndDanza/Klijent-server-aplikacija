@@ -1,6 +1,5 @@
 package org.foi.nwtis.anddanzan.web.kontrole;
 
-import com.sun.mail.imap.IMAPInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,22 +14,25 @@ import javax.mail.Part;
 import javax.mail.internet.MimeBodyPart;
 
 /**
+ * Klasa preuzete za zdaću nadopunjena metodom za čitanje sadržaja privitka
+ * poruka tipa <code>Messages</code>
  *
  * @author dkermek
  */
 public class Poruka {
 
     /**
-     *
+     * Enumeracija vrste poruka
      */
     public static enum VrstaPoruka {
 
         /**
-         *
+         * Poruka koja sadrži privitak zadan konfiguracijskom datotekom
          */
         NWTiS_poruka,
         /**
-         *
+         * Sve ostale poruke s jednim ili više privitaka (ako je jedan ne smije
+         * imati naziv zadan konfiguracijom)
          */
         neNWTiS_poruka
     }
@@ -43,16 +45,6 @@ public class Poruka {
     private String privitak;
     private VrstaPoruka vrsta;
 
-    /**
-     *
-     * @param id
-     * @param vrijemeSlanja
-     * @param vrijemePrijema
-     * @param salje
-     * @param predmet
-     * @param privitak
-     * @param vrsta
-     */
     public Poruka(String id, Date vrijemeSlanja, Date vrijemePrijema, String salje, String predmet, String privitak, VrstaPoruka vrsta) {
         this.id = id;
         this.vrijemeSlanja = vrijemeSlanja;
@@ -63,58 +55,30 @@ public class Poruka {
         this.vrsta = vrsta;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getVrijemeSlanja() {
         return vrijemeSlanja;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getVrijemePrijema() {
         return vrijemePrijema;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getPredmet() {
         return predmet;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getSalje() {
         return salje;
     }
 
-    /**
-     *
-     * @return
-     */
     public VrstaPoruka getVrsta() {
         return vrsta;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getPrivitak() {
         return privitak;
     }
@@ -150,8 +114,6 @@ public class Poruka {
         catch(MessagingException | IOException ex) {
             Logger.getLogger(Poruka.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return read;
     }
-
 }

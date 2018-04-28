@@ -4,8 +4,8 @@
     <Scope Scope="Project">
         <Node id="index.xhtml" x="1074" y="539" zoom="false"/>
         <Node id="slanjePoruka.xhtml" x="114" y="82" zoom="false"/>
-        <Node id="pregledPoruka.xhtml" x="623" y="80" zoom="false"/>
         <Node id="pregledDnevnika.xhtml" x="34" y="322" zoom="false"/>
+        <Node id="pregledPoruka.xhtml" x="623" y="80" zoom="false"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

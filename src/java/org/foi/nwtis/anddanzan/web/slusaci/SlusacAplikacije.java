@@ -48,10 +48,7 @@ public class SlusacAplikacije implements ServletContextListener {
             obrada = new ObradaPoruka();
             obrada.start();
         }
-        catch(NemaKonfiguracije | NeispravnaKonfiguracija ex) {
-            Logger.getLogger(SlusacAplikacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch(ClassNotFoundException ex) {
+        catch(NemaKonfiguracije | NeispravnaKonfiguracija | ClassNotFoundException ex) {
             Logger.getLogger(SlusacAplikacije.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

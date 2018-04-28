@@ -103,7 +103,6 @@ public class PregledPoruka {
             this.brojPorukaMape = folder.getMessageCount();
 
             if (this.session.getAttribute("kreni_mail") == null && this.session.getAttribute("stani_mail") == null) {
-                System.out.println("mapa " + this.odabranaMapa);
                 preuzmiPoruke(-1, -1);
             }
 
@@ -189,7 +188,6 @@ public class PregledPoruka {
     public String sljedecePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
-        System.out.println("sljed dohvaceno: kreni " + pocetak + " stani " + kraj);
 
         if (pocetak > 1) {
             kraj = pocetak - 1;
@@ -198,8 +196,7 @@ public class PregledPoruka {
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
-        System.out.println("sljed spremljeno: kreni " + pocetak + " stani " + kraj);
-
+        
         preuzmiPoruke(pocetak, kraj);
         
         return "SljedecePoruke";
@@ -213,7 +210,6 @@ public class PregledPoruka {
     public String prethodnePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
-        System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
 
         if (kraj < this.brojPorukaMape) {
             pocetak = kraj + 1;
@@ -222,7 +218,6 @@ public class PregledPoruka {
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
-        System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
 
         preuzmiPoruke(pocetak, kraj);
         

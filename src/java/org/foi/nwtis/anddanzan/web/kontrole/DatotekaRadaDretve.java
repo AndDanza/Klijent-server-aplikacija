@@ -90,7 +90,7 @@ public class DatotekaRadaDretve implements Serializable {
     private Properties serijalizirajPodatke() {
         Properties podaci = new Properties();
 
-        podaci.put("Obrada.poruka.broj", String.valueOf(this.brojObrade));
+        podaci.put("Obrada.poruka.broj", String.valueOf(DatotekaRadaDretve.brojObrade));
         podaci.put("Obrada.zapocela.u", String.valueOf(this.pocetak));
         podaci.put("Obrada.zavrsila.u", String.valueOf(this.zavrsetak));
         podaci.put("Trajanje.obrade.u.ms", String.valueOf(this.trajanje));

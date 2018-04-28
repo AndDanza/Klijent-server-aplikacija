@@ -151,8 +151,7 @@ public class ObradaPoruka extends Thread {
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
                     if (!messages[i].isSet(Flags.Flag.SEEN)) {
-                        System.out.println("poruka: " + messages[i].getSubject() + "vrijeme "+messages[i].getSentDate());
-                        //sortirajMail(messages[i]);
+                        sortirajMail(messages[i]);
                     }
                 }
 
@@ -446,5 +445,4 @@ public class ObradaPoruka extends Thread {
         }
         return false;
     }
-
 }
