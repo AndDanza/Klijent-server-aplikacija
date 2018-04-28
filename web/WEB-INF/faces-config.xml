@@ -58,6 +58,21 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-action>#{pregledPoruka.promjenaMape()}</from-action>
+            <from-outcome>PromjenaMape</from-outcome>
+            <to-view-id>/pregledPoruka.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledPoruka.prethodnePoruke()}</from-action>
+            <from-outcome>PrethodnePoruke</from-outcome>
+            <to-view-id>/pregledPoruka.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledPoruka.sljedecePoruke()}</from-action>
+            <from-outcome>SljedecePoruke</from-outcome>
+            <to-view-id>/pregledPoruka.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-action>#{pregledPoruka.slanjePoruka()}</from-action>
             <from-outcome>slanjePoruka</from-outcome>
             <to-view-id>/slanjePoruka.xhtml</to-view-id>
@@ -75,6 +90,21 @@
             <from-outcome>promjeniJezik</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledDnevnika.promjenaIntervala()}</from-action>
+            <from-outcome>PromjenaIntervala</from-outcome>
+            <to-view-id>/pregledDnevnika.xhtml</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-action>#{pregledDnevnika.prethodniZapisi()}</from-action>
+            <from-outcome>PrethodniZapisi</from-outcome>
+            <to-view-id>/pregledDnevnika.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{pregledDnevnika.sljedeciZapisi()}</from-action>
+            <from-outcome>SljedeciZapisi</from-outcome>
+            <to-view-id>/pregledDnevnika.xhtml</to-view-id>
+        </navigation-case>        
         <navigation-case>
             <from-action>#{pregledDnevnika.slanjePoruka()}</from-action>
             <from-outcome>slanjePoruka</from-outcome>

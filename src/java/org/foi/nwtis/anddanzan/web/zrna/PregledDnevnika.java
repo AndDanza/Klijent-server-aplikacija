@@ -135,7 +135,7 @@ public class PregledDnevnika {
      * Metoda za obradu klika pretraži na formi. Na temelju unesenih datuma
      * pretražuju se zapisi u tablic koji odgovaraju uvjetu
      */
-    public void pretraziDnevnik() {
+    public String promjenaIntervala() {
         try {
             Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
             ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
@@ -172,7 +172,7 @@ public class PregledDnevnika {
         catch(ParseException ex) {
             Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return "PromjenaIntervala";
     }
 
     /**
@@ -200,7 +200,7 @@ public class PregledDnevnika {
      * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
      * i završni index retka u tablici
      */
-    public void prikaziSljedece() {
+    public String sljedeciZapisi() {
         int stranica = (int) this.session.getAttribute("stranica_dnevnik");
 
         if ((stranica * this.pomakCitanja) < (this.brojZapisaDnevnika - this.pomakCitanja)) {
@@ -209,6 +209,7 @@ public class PregledDnevnika {
         }
 
         prikaziDnevnik(stranica);
+        return "SljedeciZapisi";
     }
 
     /**
@@ -216,7 +217,7 @@ public class PregledDnevnika {
      * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
      * i završni index retka u tablici
      */
-    public void prikaziPrethodne() {
+    public String prethodniZapisi() {
         int stranica = (int) this.session.getAttribute("stranica_dnevnik");
 
         if (stranica > 0) {
@@ -225,6 +226,7 @@ public class PregledDnevnika {
         }
 
         prikaziDnevnik(stranica);
+        return "PrethodniZapisi";
     }
 
     /**

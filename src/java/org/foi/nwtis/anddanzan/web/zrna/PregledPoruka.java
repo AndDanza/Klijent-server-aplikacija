@@ -74,12 +74,13 @@ public class PregledPoruka {
     /**
      * Metoda za promjenu mape na klik tipke
      */
-    public void promjeniMapu() {
+    public String promjenaMape() {
         this.session.removeAttribute("kreni_mail");
         this.session.removeAttribute("stani_mail");
         this.session.setAttribute("odabrana_mapa", this.odabranaMapa);
 
         odaberiMapu();
+        return "PromjenaMape";
     }
 
     /**
@@ -185,7 +186,7 @@ public class PregledPoruka {
      * temelju zadanog broj prikaza mialova pomiču se početni i završni index
      * maila u mapi
      */
-    public void prikaziSljedece() {
+    public String sljedecePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
         System.out.println("sljed dohvaceno: kreni " + pocetak + " stani " + kraj);
@@ -193,9 +194,6 @@ public class PregledPoruka {
         if (pocetak > 1) {
             kraj = pocetak - 1;
             pocetak = (pocetak - this.pomakCitanja) < 1 ? 1 : (pocetak - this.pomakCitanja);
-//            if (pocetak <= 1) {
-//                this.render_prev = true;
-//            }
         }
 
         this.session.setAttribute("kreni_mail", pocetak);
@@ -203,6 +201,8 @@ public class PregledPoruka {
         System.out.println("sljed spremljeno: kreni " + pocetak + " stani " + kraj);
 
         preuzmiPoruke(pocetak, kraj);
+        
+        return "SljedecePoruke";
     }
 
     /**
@@ -210,7 +210,7 @@ public class PregledPoruka {
      * na temelju zadanog broj prikaza mialova pomiču se početni i završni index
      * maila u mapi
      */
-    public void prikaziPrethodne() {
+    public String prethodnePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
         int kraj = (int) this.session.getAttribute("stani_mail");
         System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
@@ -219,15 +219,14 @@ public class PregledPoruka {
             pocetak = kraj + 1;
             kraj = kraj + this.pomakCitanja;
         }
-//        if (kraj == this.brojPorukaMape) {
-//            this.render_prev = false;
-//        }
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
         System.out.println("pret dohvaceno: kreni " + pocetak + " stani " + kraj);
 
         preuzmiPoruke(pocetak, kraj);
+        
+        return "PrethodnePoruke";
     }
 
     /**

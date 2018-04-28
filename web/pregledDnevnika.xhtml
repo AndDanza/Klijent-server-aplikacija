@@ -28,7 +28,7 @@
             <h:panelGrid class="dnevnik_forma" columns="3">
                 <h:outputLabel value="#{p['pregled.od_datuma']}"/>
                 <h:inputText class="pregled_input" value="#{pregledDnevnika.odDatuma}"/>
-                <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.pretraziDnevnik()}"/>
+                <h:commandButton style="clear: both; margin-top: 2%;" value="#{p['pregled.prikazi']}" action="#{pregledDnevnika.promjenaIntervala()}"/>
 
 
                 <h:outputLabel value="#{p['pregled.do_datuma']}" />
@@ -60,8 +60,8 @@
                 <h:outputLabel value="#{p['dnevnik.ukupno']}"/>
                 <h:outputLabel value="#{pregledDnevnika.brojZapisaDnevnika}"/>
                 <h:panelGrid class="slanje_komande" columns="2">
-                    <h:commandButton value="#{p['navigacija.prethodne']}" rendered="#{pregledDnevnika.render_prev}" action="#{pregledDnevnika.prikaziPrethodne()}"/>
-                    <h:commandButton value="#{p['navigacija.sljedece']}" rendered="#{pregledDnevnika.render_next}" action="#{pregledDnevnika.prikaziSljedece()}"/>
+                    <h:commandButton value="#{p['navigacija.prethodne']}" rendered="#{pregledDnevnika.render_prev}" action="#{pregledDnevnika.prethodniZapisi()}"/>
+                    <h:commandButton value="#{p['navigacija.sljedece']}" rendered="#{pregledDnevnika.render_next}" action="#{pregledDnevnika.sljedeciZapisi()}"/>
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>
