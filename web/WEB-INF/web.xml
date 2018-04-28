@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>konfiguracija</param-name>
-        <param-value>NWTiS.db.config_1.xml</param-value>
+        <param-value>NWTiS.db.config_2.xml</param-value>
     </context-param>
     <listener>
         <description>ServletContextListener</description>

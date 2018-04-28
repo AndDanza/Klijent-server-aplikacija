@@ -108,27 +108,31 @@ public class PregledDnevnika {
             }
 
             String upit = "";
-            if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` "
-                        + "ORDER BY `vrijeme` DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
+            if (konfiguracija.getServerDatabase().contains("derby")) {
+                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
+                    upit = "SELECT * FROM NWTIS_G2.DNEVNIK OFFSET " + brojStranice + " ROWS FETCH FIRST " + this.pomakCitanja + " ROWS ONLY";
+                }
+                else {
+                    upit = "SELECT * FROM NWTIS_G2.DNEVNIK WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "' "
+                            + "OFFSET " + brojStranice + " ROWS FETCH FIRST " + this.pomakCitanja + " ROWS ONLY";
+                }
             }
             else {
-                upit = "SELECT `id`, `sadrzaj`, `vrijeme` FROM `dnevnik` "
-                        + "WHERE `vrijeme` BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "' "
-                        + "ORDER BY `vrijeme` DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
+                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
+                    upit = "SELECT id, sadrzaj, vrijeme FROM dnevnik ORDER BY vrijeme DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
+                }
+                else {
+                    upit = "SELECT id, sadrzaj, vrijeme FROM dnevnik WHERE vrijeme BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "' "
+                            + "ORDER BY vrijeme DESC LIMIT " + brojStranice + "," + this.pomakCitanja;
+                }
             }
-
             ResultSet podaci = this.statement.executeQuery(upit);
-            while (podaci.next()) {
-                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String date = podaci.getString("vrijeme");
-                zapisi.add(new Dnevnik(Integer.valueOf(podaci.getString("id")), podaci.getString("sadrzaj"), formatter.parse(date)));
+            while (podaci.next()) {                
+                Date datumZapisa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(podaci.getString("vrijeme"));
+                zapisi.add(new Dnevnik(Integer.valueOf(podaci.getString("id")), podaci.getString("sadrzaj"), datumZapisa));
             }
         }
-        catch(SQLException | ParseException ex) {
-            Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        catch(SQLException | ParseException ex) {}
     }
 
     /**
@@ -139,33 +143,33 @@ public class PregledDnevnika {
         try {
             Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
             ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
-            
+
             if (!this.odDatuma.isEmpty() && !this.doDatuma.isEmpty()) {
                 this.session.setAttribute("uneseni_pocetni", this.odDatuma);
                 this.session.setAttribute("uneseni_krajnji", this.doDatuma);
             }
-            
+
             this.pocetni = provjeriDatum(this.odDatuma);
             if (this.pocetni.equals("ERROR")) {
                 this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
             }
-            
+
             this.krajnji = provjeriDatum(this.doDatuma);
             if (this.krajnji.equals("ERROR")) {
                 this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
             }
-            
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date datePocetni = sdf.parse(this.pocetni);
             Date dateZavrsni = sdf.parse(this.krajnji);
-            
-            if(datePocetni.getTime() > dateZavrsni.getTime()){
+
+            if (datePocetni.getTime() > dateZavrsni.getTime()) {
                 this.pogreske.add(prijevod.getString("dnevnik.datumi"));
             }
-            
+
             this.session.setAttribute("pocetni_datum", this.pocetni);
             this.session.setAttribute("krajnji_datum", this.krajnji);
-            
+
             prikaziDnevnik(0);
             brojZapisa();
         }
@@ -235,12 +239,23 @@ public class PregledDnevnika {
     private void brojZapisa() {
         try {
             String upit;
-            if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
-                upit = "SELECT COUNT(*) AS broj FROM `dnevnik`";
+            if (konfiguracija.getServerDatabase().contains("derby")) {                
+                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
+                    upit = "SELECT COUNT(*) AS broj FROM NWTIS_G2.DNEVNIK";
+                }
+                else {
+                    upit = "SELECT COUNT(*) AS broj FROM NWTIS_G2.DNEVNIK "
+                            + "WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "'";
+                }
             }
             else {
-                upit = "SELECT COUNT(*) AS broj FROM `dnevnik` "
-                        + "WHERE `vrijeme` BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "'";
+                if (this.pocetni.isEmpty() && this.krajnji.isEmpty()) {
+                    upit = "SELECT COUNT(*) AS broj FROM dnevnik";
+                }
+                else {
+                    upit = "SELECT COUNT(*) AS broj FROM dnevnik "
+                            + "WHERE vrijeme BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "'";
+                }
             }
             ResultSet podaci = this.statement.executeQuery(upit);
             if (podaci.next()) {

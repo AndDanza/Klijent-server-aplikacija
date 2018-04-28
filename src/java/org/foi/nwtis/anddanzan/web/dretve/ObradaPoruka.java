@@ -234,7 +234,6 @@ public class ObradaPoruka extends Thread {
         try {
             if (message.getContentType().contains("multipart")) {
                 Multipart multiPart = (Multipart) message.getContent();
-
                 if (multiPart.getCount() == 1) {
                     MimeBodyPart attachment = (MimeBodyPart) multiPart.getBodyPart(0);
                     if (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition())) {
@@ -272,36 +271,53 @@ public class ObradaPoruka extends Thread {
 
         if (provjeriPrivitak(jsonString)) {
             try {
-                //dohvaćanje jsona unutar mail
                 JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
                 String komanda = jsonObject.get("komanda").getAsString();
                 int idUredaja = jsonObject.get("id").getAsInt();
 
                 String upit = "";
                 if (komanda.equalsIgnoreCase("dodaj")) {
-                    String naziv = jsonObject.get("naziv").getAsString();
-                    String kreiranje = jsonObject.get("vrijeme").getAsString();
-                    upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
-                            + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
-                    this.statement.execute(upit);
+                    pohraniUredaj(jsonObject, idUredaja, jsonString);
                     ObradaPoruka.logObrade.setBrojDodanihIOT(ObradaPoruka.logObrade.getBrojDodanihIOT() + 1);
                     porukaUredu = true;
                 }
                 else if (komanda.equalsIgnoreCase("azuriraj")) {
                     String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
-                    upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
+                    upit = "UPDATE uredaji SET sadrzaj = '" + azuriraniJsonString + "' WHERE id = " + idUredaja;
                     this.statement.execute(upit);
                     ObradaPoruka.logObrade.setBrojAzuriranihIOT(ObradaPoruka.logObrade.getBrojAzuriranihIOT() + 1);
                     porukaUredu = true;
                 }
             }
-            catch(SQLException | JsonSyntaxException | NullPointerException ex) {
+            catch(SQLException | JsonSyntaxException | NullPointerException | ParseException ex) {
                 ObradaPoruka.logObrade.setBrojNeispravnihPoruka(ObradaPoruka.logObrade.getBrojNeispravnihPoruka() + 1);
             }
         }
         zapisiUDnevnik(jsonString);
 
         return porukaUredu;
+    }
+
+    /**
+     * Metoda koja pohranjuje podatke o zadanomuređaju u bazu podataka.
+     *
+     * @param jsonObject Json objekt s podacima
+     * @param idUredaja id uređaja za pohranu
+     * @param jsonString string vrijednost sadržaja uređaja
+     * @throws SQLException iznimka prilikom psremanja u bazu
+     * @throws ParseException iznimka prilikom parsiranja datuma za pohranu
+     */
+    private void pohraniUredaj(JsonObject jsonObject, int idUredaja, String jsonString) throws SQLException, ParseException {
+        String naziv = jsonObject.get("naziv").getAsString();
+        String kreiranje = jsonObject.get("vrijeme").getAsString();
+        DateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        Date date = formatter.parse(kreiranje);
+        kreiranje = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+        System.out.println("kreiranje " + kreiranje);
+        String upit = "INSERT INTO nwtis_g2.uredaji(id, naziv, sadrzaj, vrijeme_kreiranja) "
+                + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
+        this.statement.execute(upit);
+
     }
 
     /**
@@ -319,7 +335,7 @@ public class ObradaPoruka extends Thread {
     private String azurirajPodatke(String jsonString, int id) throws SQLException {
         Properties stariPodaci = null;
 
-        String upit = "SELECT `sadrzaj` FROM `uredaji` WHERE `id` = " + id;
+        String upit = "SELECT sadrzaj FROM uredaji WHERE id = " + id;
         ResultSet podaci = this.statement.executeQuery(upit);
         if (podaci.next()) {
             String sadrzaj = podaci.getString("sadrzaj");
@@ -347,11 +363,11 @@ public class ObradaPoruka extends Thread {
         try {
             JsonObject jsonObject = new JsonParser().parse(sadrzaj).getAsJsonObject();
             int idUredaja = jsonObject.get("id").getAsInt();
-            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES (" + idUredaja + ", '" + sadrzaj + "')";
+            String upit = "INSERT INTO dnevnik(id,sadrzaj) VALUES (" + idUredaja + ", '" + sadrzaj + "')";
             this.statement.execute(upit);
         }
         catch(SQLException | JsonSyntaxException | NullPointerException ex) {
-            String upit = "INSERT INTO `dnevnik`(`id`,`sadrzaj`) VALUES (-1, '" + sadrzaj + "')";
+            String upit = "INSERT INTO dnevnik(id,sadrzaj) VALUES (-1, '" + sadrzaj + "')";
             try {
                 this.statement.execute(upit);
             }
