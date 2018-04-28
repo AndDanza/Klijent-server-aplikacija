@@ -100,15 +100,6 @@ public class PregledDnevnika {
             brojZapisa();
             brojStranice = brojStranice * this.pomakCitanja;
 
-//            if (this.brojPorukaMape < this.pomakCitanja) {
-//                this.render_prev = false;
-//                this.render_next = false;
-//            }
-//            else if (start == (this.brojPorukaMape - this.pomakCitanja + 1)) {
-//                this.render_prev = false;
-//            }
-            System.out.println("br stran " + brojStranice);
-            System.out.println(brojStranice + this.pomakCitanja >= this.brojZapisaDnevnika);
             if (brojStranice == 0) {
                 this.render_prev = false;
             }
@@ -145,29 +136,42 @@ public class PregledDnevnika {
      * pretražuju se zapisi u tablic koji odgovaraju uvjetu
      */
     public void pretraziDnevnik() {
-        Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
-
-        if (!this.odDatuma.isEmpty() && !this.doDatuma.isEmpty()) {
-            this.session.setAttribute("uneseni_pocetni", this.odDatuma);
-            this.session.setAttribute("uneseni_krajnji", this.doDatuma);
+        try {
+            Locale currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+            ResourceBundle prijevod = ResourceBundle.getBundle("org.foi.nwtis.anddanzan.prijevod", currentLocale);
+            
+            if (!this.odDatuma.isEmpty() && !this.doDatuma.isEmpty()) {
+                this.session.setAttribute("uneseni_pocetni", this.odDatuma);
+                this.session.setAttribute("uneseni_krajnji", this.doDatuma);
+            }
+            
+            this.pocetni = provjeriDatum(this.odDatuma);
+            if (this.pocetni.equals("ERROR")) {
+                this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+            }
+            
+            this.krajnji = provjeriDatum(this.doDatuma);
+            if (this.krajnji.equals("ERROR")) {
+                this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+            }
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date datePocetni = sdf.parse(this.pocetni);
+            Date dateZavrsni = sdf.parse(this.krajnji);
+            
+            if(datePocetni.getTime() > dateZavrsni.getTime()){
+                this.pogreske.add(prijevod.getString("dnevnik.datumi"));
+            }
+            
+            this.session.setAttribute("pocetni_datum", this.pocetni);
+            this.session.setAttribute("krajnji_datum", this.krajnji);
+            
+            prikaziDnevnik(0);
+            brojZapisa();
         }
-
-        this.pocetni = provjeriDatum(this.odDatuma);
-        if (this.pocetni.equals("ERROR")) {
-            this.pogreske.add(prijevod.getString("pregled.od_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
+        catch(ParseException ex) {
+            Logger.getLogger(PregledDnevnika.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        this.krajnji = provjeriDatum(this.doDatuma);
-        if (this.krajnji.equals("ERROR")) {
-            this.pogreske.add(prijevod.getString("pregled.do_datuma") + " - " + prijevod.getString("pogreska.krivi_datum"));
-        }
-
-        this.session.setAttribute("pocetni_datum", this.pocetni);
-        this.session.setAttribute("krajnji_datum", this.krajnji);
-
-        prikaziDnevnik(0);
-        brojZapisa();
 
     }
 

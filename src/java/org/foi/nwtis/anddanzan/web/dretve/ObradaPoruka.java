@@ -125,7 +125,7 @@ public class ObradaPoruka extends Thread {
 
                 System.out.println("Pocetak obrade poruka " + new Date());
 
-                this.logObrade = new DatotekaRadaDretve();
+                ObradaPoruka.logObrade = new DatotekaRadaDretve();
 
                 // Start the session
                 Properties properties = System.getProperties();
@@ -151,12 +151,12 @@ public class ObradaPoruka extends Thread {
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
                     if (!messages[i].isSet(Flags.Flag.SEEN)) {
-                        System.out.println("poruka: "+messages[i].getSubject());
-                        sortirajMail(messages[i]);
+                        System.out.println("poruka: " + messages[i].getSubject() + "vrijeme "+messages[i].getSentDate());
+                        //sortirajMail(messages[i]);
                     }
                 }
 
-                this.logObrade.pohraniPodatke(logDatoteka);
+                ObradaPoruka.logObrade.pohraniPodatke(this.logDatoteka);
 
                 long sleepTime = this.milisecSpavanje - (System.currentTimeMillis() - start);
 
@@ -194,7 +194,7 @@ public class ObradaPoruka extends Thread {
         try {
             folder.close(false);
             store.close();
-            this.logObrade = null;
+            ObradaPoruka.logObrade = null;
             this.statement.close();
             this.connection.close();
         }
@@ -231,10 +231,10 @@ public class ObradaPoruka extends Thread {
             }
         }
         catch(MessagingException | IOException ex) {
-            this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
+            ObradaPoruka.logObrade.setBrojNeispravnihPoruka(ObradaPoruka.logObrade.getBrojNeispravnihPoruka() + 1);
         }
 
-        this.logObrade.setBrojObradenihPoruka(this.logObrade.getBrojObradenihPoruka() + 1);
+        ObradaPoruka.logObrade.setBrojObradenihPoruka(ObradaPoruka.logObrade.getBrojObradenihPoruka() + 1);
     }
 
     /**
@@ -264,19 +264,19 @@ public class ObradaPoruka extends Thread {
                     upit = "INSERT INTO `uredaji`(`id`, `naziv`, `sadrzaj`, `vrijeme_kreiranja`) "
                             + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
                     this.statement.execute(upit);
-                    this.logObrade.setBrojDodanihIOT(this.logObrade.getBrojDodanihIOT() + 1);
+                    ObradaPoruka.logObrade.setBrojDodanihIOT(ObradaPoruka.logObrade.getBrojDodanihIOT() + 1);
                     porukaUredu = true;
                 }
                 else if (komanda.equalsIgnoreCase("azuriraj")) {
                     String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
                     upit = "UPDATE `uredaji` SET `sadrzaj` = '" + azuriraniJsonString + "' WHERE `id` = " + idUredaja;
                     this.statement.execute(upit);
-                    this.logObrade.setBrojAzuriranihIOT(this.logObrade.getBrojAzuriranihIOT() + 1);
+                    ObradaPoruka.logObrade.setBrojAzuriranihIOT(ObradaPoruka.logObrade.getBrojAzuriranihIOT() + 1);
                     porukaUredu = true;
                 }
             }
             catch(SQLException | JsonSyntaxException | NullPointerException ex) {
-                this.logObrade.setBrojNeispravnihPoruka(this.logObrade.getBrojNeispravnihPoruka() + 1);
+                ObradaPoruka.logObrade.setBrojNeispravnihPoruka(ObradaPoruka.logObrade.getBrojNeispravnihPoruka() + 1);
             }
         }
         zapisiUDnevnik(jsonString);
