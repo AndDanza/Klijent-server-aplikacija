@@ -142,18 +142,9 @@ public class ObradaPoruka extends Thread {
                 folder = store.getFolder("INBOX");
                 folder.open(Folder.READ_ONLY);
 
-                nwtisMapa = provjeraNwtisMape();
+                this.nwtisMapa = provjeraNwtisMape();
 
-                //TODO ne dohvaćati sve poruke odjednom nego ih po grupama dohvatiti (numMessagesToRead)
-                //definira koliko se poruka odjednom obrađuje this.numMessagesToRead;
-                Message[] messages = folder.getMessages();
-
-                //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
-                for (int i = 0; i < messages.length; i++) {
-                    if (!messages[i].isSet(Flags.Flag.SEEN)) {
-                        sortirajMail(messages[i]);
-                    }
-                }
+                zapocniObradu(folder);
 
                 ObradaPoruka.logObrade.pohraniPodatke(this.logDatoteka);
 
@@ -183,6 +174,36 @@ public class ObradaPoruka extends Thread {
             Logger.getLogger(ObradaPoruka.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    /**
+     * Metoda za pokretanje obrade primljenih poruka. Obrada je u grupama po n
+     * poruka zadanim konfiguracijskom datotekom.
+     *
+     * @param folder Objekt mape inbox
+     * @throws MessagingException u slučaju nepravilnog dohvaćanja ili greške
+     * prilikom dohvaćanja poruke baca se iznika
+     */
+    private void zapocniObradu(Folder folder) throws MessagingException {
+        int ukupanBrojPoruka = folder.getMessageCount();
+
+        int pocetak = 1;
+        int kraj = 0;
+        while (kraj < ukupanBrojPoruka) {
+            pocetak = kraj + 1;
+            kraj = kraj + this.numMessagesToRead;
+
+            if (kraj > ukupanBrojPoruka) {
+                kraj = ukupanBrojPoruka;
+            }
+
+            Message[] messages = folder.getMessages(pocetak, kraj);
+            for (int i = 0; i < messages.length; i++) {
+                if (!messages[i].isSet(Flags.Flag.SEEN)) {
+                    sortirajMail(messages[i]);
+                }
+            }
+        }
     }
 
     /**
