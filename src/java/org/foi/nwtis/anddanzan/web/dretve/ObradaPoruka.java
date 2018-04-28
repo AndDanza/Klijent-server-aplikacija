@@ -243,6 +243,7 @@ public class ObradaPoruka extends Thread {
                                 folder.copyMessages(msg, nwtisMapa);
                                 message.setFlag(Flags.Flag.DELETED, true);
                                 folder.expunge();
+                                System.out.println("NWTiS poruka uspješno obrađena");
                             }
                         }
                     }
@@ -250,6 +251,7 @@ public class ObradaPoruka extends Thread {
             }
         }
         catch(MessagingException | IOException ex) {
+            System.out.println("Poruka je neispravna");
             ObradaPoruka.logObrade.setBrojNeispravnihPoruka(ObradaPoruka.logObrade.getBrojNeispravnihPoruka() + 1);
         }
 
@@ -280,6 +282,7 @@ public class ObradaPoruka extends Thread {
                     pohraniUredaj(jsonObject, idUredaja, jsonString);
                     ObradaPoruka.logObrade.setBrojDodanihIOT(ObradaPoruka.logObrade.getBrojDodanihIOT() + 1);
                     porukaUredu = true;
+                    System.out.println("Uređaj uspješno dodan");
                 }
                 else if (komanda.equalsIgnoreCase("azuriraj")) {
                     String azuriraniJsonString = azurirajPodatke(jsonString, idUredaja);
@@ -287,9 +290,11 @@ public class ObradaPoruka extends Thread {
                     this.statement.execute(upit);
                     ObradaPoruka.logObrade.setBrojAzuriranihIOT(ObradaPoruka.logObrade.getBrojAzuriranihIOT() + 1);
                     porukaUredu = true;
+                    System.out.println("Uredaj uspješno ažuriran");
                 }
             }
             catch(SQLException | JsonSyntaxException | NullPointerException | ParseException ex) {
+                System.out.println("Vaša poruka sadrži neispravne elemente u privitku");
                 ObradaPoruka.logObrade.setBrojNeispravnihPoruka(ObradaPoruka.logObrade.getBrojNeispravnihPoruka() + 1);
             }
         }
@@ -317,7 +322,6 @@ public class ObradaPoruka extends Thread {
         String upit = "INSERT INTO nwtis_g2.uredaji(id, naziv, sadrzaj, vrijeme_kreiranja) "
                 + "VALUES (" + idUredaja + ",'" + naziv + "','" + jsonString + "', '" + kreiranje + "')";
         this.statement.execute(upit);
-
     }
 
     /**
