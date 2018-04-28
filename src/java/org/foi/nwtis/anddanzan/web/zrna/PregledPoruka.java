@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -156,7 +157,7 @@ public class PregledPoruka {
                 this.session.setAttribute("stani_mail", end);
             }
 
-            if (this.brojPorukaMape < this.pomakCitanja) {
+            if (this.brojPorukaMape <= this.pomakCitanja) {
                 this.render_prev = false;
                 this.render_next = false;
             }
@@ -171,6 +172,7 @@ public class PregledPoruka {
 
             this.popisPoruka = new ArrayList<>();
             for (int i = messages.length - 1; i >= 0; i--) {
+                messages[i].setFlag(Flags.Flag.SEEN, true);
                 popisPoruka.add(kreirajPoruku(messages[i], i));
             }
         }

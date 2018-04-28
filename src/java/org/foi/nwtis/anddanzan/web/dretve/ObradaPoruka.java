@@ -150,7 +150,10 @@ public class ObradaPoruka extends Thread {
 
                 //TODO dohvatiti broj poruka koji se obrađuje samo u ovom ciklusu
                 for (int i = 0; i < messages.length; i++) {
-                    sortirajMail(messages[i]);
+                    if (!messages[i].isSet(Flags.Flag.SEEN)) {
+                        System.out.println("poruka: "+messages[i].getSubject());
+                        sortirajMail(messages[i]);
+                    }
                 }
 
                 this.logObrade.pohraniPodatke(logDatoteka);
