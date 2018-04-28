@@ -42,11 +42,6 @@
                      rowClasses = "pregled_red"
                      value="#{pregledDnevnika.zapisi}" var="log">
             <h:column>
-                <f:facet name="header">#{p['pregled.id']}</f:facet>
-                    #{log.id}
-            </h:column>
-
-            <h:column>
                 <f:facet name="header">#{p['dnevnik.sadrzaj']}</f:facet>
                     #{log.sadrzaj}
             </h:column>
