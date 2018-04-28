@@ -106,7 +106,7 @@ public class PregledDnevnika {
             if (brojStranice + this.pomakCitanja >= this.brojZapisaDnevnika) {
                 this.render_next = false;
             }
-            if(this.brojZapisaDnevnika == 0){
+            if (this.brojZapisaDnevnika == 0) {
                 this.render_next = false;
             }
 
@@ -124,17 +124,20 @@ public class PregledDnevnika {
                 }
             }
             ResultSet podaci = this.statement.executeQuery(upit);
-            while (podaci.next()) {                
+            while (podaci.next()) {
                 Date datumZapisa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(podaci.getString("vrijeme"));
                 zapisi.add(new Dnevnik(Integer.valueOf(podaci.getString("id")), podaci.getString("sadrzaj"), datumZapisa));
             }
         }
-        catch(SQLException | ParseException ex) {}
+        catch(SQLException | ParseException ex) {
+        }
     }
 
     /**
      * Metoda za obradu klika pretraži na formi. Na temelju unesenih datuma
      * pretražuju se zapisi u tablic koji odgovaraju uvjetu
+     *
+     * @return PromjenaIntervala
      */
     public String promjenaIntervala() {
         try {
@@ -192,13 +195,15 @@ public class PregledDnevnika {
 
         this.session.setAttribute("stranica_dnevnik", 0);
 
-        prikaziDnevnik(0);        
+        prikaziDnevnik(0);
     }
 
     /**
      * Metoda za obradu klika za sljedeću stranicu zapisa. Na klik korisnika na
      * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
      * i završni index retka u tablici
+     *
+     * @return SljedeciZapisi
      */
     public String sljedeciZapisi() {
         int stranica = (int) this.session.getAttribute("stranica_dnevnik");
@@ -216,6 +221,8 @@ public class PregledDnevnika {
      * Metoda za obradu klika za prethodnu stranicu zapisa. Na klik korisnika na
      * temelju zadanog broj zapisa koje je potrebno prikazati pomiču se početni
      * i završni index retka u tablici
+     *
+     * @return PrethodniZapisi
      */
     public String prethodniZapisi() {
         int stranica = (int) this.session.getAttribute("stranica_dnevnik");
@@ -235,12 +242,12 @@ public class PregledDnevnika {
     private void brojZapisa() {
         try {
             String upit = "";
-            if (konfiguracija.getServerDatabase().contains("derby")) {                
+            if (konfiguracija.getServerDatabase().contains("derby")) {
                 if (!this.pocetni.isEmpty() && !this.krajnji.isEmpty()) {
                     upit = "SELECT COUNT(*) AS broj FROM NWTIS_G2.DNEVNIK "
                             + "WHERE VRIJEME <= '" + this.krajnji + "' AND VRIJEME >= '" + this.pocetni + "'";
                 }
-                else{
+                else {
                     this.brojZapisaDnevnika = 0;
                 }
             }
@@ -249,7 +256,7 @@ public class PregledDnevnika {
                     upit = "SELECT COUNT(*) AS broj FROM dnevnik "
                             + "WHERE vrijeme BETWEEN '" + this.pocetni + "' AND '" + this.krajnji + "'";
                 }
-                else{
+                else {
                     this.brojZapisaDnevnika = 0;
                 }
             }
@@ -267,7 +274,7 @@ public class PregledDnevnika {
      * Metoda za validaciju datuma unesenih u inpute forme
      *
      * @param datum
-     * @return
+     * @return "ERROR" ili formatirani datum
      */
     private String provjeriDatum(String datum) {
         try {

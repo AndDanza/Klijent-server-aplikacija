@@ -73,6 +73,8 @@ public class PregledPoruka {
 
     /**
      * Metoda za promjenu mape na klik tipke
+     *
+     * @return PromjenaMape
      */
     public String promjenaMape() {
         this.session.removeAttribute("kreni_mail");
@@ -184,6 +186,8 @@ public class PregledPoruka {
      * Metoda za obradu klika za sljedeću stranicu mailova. Na klik korisnika na
      * temelju zadanog broj prikaza mialova pomiču se početni i završni index
      * maila u mapi
+     *
+     * @return SljedecePoruke
      */
     public String sljedecePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
@@ -196,9 +200,9 @@ public class PregledPoruka {
 
         this.session.setAttribute("kreni_mail", pocetak);
         this.session.setAttribute("stani_mail", kraj);
-        
+
         preuzmiPoruke(pocetak, kraj);
-        
+
         return "SljedecePoruke";
     }
 
@@ -206,6 +210,8 @@ public class PregledPoruka {
      * Metoda za obradu klika za prethodnu stranicu mailova. Na klik korisnika
      * na temelju zadanog broj prikaza mialova pomiču se početni i završni index
      * maila u mapi
+     *
+     * @return PrethodnePoruke
      */
     public String prethodnePoruke() {
         int pocetak = (int) this.session.getAttribute("kreni_mail");
@@ -220,7 +226,7 @@ public class PregledPoruka {
         this.session.setAttribute("stani_mail", kraj);
 
         preuzmiPoruke(pocetak, kraj);
-        
+
         return "PrethodnePoruke";
     }
 

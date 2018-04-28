@@ -259,6 +259,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje varijable poslužitelja
+     *
      * @return naziv poslužitelja
      */
     public String getPosluzitelj() {
@@ -267,6 +268,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje varijable poslužitelja
+     *
      * @param posluzitelj naziv poslužitelja za pohranu
      */
     public void setPosluzitelj(String posluzitelj) {
@@ -275,6 +277,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje adrese primatelja
+     *
      * @return adresa primatelja
      */
     public String getPrima() {
@@ -283,6 +286,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje varijable primatelja
+     *
      * @param prima adresa primatelja za pohranu
      */
     public void setPrima(String prima) {
@@ -291,6 +295,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje adrese primatelja
+     *
      * @return adresa primatelja poruke
      */
     public String getSalje() {
@@ -299,6 +304,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje adrese pošiljatelja
+     *
      * @param salje adresa pošiljatelja
      */
     public void setSalje(String salje) {
@@ -307,6 +313,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje predmeta poruka
+     *
      * @return predemet poruke
      */
     public String getPredmet() {
@@ -315,6 +322,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje predmeta poruke
+     *
      * @param predmet novi predmet poruke
      */
     public void setPredmet(String predmet) {
@@ -323,6 +331,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje sadržaja privitka
+     *
      * @return sadržaj privitka
      */
     public String getPrivitak() {
@@ -331,6 +340,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje sadržaja privitka
+     *
      * @param privitak novi sadržaj privetka
      */
     public void setPrivitak(String privitak) {
@@ -339,6 +349,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje popisa datoteka json
+     *
      * @return lists json datoteka
      */
     public List<String> getPopisDatoteka() {
@@ -347,6 +358,7 @@ public class SlanjePoruka {
 
     /**
      * Punjenje liste json datoteka
+     *
      * @param popisDatoteka nova lista datoteka
      */
     public void setPopisDatoteka(List<String> popisDatoteka) {
@@ -355,6 +367,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje odabrane datoteke
+     *
      * @param odabranaDatoteka nova odabrana datoteka
      */
     public void setOdabranaDatoteka(String odabranaDatoteka) {
@@ -363,6 +376,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje odabrane datoteke
+     *
      * @return naziv odabrane datoteke
      */
     public String getOdabranaDatoteka() {
@@ -371,6 +385,7 @@ public class SlanjePoruka {
 
     /**
      * Metoda za navigaciju
+     *
      * @return promjenaJezika
      */
     public String promjeniJezik() {
@@ -379,6 +394,7 @@ public class SlanjePoruka {
 
     /**
      * Metoda za navigaciju
+     *
      * @return pregledPoruka
      */
     public String pregledPoruka() {
@@ -387,6 +403,7 @@ public class SlanjePoruka {
 
     /**
      * Metoda za navigaciju
+     *
      * @return pregledDnevnika
      */
     public String pregledDnevnika() {
@@ -395,6 +412,7 @@ public class SlanjePoruka {
 
     /**
      * Dohvaćanje liste pogrešaka
+     *
      * @return lista pogrešaka
      */
     public List<String> getPogreske() {
@@ -403,6 +421,7 @@ public class SlanjePoruka {
 
     /**
      * Postavljanje liste pogreški
+     *
      * @param pogreske nova lista pogreški
      */
     public void setPogreske(List<String> pogreske) {

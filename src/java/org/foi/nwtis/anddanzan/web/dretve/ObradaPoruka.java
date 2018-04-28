@@ -94,7 +94,7 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
-     * MEtoda za iniciranje početnih varijabli i pokretanje dretve
+     * Metoda za iniciranje početnih varijabli i pokretanje dretve
      */
     @Override
     public synchronized void start() {
@@ -112,7 +112,7 @@ public class ObradaPoruka extends Thread {
     }
 
     /**
-     * Metoda dretve
+     * Početna metoda dretve
      */
     @Override
     public void run() {
@@ -432,11 +432,7 @@ public class ObradaPoruka extends Thread {
             formatter.parse(sadrzaj.getProperty("vrijeme"));
             sadrzaj.remove("vrijeme");
 
-            if (!provjeriAtribute(sadrzaj)) {
-                return false;
-            }
-
-            return true;
+            return provjeriAtribute(sadrzaj);
         }
         catch(JsonSyntaxException | NumberFormatException | ParseException ex) {
             return false;
