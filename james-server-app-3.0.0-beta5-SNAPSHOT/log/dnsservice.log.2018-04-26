@@ -1,0 +1,27 @@
+INFO  12:17:40,494 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  12:17:40,508 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  12:17:40,508 | james.dnsservice | Adding autodiscovered server 92.242.242.3
+INFO  12:17:40,509 | james.dnsservice | Adding autodiscovered server 92.242.242.4
+INFO  12:17:40,509 | james.dnsservice | Adding autodiscovered search path Speedport_W_724V_09091602_00_006.
+INFO  12:17:40,510 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  12:17:40,510 | james.dnsservice | DNS Server is: 92.242.242.3
+INFO  12:17:40,510 | james.dnsservice | DNS Server is: 92.242.242.4
+INFO  12:17:40,573 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
+INFO  17:25:53,612 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  17:25:53,628 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  17:25:53,628 | james.dnsservice | Adding autodiscovered server 92.242.242.3
+INFO  17:25:53,629 | james.dnsservice | Adding autodiscovered server 92.242.242.4
+INFO  17:25:53,629 | james.dnsservice | Adding autodiscovered search path Speedport_W_724V_09091602_00_006.
+INFO  17:25:53,629 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  17:25:53,630 | james.dnsservice | DNS Server is: 92.242.242.3
+INFO  17:25:53,630 | james.dnsservice | DNS Server is: 92.242.242.4
+INFO  17:25:53,642 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
+INFO  17:30:35,757 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  17:30:35,765 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  17:30:35,765 | james.dnsservice | Adding autodiscovered server 92.242.242.3
+INFO  17:30:35,765 | james.dnsservice | Adding autodiscovered server 92.242.242.4
+INFO  17:30:35,766 | james.dnsservice | Adding autodiscovered search path Speedport_W_724V_09091602_00_006.
+INFO  17:30:35,767 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  17:30:35,767 | james.dnsservice | DNS Server is: 92.242.242.3
+INFO  17:30:35,767 | james.dnsservice | DNS Server is: 92.242.242.4
+INFO  17:30:35,839 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults

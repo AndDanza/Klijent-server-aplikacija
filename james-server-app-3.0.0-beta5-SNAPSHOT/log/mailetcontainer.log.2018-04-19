@@ -1,0 +1,164 @@
+INFO  17:59:18,127 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:18,145 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  17:59:18,157 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  17:59:18,170 | james.mailprocessor | Mailet Null instantiated.
+INFO  17:59:18,178 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  17:59:18,183 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  17:59:18,189 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:18,194 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  17:59:18,619 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  17:59:18,627 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  17:59:18,638 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  17:59:18,643 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  17:59:18,645 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:18,678 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  17:59:18,679 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  17:59:18,796 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  17:59:18,805 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  17:59:18,807 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  17:59:18,808 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:18,833 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  17:59:18,837 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  17:59:18,847 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  17:59:19,364 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:19,413 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  17:59:19,484 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:19,496 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  17:59:19,566 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:19,581 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  17:59:19,679 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:19,695 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  17:59:19,782 | james.mailprocessor | Matcher All instantiated.
+INFO  17:59:19,811 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  17:59:19,908 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  17:59:19,908 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  17:59:19,914 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  17:59:19,914 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  17:59:19,921 | james.mailspooler | Queue=MailQueue:spool
+INFO  17:59:19,925 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:00:12,770 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  18:00:12,771 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  18:00:12,784 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:00:12,786 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:11:05,036 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:05,050 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  18:11:05,054 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  18:11:05,058 | james.mailprocessor | Mailet Null instantiated.
+INFO  18:11:05,067 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:11:05,073 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:11:05,074 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:05,075 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:11:05,458 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:11:05,472 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  18:11:05,486 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:11:05,499 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  18:11:05,503 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:05,528 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  18:11:05,531 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:11:05,621 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  18:11:05,634 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  18:11:05,653 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:11:05,662 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:05,689 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  18:11:05,690 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  18:11:05,704 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  18:11:06,214 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:06,252 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:11:06,352 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:06,364 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:11:06,484 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:06,496 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:11:06,582 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:06,596 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:11:06,655 | james.mailprocessor | Matcher All instantiated.
+INFO  18:11:06,684 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  18:11:06,761 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  18:11:06,762 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  18:11:06,766 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:11:06,767 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:11:06,768 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:11:06,776 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:12:17,854 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  18:12:17,856 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  18:12:17,858 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:12:17,858 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:16:12,039 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:12,053 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  18:16:12,058 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  18:16:12,062 | james.mailprocessor | Mailet Null instantiated.
+INFO  18:16:12,067 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:16:12,076 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:16:12,076 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:12,078 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:16:12,481 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:16:12,493 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  18:16:12,500 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:16:12,508 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  18:16:12,510 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:12,531 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  18:16:12,532 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:16:12,638 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  18:16:12,648 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  18:16:12,651 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:16:12,666 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:12,695 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  18:16:12,697 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  18:16:12,709 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  18:16:13,241 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:13,280 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:16:13,496 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:13,531 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:16:13,668 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:13,683 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:16:13,807 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:13,842 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:16:13,930 | james.mailprocessor | Matcher All instantiated.
+INFO  18:16:13,963 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  18:16:14,049 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  18:16:14,050 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  18:16:14,062 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:16:14,062 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:16:14,063 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:16:14,064 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:27:40,019 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:40,066 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  18:27:40,066 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  18:27:40,066 | james.mailprocessor | Mailet Null instantiated.
+INFO  18:27:40,082 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:27:40,082 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:27:40,082 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:40,082 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:27:40,504 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:27:40,520 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  18:27:40,535 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:27:40,535 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  18:27:40,535 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:40,566 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  18:27:40,566 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:27:40,676 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  18:27:40,691 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  18:27:40,691 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:27:40,691 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:40,723 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  18:27:40,723 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  18:27:40,738 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  18:27:41,129 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:41,176 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:27:41,254 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:41,254 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:27:41,332 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:41,348 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:27:41,426 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:41,441 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:27:41,504 | james.mailprocessor | Matcher All instantiated.
+INFO  18:27:41,551 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  18:27:41,645 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  18:27:41,645 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  18:27:41,645 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:27:41,645 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:27:41,645 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:27:41,645 | james.mailspooler | Queue=MailQueue:spool
+INFO  20:45:12,707 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  20:45:12,708 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  20:45:12,724 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  20:45:12,731 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2

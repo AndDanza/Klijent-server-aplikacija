@@ -1,0 +1,16 @@
+INFO  07:40:10,503 | james.imapserver | ID=1019211383 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  07:40:12,496 | james.imapserver | ID=1949424830 Connection closed for 127.0.0.1
+INFO  07:40:12,496 | james.imapserver | ID=1627797988 Connection closed for 127.0.0.1
+INFO  07:40:12,497 | james.imapserver | ID=687780821 Connection closed for 127.0.0.1
+INFO  07:40:12,497 | james.imapserver | ID=146053816 Connection closed for 127.0.0.1
+INFO  07:40:12,497 | james.imapserver | ID=206295693 Connection closed for 127.0.0.1
+INFO  07:40:12,502 | james.imapserver | ID=1582229019 Connection closed for 127.0.0.1
+INFO  07:40:12,503 | james.imapserver | ID=929360066 Connection closed for 127.0.0.1
+INFO  07:40:12,503 | james.imapserver | ID=1019211383 Connection closed for 127.0.0.1
+INFO  07:40:12,508 | james.imapserver | ID=138894871 Connection closed for 127.0.0.1
+INFO  07:40:12,508 | james.imapserver | ID=1511132042 Connection closed for 127.0.0.1
+INFO  07:40:12,509 | james.imapserver | ID=1931626753 Connection closed for 127.0.0.1
+INFO  07:40:12,510 | james.imapserver | ID=1247032638 Connection closed for 127.0.0.1
+INFO  07:40:12,511 | james.imapserver | ID=421887607 Connection closed for 127.0.0.1
+INFO  07:40:12,511 | james.imapserver | ID=1072167519 Connection closed for 127.0.0.1
+INFO  07:40:12,513 | james.imapserver | ID=718259127 Connection closed for 127.0.0.1

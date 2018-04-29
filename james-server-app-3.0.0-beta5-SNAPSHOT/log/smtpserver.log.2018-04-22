@@ -1,0 +1,56 @@
+INFO  00:17:18,934 | james.smtpserver | Dispose SMTP Service
+INFO  00:17:18,941 | james.smtpserver | Dispose SMTP Service done
+INFO  09:28:18,592 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  09:28:18,594 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  09:28:18,595 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  09:28:18,596 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  09:28:18,597 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  09:28:18,598 | james.smtpserver | This SMTP server requires authentication.
+INFO  09:28:18,599 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  09:28:18,876 | james.smtpserver | Init SMTP Service done
+INFO  09:28:47,172 | james.smtpserver | Id='1701418307' User='' Connection established from 127.0.0.1
+INFO  09:28:51,868 | james.smtpserver | Id='1701418307' User='' Successfully spooled mail Mail1524382131822-03cd1990-6bde-44aa-a4cd-a943c2492d07 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  09:28:51,883 | james.smtpserver | Id='1701418307' User='' Connection closed for 127.0.0.1
+INFO  12:22:27,017 | james.smtpserver | Dispose SMTP Service
+INFO  12:22:27,023 | james.smtpserver | Dispose SMTP Service done
+INFO  15:19:26,047 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  15:19:26,050 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  15:19:26,051 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  15:19:26,054 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  15:19:26,059 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  15:19:26,065 | james.smtpserver | This SMTP server requires authentication.
+INFO  15:19:26,066 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  15:19:27,047 | james.smtpserver | Init SMTP Service done
+INFO  18:02:04,414 | james.smtpserver | Id='640198704' User='' Connection established from 127.0.0.1
+INFO  18:02:09,104 | james.smtpserver | Id='640198704' User='' Successfully spooled mail Mail1524412929037-468bc1ca-0b8e-422a-8108-d0874c12dc4b from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:02:09,115 | james.smtpserver | Id='640198704' User='' Connection closed for 127.0.0.1
+INFO  18:02:15,391 | james.smtpserver | Id='1952423067' User='' Connection established from 127.0.0.1
+INFO  18:02:19,948 | james.smtpserver | Id='1952423067' User='' Successfully spooled mail Mail1524412939916-73a4504c-47d1-40ca-a402-f8cb9f3177e2 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:02:19,951 | james.smtpserver | Id='1952423067' User='' Connection closed for 127.0.0.1
+INFO  18:02:25,503 | james.smtpserver | Id='1865674782' User='' Connection established from 127.0.0.1
+INFO  18:02:30,043 | james.smtpserver | Id='1865674782' User='' Successfully spooled mail Mail1524412950039-775dc1f3-860f-46e8-bb04-e8599ec5a624 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:02:30,047 | james.smtpserver | Id='1865674782' User='' Connection closed for 127.0.0.1
+INFO  18:02:33,997 | james.smtpserver | Id='578226626' User='' Connection established from 127.0.0.1
+INFO  18:02:38,525 | james.smtpserver | Id='578226626' User='' Successfully spooled mail Mail1524412958523-257ff397-2f2a-4db7-acd5-f77b82f829e6 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:02:38,528 | james.smtpserver | Id='578226626' User='' Connection closed for 127.0.0.1
+INFO  18:02:46,372 | james.smtpserver | Id='505590998' User='' Connection established from 127.0.0.1
+INFO  18:02:50,931 | james.smtpserver | Id='505590998' User='' Successfully spooled mail Mail1524412970922-218bdc01-f1cf-434b-9b9e-2eb2c476c39c from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:02:50,941 | james.smtpserver | Id='505590998' User='' Connection closed for 127.0.0.1
+INFO  18:03:31,577 | james.smtpserver | Id='164761657' User='' Connection established from 127.0.0.1
+INFO  18:03:36,109 | james.smtpserver | Id='164761657' User='' Successfully spooled mail Mail1524413016105-27d8b48f-2565-4666-8fe6-525d87d00adf from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:03:36,115 | james.smtpserver | Id='164761657' User='' Connection closed for 127.0.0.1
+INFO  18:03:43,193 | james.smtpserver | Id='2121608400' User='' Connection established from 127.0.0.1
+INFO  18:03:47,720 | james.smtpserver | Id='2121608400' User='' Successfully spooled mail Mail1524413027717-b7a01803-08ab-44d9-8439-43d884ab7b71 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  18:03:47,724 | james.smtpserver | Id='2121608400' User='' Connection closed for 127.0.0.1
+INFO  19:15:46,836 | james.smtpserver | Id='615290455' User='' Connection established from 92.242.236.200
+INFO  19:15:46,839 | james.smtpserver | Id='615290455' User='' Connection closed for 92.242.236.200
+INFO  19:44:29,544 | james.smtpserver | Dispose SMTP Service
+INFO  19:44:29,547 | james.smtpserver | Dispose SMTP Service done
+INFO  23:24:01,792 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  23:24:01,794 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  23:24:01,795 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  23:24:01,796 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  23:24:01,797 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  23:24:01,798 | james.smtpserver | This SMTP server requires authentication.
+INFO  23:24:01,801 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  23:24:02,114 | james.smtpserver | Init SMTP Service done

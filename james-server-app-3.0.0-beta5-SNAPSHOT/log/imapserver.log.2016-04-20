@@ -1,0 +1,8 @@
+INFO  16:08:55,734 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  16:08:55,737 | james.imapserver | IMAP Service is running on: nbkermek4
+INFO  16:08:55,738 | james.imapserver | IMAP Service handler hello name is: nbkermek4
+INFO  16:08:55,741 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  16:08:55,744 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  16:08:55,756 | james.imapserver | Init IMAP Service done
+INFO  16:11:48,304 | james.imapserver | Dispose IMAP Service
+INFO  16:11:48,317 | james.imapserver | Dispose IMAP Service done

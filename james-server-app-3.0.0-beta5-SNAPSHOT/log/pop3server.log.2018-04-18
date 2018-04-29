@@ -1,0 +1,6 @@
+INFO  17:32:19,416 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  17:32:19,416 | james.pop3server | POP3 Service is running on: nwtis_webdip
+INFO  17:32:19,416 | james.pop3server | POP3 Service handler hello name is: nwtis_webdip
+INFO  17:32:19,416 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  17:32:19,416 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  17:32:19,478 | james.pop3server | Init POP3 Service done

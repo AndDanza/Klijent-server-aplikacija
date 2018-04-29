@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Sat Apr 28 17:59:50 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0163-0cfb-601c-00000a4c5e70 
+on database directory D:\FOI\Napredne WEB Tehnologije i Servisi\anddanzan\anddanzan_zadaca_2\james-server-app-3.0.0-beta5-SNAPSHOT\var\store\derby  with class loader sun.misc.Launcher$AppClassLoader@764c12b6 
+Loaded from file:/D:/FOI/Napredne%20WEB%20Tehnologije%20i%20Servisi/anddanzan/anddanzan_zadaca_2/james-server-app-3.0.0-beta5-SNAPSHOT/lib/derby-10.9.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_171-b11
+user.dir=D:\FOI\Napredne WEB Tehnologije i Servisi\anddanzan\anddanzan_zadaca_2\james-server-app-3.0.0-beta5-SNAPSHOT\bin
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,46 @@
+INFO  05:48:19,047 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:19,116 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  05:48:19,128 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  05:48:19,140 | james.mailprocessor | Mailet Null instantiated.
+INFO  05:48:19,153 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  05:48:19,168 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  05:48:19,170 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:19,173 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  05:48:20,270 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  05:48:20,300 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  05:48:20,317 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  05:48:20,328 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  05:48:20,331 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:20,378 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  05:48:20,380 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  05:48:20,698 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  05:48:20,712 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  05:48:20,715 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  05:48:20,718 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:20,769 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  05:48:20,770 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  05:48:20,795 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  05:48:22,374 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:22,434 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  05:48:22,585 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:22,605 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  05:48:22,745 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:22,763 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  05:48:22,888 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:22,906 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  05:48:23,052 | james.mailprocessor | Matcher All instantiated.
+INFO  05:48:23,180 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  05:48:23,396 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  05:48:23,397 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  05:48:23,406 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  05:48:23,406 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  05:48:23,408 | james.mailspooler | Queue=MailQueue:spool
+INFO  05:48:23,409 | james.mailspooler | Queue=MailQueue:spool
+INFO  05:57:52,658 | james.mailetcontext | Local delivered mail Mail1461038271785-f5e4f666-0b3f-4b0d-8ffe-31aeffbb2b23 sucessfully from pero@localhost to pero@localhost in folder INBOX
+INFO  05:58:37,609 | james.mailetcontext | Local delivered mail Mail1461038317415-ad048893-1ab2-4b89-b607-1d24797306fd sucessfully from pero@localhost to pero@localhost in folder INBOX
+INFO  08:49:29,045 | james.mailetcontext | Local delivered mail Mail1461048568846-66d10bc4-0989-4584-996d-d941f31f565a sucessfully from pero@localhost to pero@localhost in folder INBOX
+INFO  08:50:58,199 | james.mailetcontext | Local delivered mail Mail1461048658021-93cf1662-63db-43b9-b30f-af33eaa1aa64 sucessfully from pero@localhost to pero@localhost in folder INBOX
+INFO  19:41:48,301 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  19:41:48,304 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  19:41:48,356 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  19:41:48,359 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1

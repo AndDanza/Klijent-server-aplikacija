@@ -1,0 +1,291 @@
+INFO  16:17:32,309 | org.apache.james.container.spring.context.JamesServerApplicationContext | Refreshing org.apache.james.container.spring.context.JamesServerApplicationContext@6108b2d7: startup date [Wed Apr 23 16:17:32 CEST 2014]; root of context hierarchy
+INFO  16:17:35,485 | org.apache.james.container.spring.context.JamesServerApplicationContext | Bean 'logprovider' of type [class org.apache.james.container.spring.lifecycle.LogProviderImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+INFO  16:17:35,570 | james.mailrepositorystore | JamesMailStore init...
+INFO  16:17:35,593 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.FileMailRepository to handle file protocol requests for repositories with key file
+INFO  16:17:35,596 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle db protocol requests for repositories with key db
+INFO  16:17:35,597 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle dbfile protocol requests for repositories with key dbfile
+INFO  16:17:35,599 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.MBoxMailRepository to handle mbox protocol requests for repositories with key mbox
+INFO  16:17:35,726 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  16:17:35,747 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  16:17:35,748 | james.dnsservice | Adding autodiscovered server 161.53.120.3
+INFO  16:17:35,749 | james.dnsservice | Adding autodiscovered search path Home.
+INFO  16:17:35,750 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  16:17:35,751 | james.dnsservice | DNS Server is: 161.53.120.3
+INFO  16:17:35,767 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
+INFO  16:17:41,198 | james.domainlist | Set autodetect to: true
+INFO  16:17:41,199 | james.domainlist | Set autodetectIP to: true
+WARN  16:17:53,878 | org.apache.activemq.broker.BrokerService | Store limit is 102400 mb, whilst the data directory: E:\servisi\james-server-app-3.0.0-beta5-SNAPSHOT\bin\..\var\store\activemq\brokers\james only has 60773 mb of usable space
+WARN  16:17:55,170 | james.mailetcontext | The specified postmaster address ( postmaster@localhost ) is not a local address.  This is not necessarily a problem, but it does mean that emails addressed to the postmaster will be routed to another server.  For some configurations this may cause problems.
+INFO  16:17:55,465 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:55,496 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  16:17:55,510 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  16:17:55,521 | james.mailprocessor | Mailet Null instantiated.
+INFO  16:17:55,532 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  16:17:55,543 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  16:17:55,545 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:55,548 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  16:17:56,460 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  16:17:56,473 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  16:17:56,492 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  16:17:56,504 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  16:17:56,505 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:56,547 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  16:17:56,549 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  16:17:56,753 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  16:17:56,767 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  16:17:56,769 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  16:17:56,771 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:56,815 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  16:17:56,817 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  16:17:56,843 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  16:17:58,045 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:58,088 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  16:17:58,092 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\error
+INFO  16:17:58,096 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  16:17:58,097 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\error
+INFO  16:17:58,101 | james.mailrepositorystore | added repository: file://var/mail/error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  16:17:58,103 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  16:17:58,284 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:58,289 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  16:17:58,292 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\spam
+INFO  16:17:58,294 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  16:17:58,295 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\spam
+INFO  16:17:58,300 | james.mailrepositorystore | added repository: file://var/mail/spam/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  16:17:58,302 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  16:17:58,509 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:58,514 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  16:17:58,517 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\address-error
+INFO  16:17:58,519 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  16:17:58,520 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\address-error
+INFO  16:17:58,525 | james.mailrepositorystore | added repository: file://var/mail/address-error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  16:17:58,527 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  16:17:58,714 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:58,719 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  16:17:58,724 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\relay-denied
+INFO  16:17:58,726 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  16:17:58,728 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\relay-denied
+INFO  16:17:58,733 | james.mailrepositorystore | added repository: file://var/mail/relay-denied/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  16:17:58,734 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  16:17:58,986 | james.mailprocessor | Matcher All instantiated.
+INFO  16:17:59,031 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  16:17:59,236 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  16:17:59,238 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  16:17:59,247 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  16:17:59,247 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  16:17:59,248 | james.mailspooler | Queue=MailQueue:spool
+INFO  16:17:59,249 | james.mailspooler | Queue=MailQueue:spool
+INFO  16:17:59,316 | james.fetchmail | FetchMail Disabled
+INFO  16:17:59,397 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  16:17:59,400 | james.smtpserver | SMTP Service is running on: nbkermek4
+INFO  16:17:59,401 | james.smtpserver | SMTP Service handler hello name is: nbkermek4
+INFO  16:17:59,403 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  16:17:59,406 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  16:17:59,410 | james.smtpserver | This SMTP server requires authentication.
+INFO  16:17:59,413 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  16:17:59,884 | james.smtpserver | Init SMTP Service done
+INFO  16:17:59,910 | james.lmtpserver | LMTP Service disabled by configuration
+INFO  16:17:59,930 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  16:17:59,932 | james.pop3server | POP3 Service is running on: nbkermek4
+INFO  16:17:59,933 | james.pop3server | POP3 Service handler hello name is: nbkermek4
+INFO  16:17:59,937 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  16:17:59,940 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  16:18:00,096 | james.pop3server | Init POP3 Service done
+INFO  16:18:00,496 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  16:18:00,498 | james.imapserver | IMAP Service is running on: nbkermek4
+INFO  16:18:00,499 | james.imapserver | IMAP Service handler hello name is: nbkermek4
+INFO  16:18:00,502 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  16:18:00,506 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  16:18:00,519 | james.imapserver | Init IMAP Service done
+INFO  16:18:01,813 | org.apache.james.app.spring.JamesAppSpringMain | Apache James Server is successfully started in 29697 milliseconds.
+INFO  16:21:36,544 | james.smtpserver | Id='1861455782' User='' Connection established from 127.0.0.1
+INFO  16:21:41,194 | james.smtpserver | Id='1861455782' User='' Successfully spooled mail Mail1398262901142-e8442d19-f9d3-4322-b0a6-670281bf846b from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:21:41,221 | james.smtpserver | Id='1095730201' User='' Connection established from 127.0.0.1
+INFO  16:21:41,252 | james.smtpserver | Id='1095730201' User='' Successfully spooled mail Mail1398262901241-5ca5bd1d-cfb2-47f3-a406-82859dfca27b from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:21:41,274 | james.smtpserver | Id='1861455782' User='' Connection closed for 127.0.0.1
+INFO  16:21:41,275 | james.smtpserver | Id='1095730201' User='' Connection closed for 127.0.0.1
+INFO  16:21:41,954 | james.mailetcontext | Local delivered mail Mail1398262901142-e8442d19-f9d3-4322-b0a6-670281bf846b sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:21:42,016 | james.mailetcontext | Local delivered mail Mail1398262901241-5ca5bd1d-cfb2-47f3-a406-82859dfca27b sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:21:48,871 | james.smtpserver | Id='1404366461' User='' Connection established from 127.0.0.1
+INFO  16:21:53,425 | james.smtpserver | Id='1404366461' User='' Successfully spooled mail Mail1398262913418-3cad6486-eb32-4e0b-a028-0ca82b9b23ad from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:21:53,444 | james.smtpserver | Id='801802046' User='' Connection established from 127.0.0.1
+INFO  16:21:53,472 | james.smtpserver | Id='801802046' User='' Successfully spooled mail Mail1398262913464-fe8138ee-a844-4eda-ae0f-8194508af84a from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:21:53,487 | james.smtpserver | Id='1404366461' User='' Connection closed for 127.0.0.1
+INFO  16:21:53,488 | james.smtpserver | Id='801802046' User='' Connection closed for 127.0.0.1
+INFO  16:21:53,573 | james.mailetcontext | Local delivered mail Mail1398262913418-3cad6486-eb32-4e0b-a028-0ca82b9b23ad sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:21:53,653 | james.mailetcontext | Local delivered mail Mail1398262913464-fe8138ee-a844-4eda-ae0f-8194508af84a sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:21:56,580 | james.smtpserver | Id='1887475869' User='' Connection established from 127.0.0.1
+INFO  16:21:59,406 | james.smtpserver | Id='1401711789' User='' Connection established from 127.0.0.1
+INFO  16:22:01,139 | james.smtpserver | Id='1887475869' User='' Successfully spooled mail Mail1398262921132-45c030fc-ee59-47e7-a1dd-2e5c7bb1a608 from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:01,158 | james.smtpserver | Id='970648117' User='' Connection established from 127.0.0.1
+INFO  16:22:01,183 | james.smtpserver | Id='970648117' User='' Successfully spooled mail Mail1398262921176-d2ccd82f-0d50-47ca-a4be-f9513ea98563 from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:01,199 | james.smtpserver | Id='1887475869' User='' Connection closed for 127.0.0.1
+INFO  16:22:01,201 | james.smtpserver | Id='970648117' User='' Connection closed for 127.0.0.1
+INFO  16:22:01,259 | james.mailetcontext | Local delivered mail Mail1398262921132-45c030fc-ee59-47e7-a1dd-2e5c7bb1a608 sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:01,343 | james.mailetcontext | Local delivered mail Mail1398262921176-d2ccd82f-0d50-47ca-a4be-f9513ea98563 sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:03,922 | james.smtpserver | Id='497917583' User='' Connection established from 127.0.0.1
+INFO  16:22:03,959 | james.smtpserver | Id='1401711789' User='' Successfully spooled mail Mail1398262923953-344bb44b-4905-4ef8-900d-a7aebd88a8c8 from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:03,977 | james.smtpserver | Id='938204768' User='' Connection established from 127.0.0.1
+INFO  16:22:04,003 | james.smtpserver | Id='938204768' User='' Successfully spooled mail Mail1398262923995-78946bad-4aff-49d0-b8d4-0fa85c9e7791 from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:04,020 | james.smtpserver | Id='938204768' User='' Connection closed for 127.0.0.1
+INFO  16:22:04,030 | james.smtpserver | Id='1401711789' User='' Connection closed for 127.0.0.1
+INFO  16:22:04,095 | james.mailetcontext | Local delivered mail Mail1398262923953-344bb44b-4905-4ef8-900d-a7aebd88a8c8 sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:04,170 | james.mailetcontext | Local delivered mail Mail1398262923995-78946bad-4aff-49d0-b8d4-0fa85c9e7791 sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:08,477 | james.smtpserver | Id='497917583' User='' Successfully spooled mail Mail1398262928470-445f0c5b-0450-4ed1-a7ea-4a73243f815d from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:08,496 | james.smtpserver | Id='2099080019' User='' Connection established from 127.0.0.1
+INFO  16:22:08,523 | james.smtpserver | Id='2099080019' User='' Successfully spooled mail Mail1398262928514-6b1b1068-2066-4c99-818f-b67e9a079e48 from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  16:22:08,536 | james.smtpserver | Id='497917583' User='' Connection closed for 127.0.0.1
+INFO  16:22:08,537 | james.smtpserver | Id='2099080019' User='' Connection closed for 127.0.0.1
+INFO  16:22:08,595 | james.mailetcontext | Local delivered mail Mail1398262928470-445f0c5b-0450-4ed1-a7ea-4a73243f815d sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:08,669 | james.mailetcontext | Local delivered mail Mail1398262928514-6b1b1068-2066-4c99-818f-b67e9a079e48 sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  16:22:26,506 | james.imapserver | ID=1704920755 Connection established from 127.0.0.1
+INFO  16:22:27,714 | james.imapserver | ID=1302150833 Connection established from 127.0.0.1
+INFO  16:22:28,393 | james.imapserver | ID=1236560936 Connection established from 127.0.0.1
+WARN  16:25:24,004 | james.imapserver | ID=1704920755 Error while processing imap request: java.io.IOException - Udaljeno glavno racunalo nasilno je zatvorilo postojecu vezu
+WARN  16:25:24,005 | james.imapserver | ID=1302150833 Error while processing imap request: java.io.IOException - Udaljeno glavno racunalo nasilno je zatvorilo postojecu vezu
+WARN  16:25:24,004 | james.imapserver | ID=1236560936 Error while processing imap request: java.io.IOException - Udaljeno glavno racunalo nasilno je zatvorilo postojecu vezu
+INFO  16:25:24,019 | james.imapserver | ID=1236560936 Connection closed for 127.0.0.1
+INFO  16:25:24,012 | james.imapserver | ID=1704920755 Connection closed for 127.0.0.1
+INFO  16:25:24,021 | james.imapserver | ID=1302150833 Connection closed for 127.0.0.1
+INFO  16:26:26,810 | james.imapserver | ID=1499307494 Connection established from 127.0.0.1
+INFO  16:26:27,427 | james.imapserver | ID=617571091 Connection established from 127.0.0.1
+INFO  16:26:27,972 | james.imapserver | ID=485258912 Connection established from 127.0.0.1
+INFO  16:31:49,775 | james.imapserver | ID=1499307494 Connection closed for 127.0.0.1
+INFO  16:31:50,126 | james.imapserver | ID=617571091 Connection closed for 127.0.0.1
+INFO  16:31:50,141 | james.imapserver | ID=485258912 Connection closed for 127.0.0.1
+INFO  16:45:07,314 | james.imapserver | ID=983251569 Connection established from 127.0.0.1
+INFO  16:45:09,668 | james.imapserver | ID=1878138037 Connection established from 127.0.0.1
+INFO  16:45:10,065 | james.imapserver | ID=389768748 Connection established from 127.0.0.1
+INFO  16:45:49,060 | james.imapserver | ID=638869452 Connection established from 127.0.0.1
+INFO  16:45:49,484 | james.imapserver | ID=504406732 Connection established from 127.0.0.1
+INFO  16:45:49,871 | james.imapserver | ID=1512734321 Connection established from 127.0.0.1
+INFO  16:45:50,233 | james.imapserver | ID=2079777063 Connection established from 127.0.0.1
+INFO  16:45:50,627 | james.imapserver | ID=419375532 Connection established from 127.0.0.1
+INFO  16:45:50,988 | james.imapserver | ID=979957606 Connection established from 127.0.0.1
+INFO  16:45:51,338 | james.imapserver | ID=2137573768 Connection established from 127.0.0.1
+INFO  16:45:51,693 | james.imapserver | ID=1689285575 Connection established from 127.0.0.1
+INFO  16:45:52,006 | james.imapserver | ID=1846522711 Connection established from 127.0.0.1
+INFO  16:45:52,448 | james.imapserver | ID=477873353 Connection established from 127.0.0.1
+INFO  16:45:52,768 | james.imapserver | ID=1539579880 Connection established from 127.0.0.1
+INFO  16:45:53,151 | james.imapserver | ID=711900021 Connection established from 127.0.0.1
+INFO  16:46:42,423 | james.imapserver | ID=836997294 Connection established from 127.0.0.1
+INFO  16:46:42,738 | james.imapserver | ID=338917657 Connection established from 127.0.0.1
+INFO  16:46:43,011 | james.imapserver | ID=1502358069 Connection established from 127.0.0.1
+INFO  16:47:00,161 | james.imapserver | ID=338917657 Connection closed for 127.0.0.1
+INFO  16:47:00,163 | james.imapserver | ID=1502358069 Connection closed for 127.0.0.1
+INFO  16:47:00,164 | james.imapserver | ID=836997294 Connection closed for 127.0.0.1
+INFO  16:47:00,169 | james.imapserver | ID=2137573768 Connection closed for 127.0.0.1
+INFO  16:47:00,169 | james.imapserver | ID=1689285575 Connection closed for 127.0.0.1
+INFO  16:47:00,170 | james.imapserver | ID=1846522711 Connection closed for 127.0.0.1
+INFO  16:47:00,170 | james.imapserver | ID=419375532 Connection closed for 127.0.0.1
+INFO  16:47:00,171 | james.imapserver | ID=477873353 Connection closed for 127.0.0.1
+INFO  16:47:00,172 | james.imapserver | ID=711900021 Connection closed for 127.0.0.1
+INFO  16:47:00,171 | james.imapserver | ID=1539579880 Connection closed for 127.0.0.1
+INFO  16:47:00,171 | james.imapserver | ID=979957606 Connection closed for 127.0.0.1
+INFO  16:47:00,169 | james.imapserver | ID=2079777063 Connection closed for 127.0.0.1
+INFO  16:47:00,200 | james.imapserver | ID=1878138037 Connection closed for 127.0.0.1
+INFO  16:47:00,202 | james.imapserver | ID=389768748 Connection closed for 127.0.0.1
+INFO  16:47:00,203 | james.imapserver | ID=983251569 Connection closed for 127.0.0.1
+INFO  16:47:00,215 | james.imapserver | ID=504406732 Connection closed for 127.0.0.1
+INFO  16:47:00,218 | james.imapserver | ID=1512734321 Connection closed for 127.0.0.1
+INFO  16:47:00,228 | james.imapserver | ID=638869452 Connection closed for 127.0.0.1
+INFO  16:47:04,931 | james.imapserver | ID=683539477 Connection established from 127.0.0.1
+INFO  16:47:05,239 | james.imapserver | ID=1946757118 Connection established from 127.0.0.1
+INFO  16:47:05,510 | james.imapserver | ID=1495460399 Connection established from 127.0.0.1
+INFO  16:47:05,808 | james.imapserver | ID=1273249146 Connection established from 127.0.0.1
+INFO  16:47:06,077 | james.imapserver | ID=1547522810 Connection established from 127.0.0.1
+INFO  16:47:06,324 | james.imapserver | ID=1051453535 Connection established from 127.0.0.1
+INFO  16:47:06,587 | james.imapserver | ID=522765146 Connection established from 127.0.0.1
+INFO  16:47:06,843 | james.imapserver | ID=1523120833 Connection established from 127.0.0.1
+INFO  16:47:07,101 | james.imapserver | ID=233390235 Connection established from 127.0.0.1
+INFO  16:47:07,441 | james.imapserver | ID=733411345 Connection established from 127.0.0.1
+INFO  16:47:07,660 | james.imapserver | ID=721659464 Connection established from 127.0.0.1
+INFO  16:47:07,916 | james.imapserver | ID=693445560 Connection established from 127.0.0.1
+INFO  16:48:37,449 | james.imapserver | ID=693445560 Connection closed for 127.0.0.1
+INFO  16:48:37,454 | james.imapserver | ID=1051453535 Connection closed for 127.0.0.1
+INFO  16:48:37,450 | james.imapserver | ID=721659464 Connection closed for 127.0.0.1
+INFO  16:48:37,459 | james.imapserver | ID=233390235 Connection closed for 127.0.0.1
+INFO  16:48:37,462 | james.imapserver | ID=1946757118 Connection closed for 127.0.0.1
+INFO  16:48:37,459 | james.imapserver | ID=733411345 Connection closed for 127.0.0.1
+INFO  16:48:37,464 | james.imapserver | ID=683539477 Connection closed for 127.0.0.1
+INFO  16:48:37,463 | james.imapserver | ID=1495460399 Connection closed for 127.0.0.1
+INFO  16:48:37,462 | james.imapserver | ID=1273249146 Connection closed for 127.0.0.1
+INFO  16:48:37,462 | james.imapserver | ID=1547522810 Connection closed for 127.0.0.1
+INFO  16:48:37,461 | james.imapserver | ID=522765146 Connection closed for 127.0.0.1
+INFO  16:48:37,461 | james.imapserver | ID=1523120833 Connection closed for 127.0.0.1
+INFO  16:49:26,135 | james.imapserver | ID=1034879417 Connection established from 127.0.0.1
+INFO  16:49:26,414 | james.imapserver | ID=1011981910 Connection established from 127.0.0.1
+INFO  16:49:26,669 | james.imapserver | ID=934693586 Connection established from 127.0.0.1
+INFO  16:49:34,160 | james.imapserver | ID=201572184 Connection established from 127.0.0.1
+INFO  16:49:34,400 | james.imapserver | ID=1191951795 Connection established from 127.0.0.1
+INFO  16:49:34,643 | james.imapserver | ID=1810052259 Connection established from 127.0.0.1
+INFO  16:49:34,885 | james.imapserver | ID=1203298232 Connection established from 127.0.0.1
+INFO  16:49:35,079 | james.imapserver | ID=307151263 Connection established from 127.0.0.1
+INFO  16:49:35,274 | james.imapserver | ID=1846496041 Connection established from 127.0.0.1
+INFO  16:49:35,498 | james.imapserver | ID=1071528817 Connection established from 127.0.0.1
+INFO  16:49:35,713 | james.imapserver | ID=470017131 Connection established from 127.0.0.1
+INFO  16:49:35,927 | james.imapserver | ID=1274343213 Connection established from 127.0.0.1
+INFO  16:49:36,145 | james.imapserver | ID=1292978291 Connection established from 127.0.0.1
+INFO  16:49:36,334 | james.imapserver | ID=108736153 Connection established from 127.0.0.1
+INFO  16:49:36,542 | james.imapserver | ID=629990315 Connection established from 127.0.0.1
+INFO  16:49:41,690 | james.imapserver | ID=1409143456 Connection established from 127.0.0.1
+INFO  16:49:41,873 | james.imapserver | ID=1297783793 Connection established from 127.0.0.1
+INFO  16:49:42,061 | james.imapserver | ID=382829692 Connection established from 127.0.0.1
+INFO  16:49:42,232 | james.imapserver | ID=1607200518 Connection established from 127.0.0.1
+INFO  16:49:42,411 | james.imapserver | ID=1281646198 Connection established from 127.0.0.1
+INFO  16:49:42,608 | james.imapserver | ID=838136484 Connection established from 127.0.0.1
+INFO  16:49:42,794 | james.imapserver | ID=1864675004 Connection established from 127.0.0.1
+INFO  16:49:42,975 | james.imapserver | ID=1952164254 Connection established from 127.0.0.1
+INFO  16:49:43,155 | james.imapserver | ID=1372250413 Connection established from 127.0.0.1
+INFO  16:49:43,354 | james.imapserver | ID=2054146170 Connection established from 127.0.0.1
+INFO  16:49:43,518 | james.imapserver | ID=1744992699 Connection established from 127.0.0.1
+INFO  16:49:43,707 | james.imapserver | ID=868373959 Connection established from 127.0.0.1
+INFO  16:52:31,560 | james.imapserver | ID=529565280 Connection established from 127.0.0.1
+INFO  16:52:31,568 | james.imapserver | ID=529565280 Connection closed for 127.0.0.1
+INFO  16:59:27,205 | james.imapserver | ID=1292978291 Connection closed for 127.0.0.1
+INFO  16:59:27,206 | james.imapserver | ID=108736153 Connection closed for 127.0.0.1
+INFO  16:59:27,206 | james.imapserver | ID=1274343213 Connection closed for 127.0.0.1
+INFO  16:59:27,206 | james.imapserver | ID=629990315 Connection closed for 127.0.0.1
+INFO  16:59:27,224 | james.imapserver | ID=1297783793 Connection closed for 127.0.0.1
+INFO  16:59:27,226 | james.imapserver | ID=382829692 Connection closed for 127.0.0.1
+INFO  16:59:27,229 | james.imapserver | ID=1607200518 Connection closed for 127.0.0.1
+INFO  16:59:27,229 | james.imapserver | ID=1281646198 Connection closed for 127.0.0.1
+INFO  16:59:27,231 | james.imapserver | ID=838136484 Connection closed for 127.0.0.1
+INFO  16:59:27,233 | james.imapserver | ID=1864675004 Connection closed for 127.0.0.1
+INFO  16:59:27,237 | james.imapserver | ID=1952164254 Connection closed for 127.0.0.1
+INFO  16:59:27,238 | james.imapserver | ID=1372250413 Connection closed for 127.0.0.1
+INFO  16:59:27,239 | james.imapserver | ID=2054146170 Connection closed for 127.0.0.1
+INFO  16:59:27,240 | james.imapserver | ID=1744992699 Connection closed for 127.0.0.1
+INFO  16:59:27,241 | james.imapserver | ID=868373959 Connection closed for 127.0.0.1
+INFO  16:59:27,242 | james.imapserver | ID=1409143456 Connection closed for 127.0.0.1
+INFO  16:59:27,251 | james.imapserver | ID=1011981910 Connection closed for 127.0.0.1
+INFO  16:59:27,252 | james.imapserver | ID=934693586 Connection closed for 127.0.0.1
+INFO  16:59:27,253 | james.imapserver | ID=1034879417 Connection closed for 127.0.0.1
+INFO  16:59:27,259 | james.imapserver | ID=1191951795 Connection closed for 127.0.0.1
+INFO  16:59:27,260 | james.imapserver | ID=1810052259 Connection closed for 127.0.0.1
+INFO  16:59:27,261 | james.imapserver | ID=1203298232 Connection closed for 127.0.0.1
+INFO  16:59:27,262 | james.imapserver | ID=307151263 Connection closed for 127.0.0.1
+INFO  16:59:27,262 | james.imapserver | ID=1846496041 Connection closed for 127.0.0.1
+INFO  16:59:27,263 | james.imapserver | ID=1071528817 Connection closed for 127.0.0.1
+INFO  16:59:27,264 | james.imapserver | ID=470017131 Connection closed for 127.0.0.1
+INFO  16:59:27,266 | james.imapserver | ID=201572184 Connection closed for 127.0.0.1
+INFO  16:59:34,445 | james.imapserver | ID=430530564 Connection established from 127.0.0.1
+INFO  16:59:34,450 | james.imapserver | ID=430530564 Connection closed for 127.0.0.1
+INFO  16:59:34,473 | james.imapserver | ID=1518267250 Connection established from 127.0.0.1
+INFO  16:59:34,477 | james.imapserver | ID=1518267250 Connection closed for 127.0.0.1
+INFO  16:59:34,531 | james.imapserver | ID=429451330 Connection established from 127.0.0.1
+INFO  16:59:34,535 | james.imapserver | ID=429451330 Connection closed for 127.0.0.1
+INFO  17:07:23,897 | james.imapserver | ID=1019211383 Connection established from 127.0.0.1
+INFO  17:07:24,105 | james.imapserver | ID=1582229019 Connection established from 127.0.0.1
+INFO  17:07:24,301 | james.imapserver | ID=929360066 Connection established from 127.0.0.1
+INFO  17:07:31,145 | james.imapserver | ID=718259127 Connection established from 127.0.0.1
+INFO  17:07:31,324 | james.imapserver | ID=138894871 Connection established from 127.0.0.1
+INFO  17:07:31,493 | james.imapserver | ID=1511132042 Connection established from 127.0.0.1
+INFO  17:07:31,669 | james.imapserver | ID=1931626753 Connection established from 127.0.0.1
+INFO  17:07:31,836 | james.imapserver | ID=1247032638 Connection established from 127.0.0.1
+INFO  17:07:31,996 | james.imapserver | ID=421887607 Connection established from 127.0.0.1
+INFO  17:07:32,160 | james.imapserver | ID=1072167519 Connection established from 127.0.0.1
+INFO  17:07:32,333 | james.imapserver | ID=1949424830 Connection established from 127.0.0.1
+INFO  17:07:32,489 | james.imapserver | ID=687780821 Connection established from 127.0.0.1
+INFO  17:07:32,664 | james.imapserver | ID=146053816 Connection established from 127.0.0.1
+INFO  17:07:32,822 | james.imapserver | ID=1627797988 Connection established from 127.0.0.1
+INFO  17:07:32,994 | james.imapserver | ID=206295693 Connection established from 127.0.0.1

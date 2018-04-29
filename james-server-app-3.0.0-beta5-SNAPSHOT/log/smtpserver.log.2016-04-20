@@ -1,0 +1,10 @@
+INFO  16:08:54,587 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  16:08:54,591 | james.smtpserver | SMTP Service is running on: nbkermek4
+INFO  16:08:54,592 | james.smtpserver | SMTP Service handler hello name is: nbkermek4
+INFO  16:08:54,594 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  16:08:54,598 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  16:08:54,601 | james.smtpserver | This SMTP server requires authentication.
+INFO  16:08:54,604 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  16:08:55,151 | james.smtpserver | Init SMTP Service done
+INFO  16:11:48,329 | james.smtpserver | Dispose SMTP Service
+INFO  16:11:48,337 | james.smtpserver | Dispose SMTP Service done

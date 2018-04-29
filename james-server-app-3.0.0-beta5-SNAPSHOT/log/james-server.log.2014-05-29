@@ -1,0 +1,832 @@
+INFO  14:38:27,563 | org.apache.james.container.spring.context.JamesServerApplicationContext | Refreshing org.apache.james.container.spring.context.JamesServerApplicationContext@6108b2d7: startup date [Thu May 29 14:38:27 CEST 2014]; root of context hierarchy
+INFO  14:38:31,181 | org.apache.james.container.spring.context.JamesServerApplicationContext | Bean 'logprovider' of type [class org.apache.james.container.spring.lifecycle.LogProviderImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+INFO  14:38:31,282 | james.mailrepositorystore | JamesMailStore init...
+INFO  14:38:31,337 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.FileMailRepository to handle file protocol requests for repositories with key file
+INFO  14:38:31,339 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle db protocol requests for repositories with key db
+INFO  14:38:31,341 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle dbfile protocol requests for repositories with key dbfile
+INFO  14:38:31,343 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.MBoxMailRepository to handle mbox protocol requests for repositories with key mbox
+INFO  14:38:31,521 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  14:38:31,590 | james.dnsservice | Adding autodiscovered server 161.53.120.3
+INFO  14:38:31,591 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  14:38:31,592 | james.dnsservice | Adding autodiscovered search path Home.
+INFO  14:38:31,593 | james.dnsservice | DNS Server is: 161.53.120.3
+INFO  14:38:31,594 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  14:38:31,618 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
+INFO  14:38:32,998 | james.domainlist | Set autodetect to: true
+INFO  14:38:33,000 | james.domainlist | Set autodetectIP to: true
+WARN  14:38:41,665 | org.apache.activemq.broker.BrokerService | Store limit is 102400 mb, whilst the data directory: E:\servisi\james-server-app-3.0.0-beta5-SNAPSHOT\bin\..\var\store\activemq\brokers\james only has 59353 mb of usable space
+INFO  14:38:43,935 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:44,000 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  14:38:44,011 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  14:38:44,020 | james.mailprocessor | Mailet Null instantiated.
+INFO  14:38:44,029 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  14:38:44,039 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  14:38:44,041 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:44,043 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  14:38:44,969 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  14:38:44,981 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  14:38:44,993 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  14:38:45,004 | james.mailprocessor | Mailet RecipientToLowerCase instantiated.
+INFO  14:38:45,006 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:45,055 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  14:38:45,056 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  14:38:45,273 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  14:38:45,287 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  14:38:45,290 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  14:38:45,291 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:45,349 | james.mailetcontext | maxRetries is larger than total number of attempts specified.  Increasing last delayTime with 19 attempts 
+INFO  14:38:45,351 | james.mailetcontext | Delay of 21600000 msecs is now attempted: 20 times
+INFO  14:38:45,374 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  14:38:46,205 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:46,259 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  14:38:46,262 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\error
+INFO  14:38:46,267 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  14:38:46,269 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\error
+INFO  14:38:46,272 | james.mailrepositorystore | added repository: file://var/mail/error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  14:38:46,273 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  14:38:46,494 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:46,499 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  14:38:46,501 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\spam
+INFO  14:38:46,503 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  14:38:46,504 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\spam
+INFO  14:38:46,509 | james.mailrepositorystore | added repository: file://var/mail/spam/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  14:38:46,511 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  14:38:46,765 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:46,771 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  14:38:46,773 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\address-error
+INFO  14:38:46,775 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  14:38:46,777 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\address-error
+INFO  14:38:46,782 | james.mailrepositorystore | added repository: file://var/mail/address-error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  14:38:46,784 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  14:38:46,973 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:46,978 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  14:38:46,980 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\relay-denied
+INFO  14:38:46,982 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  14:38:46,984 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\relay-denied
+INFO  14:38:46,989 | james.mailrepositorystore | added repository: file://var/mail/relay-denied/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  14:38:46,992 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  14:38:47,173 | james.mailprocessor | Matcher All instantiated.
+INFO  14:38:47,243 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  14:38:47,433 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  14:38:47,435 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  14:38:47,445 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  14:38:47,445 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  14:38:47,447 | james.mailspooler | Queue=MailQueue:spool
+INFO  14:38:47,448 | james.mailspooler | Queue=MailQueue:spool
+INFO  14:38:47,534 | james.fetchmail | FetchMail Disabled
+INFO  14:38:47,650 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  14:38:47,655 | james.smtpserver | SMTP Service is running on: nbkermek4
+INFO  14:38:47,656 | james.smtpserver | SMTP Service handler hello name is: nbkermek4
+INFO  14:38:47,658 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  14:38:47,661 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  14:38:47,665 | james.smtpserver | This SMTP server requires authentication.
+INFO  14:38:47,668 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  14:38:48,307 | james.smtpserver | Init SMTP Service done
+INFO  14:38:48,325 | james.lmtpserver | LMTP Service disabled by configuration
+INFO  14:38:48,342 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  14:38:48,345 | james.pop3server | POP3 Service is running on: nbkermek4
+INFO  14:38:48,346 | james.pop3server | POP3 Service handler hello name is: nbkermek4
+INFO  14:38:48,350 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  14:38:48,353 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  14:38:48,527 | james.pop3server | Init POP3 Service done
+INFO  14:38:49,102 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  14:38:49,106 | james.imapserver | IMAP Service is running on: nbkermek4
+INFO  14:38:49,106 | james.imapserver | IMAP Service handler hello name is: nbkermek4
+INFO  14:38:49,110 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  14:38:49,113 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  14:38:49,126 | james.imapserver | Init IMAP Service done
+INFO  14:38:50,684 | org.apache.james.app.spring.JamesAppSpringMain | Apache James Server is successfully started in 23288 milliseconds.
+INFO  14:40:10,593 | james.imapserver | ID=833829727 Connection established from 127.0.0.1
+INFO  14:40:17,229 | james.imapserver | ID=833829727 Connection closed for 127.0.0.1
+INFO  14:42:18,481 | james.smtpserver | Id='1728266831' User='' Connection established from 127.0.0.1
+INFO  14:42:18,616 | james.smtpserver | Id='1728266831' User='' Successfully spooled mail Mail1401367338568-0fc5aaea-e952-4f5a-aef2-cc6e225925b7 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:42:18,628 | james.smtpserver | Id='1728266831' User='' Connection closed for 127.0.0.1
+INFO  14:42:18,633 | james.imapserver | ID=1479909329 Connection established from 127.0.0.1
+INFO  14:42:19,148 | james.imapserver | ID=1479909329 Connection closed for 127.0.0.1
+INFO  14:42:19,217 | james.mailetcontext | Local delivered mail Mail1401367338568-0fc5aaea-e952-4f5a-aef2-cc6e225925b7 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:42:24,873 | james.smtpserver | Id='1773737003' User='' Connection established from 127.0.0.1
+INFO  14:42:24,925 | james.smtpserver | Id='1773737003' User='' Successfully spooled mail Mail1401367344916-e09ea1e7-b5e5-48a6-982a-68634eb04416 from pero@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  14:42:24,956 | james.smtpserver | Id='1963020856' User='' Connection established from 127.0.0.1
+INFO  14:42:25,058 | james.mailetcontext | Local delivered mail Mail1401367344916-e09ea1e7-b5e5-48a6-982a-68634eb04416 sucessfully from pero@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:42:25,155 | james.smtpserver | Id='1963020856' User='' Successfully spooled mail Mail1401367345143-6b22cb11-6930-4d61-9c36-c5353f7f0491 from mato@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [servis@nwtis.nastava.foi.hr]
+INFO  14:42:25,220 | james.smtpserver | Id='1963020856' User='' Connection closed for 127.0.0.1
+INFO  14:42:25,220 | james.smtpserver | Id='1773737003' User='' Connection closed for 127.0.0.1
+INFO  14:42:25,458 | james.mailetcontext | Local delivered mail Mail1401367345143-6b22cb11-6930-4d61-9c36-c5353f7f0491 sucessfully from mato@nwtis.nastava.foi.hr to servis@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:42:39,053 | james.imapserver | ID=1551797984 Connection established from 127.0.0.1
+INFO  14:42:39,539 | james.imapserver | ID=899638592 Connection established from 127.0.0.1
+INFO  14:42:39,846 | james.imapserver | ID=951126862 Connection established from 127.0.0.1
+INFO  14:42:48,971 | james.imapserver | ID=1390633885 Connection established from 127.0.0.1
+INFO  14:42:49,235 | james.imapserver | ID=1054506902 Connection established from 127.0.0.1
+INFO  14:42:49,482 | james.imapserver | ID=520452126 Connection established from 127.0.0.1
+INFO  14:42:49,689 | james.imapserver | ID=1177219108 Connection established from 127.0.0.1
+INFO  14:42:49,893 | james.imapserver | ID=725450270 Connection established from 127.0.0.1
+INFO  14:42:50,106 | james.imapserver | ID=1464696319 Connection established from 127.0.0.1
+INFO  14:42:50,321 | james.imapserver | ID=1125814470 Connection established from 127.0.0.1
+INFO  14:42:50,513 | james.imapserver | ID=1925248413 Connection established from 127.0.0.1
+INFO  14:42:50,695 | james.imapserver | ID=1690512122 Connection established from 127.0.0.1
+INFO  14:42:50,874 | james.imapserver | ID=1252544643 Connection established from 127.0.0.1
+INFO  14:42:56,385 | james.imapserver | ID=1627433846 Connection established from 127.0.0.1
+INFO  14:42:56,644 | james.imapserver | ID=458361924 Connection established from 127.0.0.1
+INFO  14:42:56,861 | james.imapserver | ID=1244848389 Connection established from 127.0.0.1
+INFO  14:42:59,832 | james.imapserver | ID=921384708 Connection established from 127.0.0.1
+INFO  14:43:00,064 | james.imapserver | ID=1697274867 Connection established from 127.0.0.1
+INFO  14:43:00,282 | james.imapserver | ID=124791070 Connection established from 127.0.0.1
+INFO  14:43:00,479 | james.imapserver | ID=1034152163 Connection established from 127.0.0.1
+INFO  14:43:00,657 | james.imapserver | ID=819627032 Connection established from 127.0.0.1
+INFO  14:43:00,831 | james.imapserver | ID=369470128 Connection established from 127.0.0.1
+INFO  14:43:01,006 | james.imapserver | ID=1735528761 Connection established from 127.0.0.1
+INFO  14:43:01,182 | james.imapserver | ID=1966214365 Connection established from 127.0.0.1
+INFO  14:43:01,361 | james.imapserver | ID=1682725252 Connection established from 127.0.0.1
+INFO  14:43:01,528 | james.imapserver | ID=73253786 Connection established from 127.0.0.1
+INFO  14:43:04,548 | james.imapserver | ID=314812897 Connection established from 127.0.0.1
+INFO  14:43:04,770 | james.imapserver | ID=2063230139 Connection established from 127.0.0.1
+INFO  14:43:04,954 | james.imapserver | ID=1268149568 Connection established from 127.0.0.1
+INFO  14:43:15,127 | james.imapserver | ID=2064193958 Connection established from 127.0.0.1
+INFO  14:43:15,292 | james.imapserver | ID=1832000662 Connection established from 127.0.0.1
+INFO  14:43:15,433 | james.imapserver | ID=1997806685 Connection established from 127.0.0.1
+INFO  14:43:15,589 | james.imapserver | ID=726686624 Connection established from 127.0.0.1
+INFO  14:43:15,751 | james.imapserver | ID=662926000 Connection established from 127.0.0.1
+INFO  14:43:15,909 | james.imapserver | ID=25761640 Connection established from 127.0.0.1
+INFO  14:43:16,060 | james.imapserver | ID=1578286039 Connection established from 127.0.0.1
+INFO  14:43:20,385 | james.imapserver | ID=1369844691 Connection established from 127.0.0.1
+INFO  14:43:23,411 | james.imapserver | ID=1627433846 Connection closed for 127.0.0.1
+INFO  14:43:23,412 | james.imapserver | ID=1697274867 Connection closed for 127.0.0.1
+INFO  14:43:23,412 | james.imapserver | ID=1268149568 Connection closed for 127.0.0.1
+INFO  14:43:23,413 | james.imapserver | ID=1034152163 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=1682725252 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=124791070 Connection closed for 127.0.0.1
+INFO  14:43:23,412 | james.imapserver | ID=1551797984 Connection closed for 127.0.0.1
+INFO  14:43:23,411 | james.imapserver | ID=951126862 Connection closed for 127.0.0.1
+INFO  14:43:23,411 | james.imapserver | ID=314812897 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=369470128 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=1735528761 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=73253786 Connection closed for 127.0.0.1
+INFO  14:43:23,415 | james.imapserver | ID=1966214365 Connection closed for 127.0.0.1
+INFO  14:43:23,413 | james.imapserver | ID=819627032 Connection closed for 127.0.0.1
+INFO  14:43:23,605 | james.imapserver | ID=2063230139 Connection closed for 127.0.0.1
+INFO  14:43:23,605 | james.imapserver | ID=458361924 Connection closed for 127.0.0.1
+INFO  14:43:23,605 | james.imapserver | ID=1244848389 Connection closed for 127.0.0.1
+INFO  14:43:23,772 | james.imapserver | ID=921384708 Connection closed for 127.0.0.1
+INFO  14:43:23,773 | james.imapserver | ID=1054506902 Connection closed for 127.0.0.1
+INFO  14:43:23,775 | james.imapserver | ID=1177219108 Connection closed for 127.0.0.1
+INFO  14:43:23,776 | james.imapserver | ID=1690512122 Connection closed for 127.0.0.1
+INFO  14:43:23,775 | james.imapserver | ID=520452126 Connection closed for 127.0.0.1
+INFO  14:43:23,777 | james.imapserver | ID=1125814470 Connection closed for 127.0.0.1
+INFO  14:43:23,776 | james.imapserver | ID=725450270 Connection closed for 127.0.0.1
+INFO  14:43:23,776 | james.imapserver | ID=1925248413 Connection closed for 127.0.0.1
+INFO  14:43:23,776 | james.imapserver | ID=1252544643 Connection closed for 127.0.0.1
+INFO  14:43:23,778 | james.imapserver | ID=899638592 Connection closed for 127.0.0.1
+INFO  14:43:23,777 | james.imapserver | ID=1464696319 Connection closed for 127.0.0.1
+INFO  14:43:23,937 | james.imapserver | ID=1390633885 Connection closed for 127.0.0.1
+INFO  14:43:24,598 | james.imapserver | ID=975639814 Connection established from 127.0.0.1
+INFO  14:43:27,911 | james.imapserver | ID=687802284 Connection established from 127.0.0.1
+INFO  14:43:30,473 | james.imapserver | ID=1568850035 Connection established from 127.0.0.1
+INFO  14:43:33,132 | james.imapserver | ID=2141939706 Connection established from 127.0.0.1
+INFO  14:44:19,158 | james.smtpserver | Id='752541032' User='' Connection established from 127.0.0.1
+INFO  14:44:19,180 | james.smtpserver | Id='752541032' User='' Successfully spooled mail Mail1401367459173-9c72e2c6-174a-47e1-b3b6-8f67bf1209f3 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:44:19,185 | james.smtpserver | Id='752541032' User='' Connection closed for 127.0.0.1
+INFO  14:44:19,189 | james.imapserver | ID=273109389 Connection established from 127.0.0.1
+INFO  14:44:19,257 | james.mailetcontext | Local delivered mail Mail1401367459173-9c72e2c6-174a-47e1-b3b6-8f67bf1209f3 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:44:19,376 | james.imapserver | ID=273109389 Connection closed for 127.0.0.1
+INFO  14:44:59,130 | james.imapserver | ID=1656077459 Connection established from 127.0.0.1
+INFO  14:44:59,234 | james.imapserver | ID=1831531365 Connection established from 127.0.0.1
+INFO  14:44:59,325 | james.imapserver | ID=2143062341 Connection established from 127.0.0.1
+INFO  14:45:02,718 | james.imapserver | ID=1137930189 Connection established from 127.0.0.1
+INFO  14:45:02,807 | james.imapserver | ID=580088004 Connection established from 127.0.0.1
+INFO  14:45:02,883 | james.imapserver | ID=1221430765 Connection established from 127.0.0.1
+INFO  14:45:02,961 | james.imapserver | ID=1484048800 Connection established from 127.0.0.1
+INFO  14:45:03,034 | james.imapserver | ID=758292501 Connection established from 127.0.0.1
+INFO  14:45:03,107 | james.imapserver | ID=1980261412 Connection established from 127.0.0.1
+INFO  14:45:03,185 | james.imapserver | ID=1621717225 Connection established from 127.0.0.1
+INFO  14:45:08,752 | james.imapserver | ID=556024810 Connection established from 127.0.0.1
+INFO  14:45:13,371 | james.imapserver | ID=1213149399 Connection established from 127.0.0.1
+INFO  14:45:15,430 | james.imapserver | ID=511352518 Connection established from 127.0.0.1
+INFO  14:45:15,516 | james.imapserver | ID=497652321 Connection established from 127.0.0.1
+INFO  14:45:15,587 | james.imapserver | ID=1602867743 Connection established from 127.0.0.1
+INFO  14:45:15,661 | james.imapserver | ID=749008110 Connection established from 127.0.0.1
+INFO  14:45:15,755 | james.imapserver | ID=1351234101 Connection established from 127.0.0.1
+INFO  14:45:15,830 | james.imapserver | ID=607873170 Connection established from 127.0.0.1
+INFO  14:45:15,903 | james.imapserver | ID=169866386 Connection established from 127.0.0.1
+INFO  14:45:15,973 | james.imapserver | ID=992566719 Connection established from 127.0.0.1
+INFO  14:45:16,043 | james.imapserver | ID=1860222360 Connection established from 127.0.0.1
+INFO  14:45:16,113 | james.imapserver | ID=358921414 Connection established from 127.0.0.1
+INFO  14:45:17,959 | james.imapserver | ID=382556040 Connection established from 127.0.0.1
+INFO  14:45:20,472 | james.imapserver | ID=1280212651 Connection established from 127.0.0.1
+INFO  14:45:20,581 | james.imapserver | ID=470519948 Connection established from 127.0.0.1
+INFO  14:45:20,658 | james.imapserver | ID=1049976347 Connection established from 127.0.0.1
+INFO  14:45:20,838 | james.imapserver | ID=1602867743 Connection closed for 127.0.0.1
+INFO  14:45:20,838 | james.imapserver | ID=2143062341 Connection closed for 127.0.0.1
+INFO  14:45:20,838 | james.imapserver | ID=511352518 Connection closed for 127.0.0.1
+INFO  14:45:20,839 | james.imapserver | ID=358921414 Connection closed for 127.0.0.1
+INFO  14:45:20,838 | james.imapserver | ID=1280212651 Connection closed for 127.0.0.1
+INFO  14:45:20,991 | james.imapserver | ID=1049976347 Connection closed for 127.0.0.1
+INFO  14:45:20,992 | james.imapserver | ID=749008110 Connection closed for 127.0.0.1
+INFO  14:45:20,994 | james.imapserver | ID=470519948 Connection closed for 127.0.0.1
+INFO  14:45:20,994 | james.imapserver | ID=1351234101 Connection closed for 127.0.0.1
+INFO  14:45:20,995 | james.imapserver | ID=169866386 Connection closed for 127.0.0.1
+INFO  14:45:20,995 | james.imapserver | ID=607873170 Connection closed for 127.0.0.1
+INFO  14:45:20,995 | james.imapserver | ID=1860222360 Connection closed for 127.0.0.1
+INFO  14:45:20,995 | james.imapserver | ID=992566719 Connection closed for 127.0.0.1
+INFO  14:45:21,148 | james.imapserver | ID=497652321 Connection closed for 127.0.0.1
+INFO  14:45:21,148 | james.imapserver | ID=1831531365 Connection closed for 127.0.0.1
+INFO  14:45:21,274 | james.imapserver | ID=1656077459 Connection closed for 127.0.0.1
+INFO  14:45:22,624 | james.imapserver | ID=702259046 Connection established from 127.0.0.1
+INFO  14:45:27,459 | james.imapserver | ID=841581132 Connection established from 127.0.0.1
+INFO  14:46:19,387 | james.smtpserver | Id='1112121686' User='' Connection established from 127.0.0.1
+INFO  14:46:19,409 | james.smtpserver | Id='1112121686' User='' Successfully spooled mail Mail1401367579401-e2a27168-fce4-4bd9-a887-0b7b5c0180da from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:46:19,413 | james.smtpserver | Id='1112121686' User='' Connection closed for 127.0.0.1
+INFO  14:46:19,416 | james.imapserver | ID=156189894 Connection established from 127.0.0.1
+INFO  14:46:19,473 | james.mailetcontext | Local delivered mail Mail1401367579401-e2a27168-fce4-4bd9-a887-0b7b5c0180da sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:46:19,597 | james.imapserver | ID=156189894 Connection closed for 127.0.0.1
+INFO  14:47:31,096 | james.imapserver | ID=948690078 Connection established from 127.0.0.1
+INFO  14:47:31,102 | james.imapserver | ID=948690078 Connection closed for 127.0.0.1
+INFO  14:48:19,606 | james.smtpserver | Id='1880769259' User='' Connection established from 127.0.0.1
+INFO  14:48:19,629 | james.smtpserver | Id='1880769259' User='' Successfully spooled mail Mail1401367699621-22f54977-7782-41c1-8635-43943e7204d7 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:48:19,633 | james.smtpserver | Id='1880769259' User='' Connection closed for 127.0.0.1
+INFO  14:48:19,636 | james.imapserver | ID=455432568 Connection established from 127.0.0.1
+INFO  14:48:19,714 | james.mailetcontext | Local delivered mail Mail1401367699621-22f54977-7782-41c1-8635-43943e7204d7 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:48:19,850 | james.imapserver | ID=455432568 Connection closed for 127.0.0.1
+INFO  14:50:19,861 | james.smtpserver | Id='561412935' User='' Connection established from 127.0.0.1
+INFO  14:50:19,881 | james.smtpserver | Id='561412935' User='' Successfully spooled mail Mail1401367819874-b94b0a5b-4642-41ff-be86-6cb44cce36e4 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:50:19,884 | james.smtpserver | Id='561412935' User='' Connection closed for 127.0.0.1
+INFO  14:50:19,888 | james.imapserver | ID=1130334693 Connection established from 127.0.0.1
+INFO  14:50:40,010 | james.mailetcontext | Local delivered mail Mail1401367819874-b94b0a5b-4642-41ff-be86-6cb44cce36e4 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:50:40,018 | james.imapserver | ID=1130334693 Close failed for mailbox #private:servis@nwtis.nastava.foi.hr:INBOX
+org.apache.james.mailbox.exception.MailboxException: Search of MessageRange TYPE: ALL UID: -1:9223372036854775807 failed in mailbox Mailbox ( mailboxId = 1 name = INBOX uidValidity = 1683738977  )
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:262)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:678)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.transaction.TransactionalMapper.execute(TransactionalMapper.java:37)
+	at org.apache.james.mailbox.store.StoreMessageManager.deleteMarkedInMailbox(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.StoreMessageManager.expunge(StoreMessageManager.java:233)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:47)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:36)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:100)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.process(AbstractMailboxProcessor.java:89)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:83)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:66)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:52)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imapserver.netty.ImapChannelUpstreamHandler.messageReceived(ImapChannelUpstreamHandler.java:187)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.channel.Channels.fireMessageReceived(Channels.java:296)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.unfoldAndFireMessageReceived(FrameDecoder.java:327)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.callDecode(FrameDecoder.java:305)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.messageReceived(FrameDecoder.java:207)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.run(ChannelUpstreamEventRunnable.java:44)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: <openjpa-2.2.1-r422266:1396819 nonfatal store error> org.apache.openjpa.persistence.OptimisticLockException: Unable to obtain an object lock on "DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]".
+FailedObject: DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4940)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4918)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:579)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeDelete(JDBCStoreQuery.java:491)
+	at org.apache.openjpa.kernel.ExpressionStoreQuery$DataStoreExecutor.executeDelete(ExpressionStoreQuery.java:789)
+	at org.apache.openjpa.kernel.QueryImpl.delete(QueryImpl.java:1025)
+	at org.apache.openjpa.kernel.QueryImpl.execute(QueryImpl.java:865)
+	at org.apache.openjpa.kernel.QueryImpl.deleteAll(QueryImpl.java:892)
+	at org.apache.openjpa.kernel.DelegatingQuery.deleteAll(DelegatingQuery.java:574)
+	at org.apache.openjpa.persistence.QueryImpl.executeUpdate(QueryImpl.java:374)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.deleteDeletedMessagesInMailbox(JPAMessageMapper.java:368)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:256)
+	... 56 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: A lock could not be obtained due to a deadlock, cycle of locks and waiters is:
+Lock : ROW, JAMES_MAIL, (807,15)
+  Waiting XID : {2208646, U} , APP, DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))
+  Granted XID : {2208645, X} 
+Lock : TABLE, JAMES_MAIL_PROPERTY, Tablelock
+  Waiting XID : {2208645, IX} , APP, INSERT INTO APP.JAMES_MAIL_PROPERTY (PROPERTY_ID, PROPERTY_LINE_NUMBER, PROPERTY_LOCAL_NAME, PROPERTY_NAME_SPACE, PROPERTY_VALUE, MAILBOX_ID, MAIL_UID) VALUES (?, ?, ?, ?, ?, ?, ?)
+  Granted XID : {2208646, X} 
+. The selected victim is XID : 2208646. {prepstmnt 93282554 DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))} [code=30000, state=40001]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:219)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:195)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:59)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1134)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1765)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeUpdate(JDBCStoreQuery.java:746)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:577)
+	... 65 more
+INFO  14:50:40,089 | james.smtpserver | Id='1697268264' User='' Connection established from 127.0.0.1
+INFO  14:50:40,107 | james.smtpserver | Id='1697268264' User='' Successfully spooled mail Mail1401367840099-732c58b1-5cbb-4219-9586-7d059781a081 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:50:40,110 | james.smtpserver | Id='1697268264' User='' Connection closed for 127.0.0.1
+INFO  14:50:40,115 | james.imapserver | ID=607002227 Connection established from 127.0.0.1
+INFO  14:51:00,185 | james.imapserver | ID=607002227 Close failed for mailbox #private:servis@nwtis.nastava.foi.hr:INBOX
+org.apache.james.mailbox.exception.MailboxException: Search of MessageRange TYPE: ALL UID: -1:9223372036854775807 failed in mailbox Mailbox ( mailboxId = 1 name = INBOX uidValidity = 1683738977  )
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:262)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:678)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.transaction.TransactionalMapper.execute(TransactionalMapper.java:37)
+	at org.apache.james.mailbox.store.StoreMessageManager.deleteMarkedInMailbox(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.StoreMessageManager.expunge(StoreMessageManager.java:233)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:47)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:36)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:100)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.process(AbstractMailboxProcessor.java:89)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:83)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:66)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:52)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imapserver.netty.ImapChannelUpstreamHandler.messageReceived(ImapChannelUpstreamHandler.java:187)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.channel.Channels.fireMessageReceived(Channels.java:296)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.unfoldAndFireMessageReceived(FrameDecoder.java:327)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.callDecode(FrameDecoder.java:305)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.messageReceived(FrameDecoder.java:207)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.run(ChannelUpstreamEventRunnable.java:44)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: <openjpa-2.2.1-r422266:1396819 nonfatal store error> org.apache.openjpa.persistence.OptimisticLockException: Unable to obtain an object lock on "DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]".
+FailedObject: DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4940)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4918)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:579)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeDelete(JDBCStoreQuery.java:491)
+	at org.apache.openjpa.kernel.ExpressionStoreQuery$DataStoreExecutor.executeDelete(ExpressionStoreQuery.java:789)
+	at org.apache.openjpa.kernel.QueryImpl.delete(QueryImpl.java:1025)
+	at org.apache.openjpa.kernel.QueryImpl.execute(QueryImpl.java:865)
+	at org.apache.openjpa.kernel.QueryImpl.deleteAll(QueryImpl.java:892)
+	at org.apache.openjpa.kernel.DelegatingQuery.deleteAll(DelegatingQuery.java:574)
+	at org.apache.openjpa.persistence.QueryImpl.executeUpdate(QueryImpl.java:374)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.deleteDeletedMessagesInMailbox(JPAMessageMapper.java:368)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:256)
+	... 56 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: A lock could not be obtained due to a deadlock, cycle of locks and waiters is:
+Lock : ROW, JAMES_MAIL, (807,16)
+  Waiting XID : {2208741, U} , APP, DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))
+  Granted XID : {2208747, X} 
+Lock : TABLE, JAMES_MAIL_PROPERTY, Tablelock
+  Waiting XID : {2208747, IX} , APP, INSERT INTO APP.JAMES_MAIL_PROPERTY (PROPERTY_ID, PROPERTY_LINE_NUMBER, PROPERTY_LOCAL_NAME, PROPERTY_NAME_SPACE, PROPERTY_VALUE, MAILBOX_ID, MAIL_UID) VALUES (?, ?, ?, ?, ?, ?, ?)
+  Granted XID : {2208741, X} 
+. The selected victim is XID : 2208741. {prepstmnt 172996956 DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))} [code=30000, state=40001]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:219)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:195)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:59)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1134)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1765)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeUpdate(JDBCStoreQuery.java:746)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:577)
+	... 65 more
+INFO  14:51:00,190 | james.mailetcontext | Local delivered mail Mail1401367840099-732c58b1-5cbb-4219-9586-7d059781a081 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:51:00,215 | james.smtpserver | Id='2097977061' User='' Connection established from 127.0.0.1
+INFO  14:51:00,274 | james.smtpserver | Id='2097977061' User='' Successfully spooled mail Mail1401367860225-61c82c92-4f86-4a8f-8f1d-1890e441fb3a from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:51:00,278 | james.smtpserver | Id='2097977061' User='' Connection closed for 127.0.0.1
+INFO  14:51:00,281 | james.imapserver | ID=1332648578 Connection established from 127.0.0.1
+INFO  14:51:00,332 | james.mailetcontext | Local delivered mail Mail1401367860225-61c82c92-4f86-4a8f-8f1d-1890e441fb3a sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:51:00,420 | james.imapserver | ID=1332648578 Connection closed for 127.0.0.1
+INFO  14:53:00,431 | james.smtpserver | Id='408448137' User='' Connection established from 127.0.0.1
+INFO  14:53:00,452 | james.smtpserver | Id='408448137' User='' Successfully spooled mail Mail1401367980444-d0f2ece6-6d30-4b8d-ad15-30279c259135 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:53:00,454 | james.smtpserver | Id='408448137' User='' Connection closed for 127.0.0.1
+INFO  14:53:00,458 | james.imapserver | ID=219013006 Connection established from 127.0.0.1
+INFO  14:53:00,554 | james.mailetcontext | Local delivered mail Mail1401367980444-d0f2ece6-6d30-4b8d-ad15-30279c259135 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:53:00,684 | james.imapserver | ID=219013006 Connection closed for 127.0.0.1
+INFO  14:55:00,695 | james.smtpserver | Id='394338108' User='' Connection established from 127.0.0.1
+INFO  14:55:00,884 | james.smtpserver | Id='394338108' User='' Successfully spooled mail Mail1401368100876-04098fae-d5e1-424c-9d9e-68c30d22883c from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:55:00,886 | james.smtpserver | Id='394338108' User='' Connection closed for 127.0.0.1
+INFO  14:55:00,889 | james.imapserver | ID=1126924201 Connection established from 127.0.0.1
+INFO  14:55:20,947 | james.imapserver | ID=1126924201 Close failed for mailbox #private:servis@nwtis.nastava.foi.hr:INBOX
+org.apache.james.mailbox.exception.MailboxException: Search of MessageRange TYPE: ALL UID: -1:9223372036854775807 failed in mailbox Mailbox ( mailboxId = 1 name = INBOX uidValidity = 1683738977  )
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:262)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:678)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.transaction.TransactionalMapper.execute(TransactionalMapper.java:37)
+	at org.apache.james.mailbox.store.StoreMessageManager.deleteMarkedInMailbox(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.StoreMessageManager.expunge(StoreMessageManager.java:233)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:47)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:36)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:100)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.process(AbstractMailboxProcessor.java:89)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:83)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:66)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:52)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imapserver.netty.ImapChannelUpstreamHandler.messageReceived(ImapChannelUpstreamHandler.java:187)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.channel.Channels.fireMessageReceived(Channels.java:296)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.unfoldAndFireMessageReceived(FrameDecoder.java:327)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.callDecode(FrameDecoder.java:305)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.messageReceived(FrameDecoder.java:207)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.run(ChannelUpstreamEventRunnable.java:44)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: <openjpa-2.2.1-r422266:1396819 nonfatal store error> org.apache.openjpa.persistence.OptimisticLockException: Unable to obtain an object lock on "DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]".
+FailedObject: DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4940)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4918)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:579)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeDelete(JDBCStoreQuery.java:491)
+	at org.apache.openjpa.kernel.ExpressionStoreQuery$DataStoreExecutor.executeDelete(ExpressionStoreQuery.java:789)
+	at org.apache.openjpa.kernel.QueryImpl.delete(QueryImpl.java:1025)
+	at org.apache.openjpa.kernel.QueryImpl.execute(QueryImpl.java:865)
+	at org.apache.openjpa.kernel.QueryImpl.deleteAll(QueryImpl.java:892)
+	at org.apache.openjpa.kernel.DelegatingQuery.deleteAll(DelegatingQuery.java:574)
+	at org.apache.openjpa.persistence.QueryImpl.executeUpdate(QueryImpl.java:374)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.deleteDeletedMessagesInMailbox(JPAMessageMapper.java:368)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:256)
+	... 56 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: A lock could not be obtained due to a deadlock, cycle of locks and waiters is:
+Lock : ROW, JAMES_MAIL, (807,19)
+  Waiting XID : {2209034, U} , APP, DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))
+  Granted XID : {2209035, X} 
+Lock : TABLE, JAMES_MAIL_PROPERTY, Tablelock
+  Waiting XID : {2209035, IX} , APP, INSERT INTO APP.JAMES_MAIL_PROPERTY (PROPERTY_ID, PROPERTY_LINE_NUMBER, PROPERTY_LOCAL_NAME, PROPERTY_NAME_SPACE, PROPERTY_VALUE, MAILBOX_ID, MAIL_UID) VALUES (?, ?, ?, ?, ?, ?, ?)
+  Granted XID : {2209034, X} 
+. The selected victim is XID : 2209034. {prepstmnt 2142458659 DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))} [code=30000, state=40001]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:219)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:195)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:59)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1134)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1765)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeUpdate(JDBCStoreQuery.java:746)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:577)
+	... 65 more
+INFO  14:55:20,955 | james.mailetcontext | Local delivered mail Mail1401368100876-04098fae-d5e1-424c-9d9e-68c30d22883c sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:55:20,977 | james.smtpserver | Id='2111139166' User='' Connection established from 127.0.0.1
+INFO  14:55:21,033 | james.smtpserver | Id='2111139166' User='' Successfully spooled mail Mail1401368120986-60ccc2c3-4970-4351-951d-012d2a8ab044 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:55:21,037 | james.smtpserver | Id='2111139166' User='' Connection closed for 127.0.0.1
+INFO  14:55:21,039 | james.imapserver | ID=975961810 Connection established from 127.0.0.1
+INFO  14:55:41,094 | james.imapserver | ID=975961810 Close failed for mailbox #private:servis@nwtis.nastava.foi.hr:INBOX
+org.apache.james.mailbox.exception.MailboxException: Search of MessageRange TYPE: ALL UID: -1:9223372036854775807 failed in mailbox Mailbox ( mailboxId = 1 name = INBOX uidValidity = 1683738977  )
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:262)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:678)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.transaction.TransactionalMapper.execute(TransactionalMapper.java:37)
+	at org.apache.james.mailbox.store.StoreMessageManager.deleteMarkedInMailbox(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.StoreMessageManager.expunge(StoreMessageManager.java:233)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:47)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:36)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:100)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.process(AbstractMailboxProcessor.java:89)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:83)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:66)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:52)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imapserver.netty.ImapChannelUpstreamHandler.messageReceived(ImapChannelUpstreamHandler.java:187)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.channel.Channels.fireMessageReceived(Channels.java:296)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.unfoldAndFireMessageReceived(FrameDecoder.java:327)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.callDecode(FrameDecoder.java:305)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.messageReceived(FrameDecoder.java:207)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.run(ChannelUpstreamEventRunnable.java:44)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: <openjpa-2.2.1-r422266:1396819 nonfatal store error> org.apache.openjpa.persistence.OptimisticLockException: Unable to obtain an object lock on "DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]".
+FailedObject: DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4940)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4918)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:579)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeDelete(JDBCStoreQuery.java:491)
+	at org.apache.openjpa.kernel.ExpressionStoreQuery$DataStoreExecutor.executeDelete(ExpressionStoreQuery.java:789)
+	at org.apache.openjpa.kernel.QueryImpl.delete(QueryImpl.java:1025)
+	at org.apache.openjpa.kernel.QueryImpl.execute(QueryImpl.java:865)
+	at org.apache.openjpa.kernel.QueryImpl.deleteAll(QueryImpl.java:892)
+	at org.apache.openjpa.kernel.DelegatingQuery.deleteAll(DelegatingQuery.java:574)
+	at org.apache.openjpa.persistence.QueryImpl.executeUpdate(QueryImpl.java:374)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.deleteDeletedMessagesInMailbox(JPAMessageMapper.java:368)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:256)
+	... 56 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: A lock could not be obtained due to a deadlock, cycle of locks and waiters is:
+Lock : ROW, JAMES_MAIL, (807,20)
+  Waiting XID : {2209130, U} , APP, DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))
+  Granted XID : {2209131, X} 
+Lock : TABLE, JAMES_MAIL_PROPERTY, Tablelock
+  Waiting XID : {2209131, IX} , APP, INSERT INTO APP.JAMES_MAIL_PROPERTY (PROPERTY_ID, PROPERTY_LINE_NUMBER, PROPERTY_LOCAL_NAME, PROPERTY_NAME_SPACE, PROPERTY_VALUE, MAILBOX_ID, MAIL_UID) VALUES (?, ?, ?, ?, ?, ?, ?)
+  Granted XID : {2209130, X} 
+. The selected victim is XID : 2209130. {prepstmnt 348229568 DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))} [code=30000, state=40001]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:219)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:195)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:59)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1134)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1765)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeUpdate(JDBCStoreQuery.java:746)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:577)
+	... 65 more
+INFO  14:55:41,100 | james.mailetcontext | Local delivered mail Mail1401368120986-60ccc2c3-4970-4351-951d-012d2a8ab044 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:55:41,121 | james.smtpserver | Id='1506179567' User='' Connection established from 127.0.0.1
+INFO  14:55:41,148 | james.smtpserver | Id='1506179567' User='' Successfully spooled mail Mail1401368141131-94a890eb-5c15-4ae0-82f7-07b126f7c3d0 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:55:41,150 | james.smtpserver | Id='1506179567' User='' Connection closed for 127.0.0.1
+INFO  14:55:41,152 | james.imapserver | ID=170610396 Connection established from 127.0.0.1
+INFO  14:56:01,211 | james.imapserver | ID=170610396 Close failed for mailbox #private:servis@nwtis.nastava.foi.hr:INBOX
+org.apache.james.mailbox.exception.MailboxException: Search of MessageRange TYPE: ALL UID: -1:9223372036854775807 failed in mailbox Mailbox ( mailboxId = 1 name = INBOX uidValidity = 1683738977  )
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:262)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:678)
+	at org.apache.james.mailbox.store.StoreMessageManager$7.run(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.transaction.TransactionalMapper.execute(TransactionalMapper.java:37)
+	at org.apache.james.mailbox.store.StoreMessageManager.deleteMarkedInMailbox(StoreMessageManager.java:675)
+	at org.apache.james.mailbox.store.StoreMessageManager.expunge(StoreMessageManager.java:233)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:47)
+	at org.apache.james.imap.processor.CloseProcessor.doProcess(CloseProcessor.java:36)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:100)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.process(AbstractMailboxProcessor.java:89)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:83)
+	at org.apache.james.imap.processor.AbstractMailboxProcessor.doProcess(AbstractMailboxProcessor.java:66)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:52)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imap.processor.base.AbstractChainedProcessor.process(AbstractChainedProcessor.java:54)
+	at org.apache.james.imapserver.netty.ImapChannelUpstreamHandler.messageReceived(ImapChannelUpstreamHandler.java:187)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.channel.Channels.fireMessageReceived(Channels.java:296)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.unfoldAndFireMessageReceived(FrameDecoder.java:327)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.callDecode(FrameDecoder.java:305)
+	at org.jboss.netty.handler.codec.frame.FrameDecoder.messageReceived(FrameDecoder.java:207)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:75)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:558)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:777)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.run(ChannelUpstreamEventRunnable.java:44)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:312)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: <openjpa-2.2.1-r422266:1396819 nonfatal store error> org.apache.openjpa.persistence.OptimisticLockException: Unable to obtain an object lock on "DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]".
+FailedObject: DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID)) [java.lang.String]
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4940)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4918)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:579)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeDelete(JDBCStoreQuery.java:491)
+	at org.apache.openjpa.kernel.ExpressionStoreQuery$DataStoreExecutor.executeDelete(ExpressionStoreQuery.java:789)
+	at org.apache.openjpa.kernel.QueryImpl.delete(QueryImpl.java:1025)
+	at org.apache.openjpa.kernel.QueryImpl.execute(QueryImpl.java:865)
+	at org.apache.openjpa.kernel.QueryImpl.deleteAll(QueryImpl.java:892)
+	at org.apache.openjpa.kernel.DelegatingQuery.deleteAll(DelegatingQuery.java:574)
+	at org.apache.openjpa.persistence.QueryImpl.executeUpdate(QueryImpl.java:374)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.deleteDeletedMessagesInMailbox(JPAMessageMapper.java:368)
+	at org.apache.james.mailbox.jpa.mail.JPAMessageMapper.expungeMarkedForDeletionInMailbox(JPAMessageMapper.java:256)
+	... 56 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: A lock could not be obtained due to a deadlock, cycle of locks and waiters is:
+Lock : ROW, JAMES_MAIL, (807,21)
+  Waiting XID : {2209226, U} , APP, DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))
+  Granted XID : {2209232, X} 
+Lock : TABLE, JAMES_MAIL_PROPERTY, Tablelock
+  Waiting XID : {2209232, IX} , APP, INSERT INTO APP.JAMES_MAIL_PROPERTY (PROPERTY_ID, PROPERTY_LINE_NUMBER, PROPERTY_LOCAL_NAME, PROPERTY_NAME_SPACE, PROPERTY_VALUE, MAILBOX_ID, MAIL_UID) VALUES (?, ?, ?, ?, ?, ?, ?)
+  Granted XID : {2209226, X} 
+. The selected victim is XID : 2209226. {prepstmnt 1307958539 DELETE FROM APP.JAMES_MAIL WHERE EXISTS (SELECT 1 FROM APP.JAMES_MAIL t0 WHERE (t0.MAILBOX_ID = ? AND t0.MAIL_IS_DELETED = ?) AND (t0.MAILBOX_ID = APP.JAMES_MAIL.MAILBOX_ID AND t0.MAIL_UID = APP.JAMES_MAIL.MAIL_UID))} [code=30000, state=40001]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:219)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:195)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:59)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1134)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1765)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeUpdate(JDBCStoreQuery.java:746)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreQuery.executeBulkOperation(JDBCStoreQuery.java:577)
+	... 65 more
+INFO  14:56:01,217 | james.mailetcontext | Local delivered mail Mail1401368141131-94a890eb-5c15-4ae0-82f7-07b126f7c3d0 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:56:01,240 | james.smtpserver | Id='2053046247' User='' Connection established from 127.0.0.1
+INFO  14:56:01,272 | james.smtpserver | Id='2053046247' User='' Successfully spooled mail Mail1401368161250-dcad5378-0754-4ce3-88fd-eb602c6339a6 from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:56:01,275 | james.smtpserver | Id='2053046247' User='' Connection closed for 127.0.0.1
+INFO  14:56:01,277 | james.imapserver | ID=97070269 Connection established from 127.0.0.1
+INFO  14:56:01,346 | james.mailetcontext | Local delivered mail Mail1401368161250-dcad5378-0754-4ce3-88fd-eb602c6339a6 sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:56:01,415 | james.imapserver | ID=97070269 Connection closed for 127.0.0.1
+INFO  14:58:01,425 | james.smtpserver | Id='1226239467' User='' Connection established from 127.0.0.1
+INFO  14:58:01,458 | james.smtpserver | Id='1226239467' User='' Successfully spooled mail Mail1401368281450-436a190d-413c-4662-864b-1adc5c46645d from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  14:58:01,461 | james.smtpserver | Id='1226239467' User='' Connection closed for 127.0.0.1
+INFO  14:58:01,464 | james.imapserver | ID=1600895939 Connection established from 127.0.0.1
+INFO  14:58:01,521 | james.mailetcontext | Local delivered mail Mail1401368281450-436a190d-413c-4662-864b-1adc5c46645d sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  14:58:01,659 | james.imapserver | ID=1600895939 Connection closed for 127.0.0.1
+INFO  15:00:01,667 | james.smtpserver | Id='607074671' User='' Connection established from 127.0.0.1
+INFO  15:00:01,687 | james.smtpserver | Id='607074671' User='' Successfully spooled mail Mail1401368401680-8b9cd34c-9135-4563-a19d-07e238731a3a from admin@nwtis.nastava.foi.hr on nwtis.nastava.foi.hr/127.0.0.1 for [admin@nwtis.nastava.foi.hr]
+INFO  15:00:01,691 | james.smtpserver | Id='607074671' User='' Connection closed for 127.0.0.1
+INFO  15:00:01,759 | james.mailetcontext | Local delivered mail Mail1401368401680-8b9cd34c-9135-4563-a19d-07e238731a3a sucessfully from admin@nwtis.nastava.foi.hr to admin@nwtis.nastava.foi.hr in folder INBOX
+INFO  15:00:18,871 | james.imapserver | ID=1126924201 Connection closed for 127.0.0.1
+INFO  15:00:18,876 | james.imapserver | ID=170610396 Connection closed for 127.0.0.1
+INFO  15:00:18,883 | james.imapserver | ID=975961810 Connection closed for 127.0.0.1
+INFO  15:00:18,884 | james.imapserver | ID=607002227 Connection closed for 127.0.0.1
+INFO  15:00:18,887 | james.imapserver | ID=1130334693 Connection closed for 127.0.0.1
+INFO  15:13:15,359 | james.imapserver | ID=2064193958 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:15,362 | james.imapserver | ID=2064193958 Connection closed for 127.0.0.1
+INFO  15:13:15,455 | james.imapserver | ID=1832000662 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:15,457 | james.imapserver | ID=1832000662 Connection closed for 127.0.0.1
+INFO  15:13:15,654 | james.imapserver | ID=1997806685 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:15,656 | james.imapserver | ID=1997806685 Connection closed for 127.0.0.1
+INFO  15:13:15,754 | james.imapserver | ID=726686624 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:15,757 | james.imapserver | ID=726686624 Connection closed for 127.0.0.1
+INFO  15:13:15,955 | james.imapserver | ID=662926000 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:15,958 | james.imapserver | ID=662926000 Connection closed for 127.0.0.1
+INFO  15:13:16,154 | james.imapserver | ID=25761640 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:16,155 | james.imapserver | ID=25761640 Connection closed for 127.0.0.1
+INFO  15:13:20,455 | james.imapserver | ID=1578286039 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:20,459 | james.imapserver | ID=1578286039 Connection closed for 127.0.0.1
+INFO  15:13:24,655 | james.imapserver | ID=1369844691 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:24,657 | james.imapserver | ID=1369844691 Connection closed for 127.0.0.1
+INFO  15:13:27,854 | james.imapserver | ID=975639814 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:27,856 | james.imapserver | ID=975639814 Connection closed for 127.0.0.1
+INFO  15:13:30,554 | james.imapserver | ID=687802284 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:30,556 | james.imapserver | ID=687802284 Connection closed for 127.0.0.1
+INFO  15:13:32,855 | james.imapserver | ID=1568850035 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:32,857 | james.imapserver | ID=1568850035 Connection closed for 127.0.0.1
+INFO  15:13:35,656 | james.imapserver | ID=2141939706 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:13:35,658 | james.imapserver | ID=2141939706 Connection closed for 127.0.0.1
+INFO  15:15:02,855 | james.imapserver | ID=1137930189 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:02,857 | james.imapserver | ID=1137930189 Connection closed for 127.0.0.1
+INFO  15:15:02,954 | james.imapserver | ID=580088004 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:02,956 | james.imapserver | ID=580088004 Connection closed for 127.0.0.1
+INFO  15:15:03,055 | james.imapserver | ID=1221430765 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:03,058 | james.imapserver | ID=1221430765 Connection closed for 127.0.0.1
+INFO  15:15:03,058 | james.imapserver | ID=1484048800 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:03,060 | james.imapserver | ID=1484048800 Connection closed for 127.0.0.1
+INFO  15:15:03,154 | james.imapserver | ID=758292501 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:03,156 | james.imapserver | ID=758292501 Connection closed for 127.0.0.1
+INFO  15:15:03,254 | james.imapserver | ID=1980261412 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:03,256 | james.imapserver | ID=1980261412 Connection closed for 127.0.0.1
+INFO  15:15:08,754 | james.imapserver | ID=1621717225 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:08,756 | james.imapserver | ID=1621717225 Connection closed for 127.0.0.1
+INFO  15:15:13,454 | james.imapserver | ID=556024810 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:13,456 | james.imapserver | ID=556024810 Connection closed for 127.0.0.1
+INFO  15:15:17,854 | james.imapserver | ID=1213149399 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:17,856 | james.imapserver | ID=1213149399 Connection closed for 127.0.0.1
+INFO  15:15:22,655 | james.imapserver | ID=382556040 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:22,656 | james.imapserver | ID=382556040 Connection closed for 127.0.0.1
+INFO  15:15:27,154 | james.imapserver | ID=702259046 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:27,156 | james.imapserver | ID=702259046 Connection closed for 127.0.0.1
+INFO  15:15:31,754 | james.imapserver | ID=841581132 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  15:15:31,756 | james.imapserver | ID=841581132 Connection closed for 127.0.0.1
+INFO  15:37:46,473 | org.apache.james.container.spring.context.JamesServerApplicationContext | Closing org.apache.james.container.spring.context.JamesServerApplicationContext@6108b2d7: startup date [Thu May 29 14:38:27 CEST 2014]; root of context hierarchy
+INFO  15:37:46,492 | james.imapserver | Dispose IMAP Service
+INFO  15:37:46,548 | james.imapserver | Dispose IMAP Service done
+INFO  15:37:46,548 | james.pop3server | Dispose POP3 Service
+INFO  15:37:46,553 | james.pop3server | Dispose POP3 Service done
+INFO  15:37:46,554 | james.lmtpserver | Dispose LMTP Service
+INFO  15:37:46,555 | james.lmtpserver | Dispose LMTP Service done
+INFO  15:37:46,555 | james.smtpserver | Dispose SMTP Service
+INFO  15:37:46,559 | james.smtpserver | Dispose SMTP Service done
+INFO  15:37:46,560 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  15:37:46,561 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  15:37:46,570 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  15:37:46,572 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2

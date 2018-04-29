@@ -1,0 +1,20 @@
+INFO  09:20:53,395 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  09:20:53,395 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  09:20:53,395 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  09:20:53,395 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  09:20:53,395 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  09:20:53,473 | james.pop3server | Init POP3 Service done
+INFO  12:54:40,181 | james.pop3server | Dispose POP3 Service
+INFO  12:54:40,186 | james.pop3server | Dispose POP3 Service done
+INFO  17:59:56,929 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  17:59:56,932 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  17:59:56,934 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:59:56,934 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  17:59:56,935 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  17:59:57,142 | james.pop3server | Init POP3 Service done
+INFO  19:45:01,681 | james.pop3server | Id='1681573761' User='' Connection established from 92.242.236.200
+INFO  19:45:01,690 | james.pop3server | Id='1681573761' User='' Connection closed for 92.242.236.200
+INFO  22:45:59,957 | james.pop3server | Id='427090811' User='' Connection established from 107.170.224.237
+INFO  22:46:00,267 | james.pop3server | Id='427090811' User='' Connection closed for 107.170.224.237
+INFO  22:59:26,014 | james.pop3server | Dispose POP3 Service
+INFO  22:59:26,019 | james.pop3server | Dispose POP3 Service done

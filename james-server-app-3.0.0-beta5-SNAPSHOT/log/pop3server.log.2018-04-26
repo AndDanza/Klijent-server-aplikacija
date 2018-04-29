@@ -1,0 +1,28 @@
+INFO  12:17:51,585 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  12:17:51,588 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  12:17:51,591 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  12:17:51,592 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  12:17:51,592 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  12:17:51,689 | james.pop3server | Init POP3 Service done
+INFO  12:57:00,024 | james.pop3server | Id='1732038496' User='' Connection established from 80.82.70.118
+INFO  12:57:00,295 | james.pop3server | Id='1732038496' User='' Connection closed for 80.82.70.118
+INFO  13:36:19,461 | james.pop3server | Dispose POP3 Service
+INFO  13:36:19,461 | james.pop3server | Dispose POP3 Service done
+INFO  17:26:04,585 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  17:26:04,587 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  17:26:04,587 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:26:04,588 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  17:26:04,590 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  17:26:04,667 | james.pop3server | Init POP3 Service done
+INFO  17:30:16,719 | james.pop3server | Dispose POP3 Service
+INFO  17:30:16,727 | james.pop3server | Dispose POP3 Service done
+INFO  17:30:45,693 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  17:30:45,694 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  17:30:45,695 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:30:45,697 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  17:30:45,698 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  17:30:45,777 | james.pop3server | Init POP3 Service done
+INFO  19:36:58,790 | james.pop3server | Id='416519133' User='' Connection established from 92.242.236.200
+INFO  19:36:58,796 | james.pop3server | Id='416519133' User='' Connection closed for 92.242.236.200
+INFO  23:14:26,621 | james.pop3server | Dispose POP3 Service
+INFO  23:14:26,623 | james.pop3server | Dispose POP3 Service done

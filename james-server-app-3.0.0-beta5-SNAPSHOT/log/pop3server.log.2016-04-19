@@ -1,0 +1,30 @@
+INFO  05:48:24,425 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  05:48:24,428 | james.pop3server | POP3 Service is running on: nbkermek4
+INFO  05:48:24,429 | james.pop3server | POP3 Service handler hello name is: nbkermek4
+INFO  05:48:24,433 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  05:48:24,437 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  05:48:24,600 | james.pop3server | Init POP3 Service done
+INFO  05:54:57,538 | james.pop3server | Id='1991927207' User='' Connection established from 127.0.0.1
+INFO  05:54:57,664 | james.pop3server | Id='1991927207' User='pero' Connection closed for 127.0.0.1
+INFO  05:56:55,439 | james.pop3server | Id='714145976' User='' Connection established from 127.0.0.1
+INFO  05:56:55,453 | james.pop3server | Id='714145976' User='pero' Connection closed for 127.0.0.1
+INFO  05:57:11,189 | james.pop3server | Id='664352986' User='' Connection established from 127.0.0.1
+INFO  05:58:08,496 | james.pop3server | Id='890812247' User='' Connection established from 127.0.0.1
+INFO  05:58:46,363 | james.pop3server | Id='1421279238' User='' Connection established from 127.0.0.1
+INFO  05:58:46,451 | james.pop3server | Id='664352986' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  05:58:46,456 | james.pop3server | Id='890812247' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  06:18:46,423 | james.pop3server | Id='1421279238' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  08:46:47,034 | james.pop3server | Id='748649146' User='' Connection established from 127.0.0.1
+INFO  08:48:04,450 | james.pop3server | Id='2086493627' User='' Connection established from 127.0.0.1
+INFO  08:48:24,646 | james.pop3server | Id='1228097797' User='' Connection established from 127.0.0.1
+INFO  08:50:11,710 | james.pop3server | Id='1375956222' User='' Connection established from 127.0.0.1
+INFO  08:50:11,726 | james.pop3server | Id='1375956222' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  08:50:21,525 | james.pop3server | Id='540868377' User='' Connection established from 127.0.0.1
+INFO  08:50:47,626 | james.pop3server | Id='748649146' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  08:50:47,626 | james.pop3server | Id='1228097797' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  08:50:47,632 | james.pop3server | Id='2086493627' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  08:51:03,874 | james.pop3server | Id='1628613786' User='' Connection established from 127.0.0.1
+INFO  09:10:21,622 | james.pop3server | Id='540868377' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  09:11:04,021 | james.pop3server | Id='1628613786' User='pero@localhost' Connection closed for 127.0.0.1
+INFO  19:41:48,266 | james.pop3server | Dispose POP3 Service
+INFO  19:41:48,278 | james.pop3server | Dispose POP3 Service done

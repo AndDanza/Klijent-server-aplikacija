@@ -1,0 +1,6 @@
+INFO  17:32:19,666 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  17:32:19,666 | james.imapserver | IMAP Service is running on: nwtis_webdip
+INFO  17:32:19,666 | james.imapserver | IMAP Service handler hello name is: nwtis_webdip
+INFO  17:32:19,666 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  17:32:19,666 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  17:32:19,666 | james.imapserver | Init IMAP Service done

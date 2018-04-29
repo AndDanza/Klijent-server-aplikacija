@@ -1,0 +1,30 @@
+INFO  17:59:20,845 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  17:59:20,849 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  17:59:20,850 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:59:20,850 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  17:59:20,853 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  17:59:20,860 | james.imapserver | Init IMAP Service done
+INFO  18:00:12,739 | james.imapserver | Dispose IMAP Service
+INFO  18:00:12,749 | james.imapserver | Dispose IMAP Service done
+INFO  18:11:07,523 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  18:11:07,526 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  18:11:07,527 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:11:07,529 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  18:11:07,529 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  18:11:07,535 | james.imapserver | Init IMAP Service done
+INFO  18:12:17,833 | james.imapserver | Dispose IMAP Service
+INFO  18:12:17,842 | james.imapserver | Dispose IMAP Service done
+INFO  18:16:15,749 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  18:16:15,758 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  18:16:15,762 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:16:15,763 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  18:16:15,771 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  18:16:15,789 | james.imapserver | Init IMAP Service done
+INFO  18:27:42,488 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  18:27:42,504 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  18:27:42,504 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:27:42,520 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  18:27:42,520 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  18:27:42,520 | james.imapserver | Init IMAP Service done
+INFO  20:45:12,580 | james.imapserver | Dispose IMAP Service
+INFO  20:45:12,693 | james.imapserver | Dispose IMAP Service done

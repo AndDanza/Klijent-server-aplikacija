@@ -1,0 +1,392 @@
+INFO  10:03:33,499 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  10:03:33,501 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  10:03:33,502 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  10:03:33,502 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  10:03:33,504 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  10:03:33,508 | james.imapserver | Init IMAP Service done
+INFO  11:23:14,825 | james.imapserver | ID=1615704544 Connection established from 127.0.0.1
+INFO  11:29:09,059 | james.imapserver | ID=844523673 Connection established from 127.0.0.1
+INFO  11:41:05,131 | james.imapserver | ID=1477764 Connection established from 127.0.0.1
+INFO  11:41:24,220 | james.imapserver | ID=1477466074 Connection established from 127.0.0.1
+INFO  11:45:53,594 | james.imapserver | ID=1308115943 Connection established from 127.0.0.1
+INFO  11:46:27,878 | james.imapserver | ID=1880701406 Connection established from 127.0.0.1
+INFO  11:46:37,805 | james.imapserver | ID=1477764 Connection closed for 127.0.0.1
+INFO  11:46:37,859 | james.imapserver | ID=844523673 Connection closed for 127.0.0.1
+INFO  11:46:39,028 | james.imapserver | ID=1880701406 Connection closed for 127.0.0.1
+INFO  11:46:45,083 | james.imapserver | Dispose IMAP Service
+INFO  11:46:45,090 | james.imapserver | ID=1477466074 Connection closed for 127.0.0.1
+INFO  11:46:45,091 | james.imapserver | ID=1615704544 Connection closed for 127.0.0.1
+INFO  11:46:45,092 | james.imapserver | ID=1308115943 Connection closed for 127.0.0.1
+INFO  11:46:45,100 | james.imapserver | Dispose IMAP Service done
+INFO  11:47:06,727 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  11:47:06,733 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  11:47:06,734 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  11:47:06,735 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  11:47:06,735 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  11:47:06,740 | james.imapserver | Init IMAP Service done
+INFO  11:47:14,246 | james.imapserver | ID=161631718 Connection established from 127.0.0.1
+INFO  11:47:15,373 | james.imapserver | ID=161631718 Connection closed for 127.0.0.1
+WARN  11:47:15,377 | james.imapserver | ID=161631718 Error while processing imap request: java.nio.channels.ClosedChannelException - null
+INFO  11:50:22,405 | james.imapserver | ID=1887416744 Connection established from 127.0.0.1
+INFO  11:50:22,934 | james.imapserver | ID=1887416744 Connection closed for 127.0.0.1
+INFO  11:51:35,665 | james.imapserver | ID=416970966 Connection established from 127.0.0.1
+INFO  11:51:36,408 | james.imapserver | ID=416970966 Connection closed for 127.0.0.1
+INFO  11:59:43,112 | james.imapserver | ID=890424821 Connection established from 127.0.0.1
+INFO  11:59:43,671 | james.imapserver | ID=890424821 Connection closed for 127.0.0.1
+INFO  12:01:00,310 | james.imapserver | ID=69593331 Connection established from 127.0.0.1
+INFO  12:01:00,774 | james.imapserver | ID=69593331 Connection closed for 127.0.0.1
+INFO  12:02:18,609 | james.imapserver | ID=770137324 Connection established from 127.0.0.1
+INFO  12:02:19,004 | james.imapserver | ID=770137324 Connection closed for 127.0.0.1
+INFO  12:09:37,248 | james.imapserver | ID=1930164836 Connection established from 127.0.0.1
+INFO  12:09:37,609 | james.imapserver | ID=1930164836 Connection closed for 127.0.0.1
+INFO  12:10:07,444 | james.imapserver | ID=760039781 Connection established from 127.0.0.1
+INFO  12:10:07,917 | james.imapserver | ID=760039781 Connection closed for 127.0.0.1
+INFO  12:12:32,373 | james.imapserver | Dispose IMAP Service
+INFO  12:12:32,382 | james.imapserver | Dispose IMAP Service done
+INFO  12:15:27,879 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  12:15:27,882 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  12:15:27,882 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  12:15:27,883 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  12:15:27,883 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  12:15:27,888 | james.imapserver | Init IMAP Service done
+INFO  12:15:32,101 | james.imapserver | ID=1835010169 Connection established from 127.0.0.1
+INFO  12:15:33,228 | james.imapserver | ID=1835010169 Connection closed for 127.0.0.1
+INFO  12:16:57,037 | james.imapserver | ID=998454309 Connection established from 127.0.0.1
+INFO  12:16:57,708 | james.imapserver | ID=998454309 Connection closed for 127.0.0.1
+INFO  12:20:38,372 | james.imapserver | ID=655494547 Connection established from 127.0.0.1
+INFO  12:20:38,831 | james.imapserver | ID=655494547 Connection closed for 127.0.0.1
+INFO  12:20:52,617 | james.imapserver | ID=1009225085 Connection established from 127.0.0.1
+INFO  12:20:53,007 | james.imapserver | ID=1009225085 Connection closed for 127.0.0.1
+WARN  12:20:53,007 | james.imapserver | ID=1009225085 Error while processing imap request: java.nio.channels.ClosedChannelException - null
+INFO  12:23:04,877 | james.imapserver | ID=1860218876 Connection established from 127.0.0.1
+INFO  12:23:18,633 | james.imapserver | ID=1860218876 Connection closed for 127.0.0.1
+INFO  12:23:24,755 | james.imapserver | Dispose IMAP Service
+INFO  12:23:24,763 | james.imapserver | Dispose IMAP Service done
+INFO  12:23:47,899 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  12:23:47,900 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  12:23:47,901 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  12:23:47,901 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  12:23:47,902 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  12:23:47,907 | james.imapserver | Init IMAP Service done
+INFO  12:23:51,910 | james.imapserver | ID=501427513 Connection established from 127.0.0.1
+INFO  12:23:53,129 | james.imapserver | ID=501427513 Connection closed for 127.0.0.1
+INFO  12:25:25,822 | james.imapserver | ID=1316092368 Connection established from 127.0.0.1
+INFO  12:25:26,604 | james.imapserver | ID=1316092368 Connection closed for 127.0.0.1
+INFO  12:26:04,588 | james.imapserver | ID=1261735019 Connection established from 127.0.0.1
+INFO  12:26:05,140 | james.imapserver | ID=1261735019 Connection closed for 127.0.0.1
+INFO  12:28:53,535 | james.imapserver | ID=901674097 Connection established from 127.0.0.1
+INFO  12:28:54,326 | james.imapserver | ID=901674097 Connection closed for 127.0.0.1
+INFO  12:38:56,898 | james.imapserver | ID=1179355653 Connection established from 127.0.0.1
+INFO  12:38:57,591 | james.imapserver | ID=1179355653 Connection closed for 127.0.0.1
+INFO  12:48:33,229 | james.imapserver | Dispose IMAP Service
+INFO  12:48:33,241 | james.imapserver | Dispose IMAP Service done
+INFO  18:03:04,430 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  18:03:04,455 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  18:03:04,456 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:03:04,525 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  18:03:04,587 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  18:03:04,596 | james.imapserver | Init IMAP Service done
+INFO  18:03:21,388 | james.imapserver | ID=216142949 Connection established from 127.0.0.1
+INFO  18:03:23,243 | james.imapserver | ID=216142949 Connection closed for 127.0.0.1
+INFO  18:07:05,152 | james.imapserver | ID=1590614727 Connection established from 127.0.0.1
+INFO  18:07:06,150 | james.imapserver | ID=1590614727 Connection closed for 127.0.0.1
+INFO  18:12:08,036 | james.imapserver | ID=1799943479 Connection established from 127.0.0.1
+INFO  18:12:08,834 | james.imapserver | ID=1799943479 Connection closed for 127.0.0.1
+INFO  18:12:43,794 | james.imapserver | ID=767748672 Connection established from 127.0.0.1
+INFO  18:12:45,911 | james.imapserver | ID=767748672 Connection closed for 127.0.0.1
+INFO  18:13:50,067 | james.imapserver | ID=1952396154 Connection established from 127.0.0.1
+INFO  18:13:50,541 | james.imapserver | ID=1952396154 Connection closed for 127.0.0.1
+INFO  18:15:21,111 | james.imapserver | ID=501820758 Connection established from 127.0.0.1
+INFO  18:15:21,829 | james.imapserver | ID=501820758 Connection closed for 127.0.0.1
+INFO  18:15:31,056 | james.imapserver | ID=1500614051 Connection established from 127.0.0.1
+INFO  18:15:31,361 | james.imapserver | ID=1500614051 Connection closed for 127.0.0.1
+INFO  18:15:41,056 | james.imapserver | ID=316064310 Connection established from 127.0.0.1
+INFO  18:15:41,342 | james.imapserver | ID=316064310 Connection closed for 127.0.0.1
+INFO  18:15:51,064 | james.imapserver | ID=827876126 Connection established from 127.0.0.1
+INFO  18:15:51,378 | james.imapserver | ID=827876126 Connection closed for 127.0.0.1
+INFO  18:16:01,065 | james.imapserver | ID=1175990608 Connection established from 127.0.0.1
+INFO  18:16:01,369 | james.imapserver | ID=1175990608 Connection closed for 127.0.0.1
+INFO  18:16:11,093 | james.imapserver | ID=155335075 Connection established from 127.0.0.1
+INFO  18:16:11,804 | james.imapserver | ID=155335075 Connection closed for 127.0.0.1
+INFO  18:16:21,066 | james.imapserver | ID=810574873 Connection established from 127.0.0.1
+INFO  18:16:21,391 | james.imapserver | ID=810574873 Connection closed for 127.0.0.1
+INFO  18:16:31,067 | james.imapserver | ID=1415670442 Connection established from 127.0.0.1
+INFO  18:16:31,478 | james.imapserver | ID=1415670442 Connection closed for 127.0.0.1
+INFO  18:16:41,068 | james.imapserver | ID=2062727540 Connection established from 127.0.0.1
+INFO  18:16:41,394 | james.imapserver | ID=2062727540 Connection closed for 127.0.0.1
+INFO  18:16:51,072 | james.imapserver | ID=1601752691 Connection established from 127.0.0.1
+INFO  18:16:51,385 | james.imapserver | ID=1601752691 Connection closed for 127.0.0.1
+INFO  18:17:01,067 | james.imapserver | ID=1924855039 Connection established from 127.0.0.1
+INFO  18:17:01,491 | james.imapserver | ID=1924855039 Connection closed for 127.0.0.1
+INFO  18:17:11,073 | james.imapserver | ID=1965221554 Connection established from 127.0.0.1
+INFO  18:17:11,467 | james.imapserver | ID=1965221554 Connection closed for 127.0.0.1
+INFO  18:17:21,075 | james.imapserver | ID=724861620 Connection established from 127.0.0.1
+INFO  18:17:21,375 | james.imapserver | ID=724861620 Connection closed for 127.0.0.1
+INFO  18:17:31,067 | james.imapserver | ID=547930338 Connection established from 127.0.0.1
+INFO  18:17:31,370 | james.imapserver | ID=547930338 Connection closed for 127.0.0.1
+INFO  18:17:41,073 | james.imapserver | ID=1165259806 Connection established from 127.0.0.1
+INFO  18:17:41,356 | james.imapserver | ID=1165259806 Connection closed for 127.0.0.1
+INFO  19:57:37,544 | james.imapserver | ID=201607655 Connection established from 127.0.0.1
+INFO  19:57:38,726 | james.imapserver | ID=201607655 Connection closed for 127.0.0.1
+INFO  19:57:47,517 | james.imapserver | ID=1584705629 Connection established from 127.0.0.1
+INFO  19:57:48,084 | james.imapserver | ID=1584705629 Connection closed for 127.0.0.1
+INFO  19:57:57,514 | james.imapserver | ID=715371252 Connection established from 127.0.0.1
+INFO  19:57:58,072 | james.imapserver | ID=715371252 Connection closed for 127.0.0.1
+INFO  19:58:06,933 | james.imapserver | ID=770013437 Connection established from 127.0.0.1
+INFO  19:58:07,754 | james.imapserver | ID=770013437 Connection closed for 127.0.0.1
+INFO  20:00:06,923 | james.imapserver | ID=164230827 Connection established from 127.0.0.1
+INFO  20:00:07,454 | james.imapserver | ID=164230827 Connection closed for 127.0.0.1
+INFO  20:02:06,926 | james.imapserver | ID=827352561 Connection established from 127.0.0.1
+INFO  20:02:07,470 | james.imapserver | ID=827352561 Connection closed for 127.0.0.1
+INFO  20:04:06,918 | james.imapserver | ID=34641080 Connection established from 127.0.0.1
+INFO  20:04:07,533 | james.imapserver | ID=34641080 Connection closed for 127.0.0.1
+INFO  20:15:03,596 | james.imapserver | ID=1403667683 Connection established from 127.0.0.1
+INFO  20:15:04,269 | james.imapserver | ID=1403667683 Connection closed for 127.0.0.1
+INFO  20:17:03,520 | james.imapserver | ID=2033245269 Connection established from 127.0.0.1
+INFO  20:17:03,824 | james.imapserver | ID=2033245269 Connection closed for 127.0.0.1
+INFO  20:19:03,519 | james.imapserver | ID=247024640 Connection established from 127.0.0.1
+INFO  20:19:03,839 | james.imapserver | ID=247024640 Connection closed for 127.0.0.1
+INFO  20:22:02,268 | james.imapserver | ID=916821499 Connection established from 127.0.0.1
+INFO  20:29:58,084 | james.imapserver | Dispose IMAP Service
+INFO  20:29:58,093 | james.imapserver | ID=916821499 Connection closed for 127.0.0.1
+INFO  20:29:58,203 | james.imapserver | Dispose IMAP Service done
+INFO  20:31:32,293 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  20:31:32,296 | james.imapserver | IMAP Service is running on: DESKTOP-TL7D46P
+INFO  20:31:32,297 | james.imapserver | IMAP Service handler hello name is: DESKTOP-TL7D46P
+INFO  20:31:32,298 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  20:31:32,299 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  20:31:32,305 | james.imapserver | Init IMAP Service done
+INFO  20:32:28,450 | james.imapserver | ID=1705599476 Connection established from 127.0.0.1
+INFO  20:34:16,982 | james.imapserver | ID=1705599476 Connection closed for 127.0.0.1
+INFO  20:34:17,672 | james.imapserver | ID=377734951 Connection established from 127.0.0.1
+INFO  20:34:39,842 | james.imapserver | ID=377734951 Connection closed for 127.0.0.1
+INFO  20:34:40,476 | james.imapserver | ID=239268425 Connection established from 127.0.0.1
+INFO  20:34:41,691 | james.imapserver | ID=239268425 Connection closed for 127.0.0.1
+INFO  20:37:40,826 | james.imapserver | ID=984450774 Connection established from 127.0.0.1
+INFO  20:37:41,112 | james.imapserver | ID=984450774 Connection closed for 127.0.0.1
+INFO  20:38:38,100 | james.imapserver | ID=79155065 Connection established from 127.0.0.1
+INFO  20:39:03,256 | james.imapserver | ID=79155065 Connection closed for 127.0.0.1
+INFO  20:39:03,859 | james.imapserver | ID=1305034987 Connection established from 127.0.0.1
+INFO  20:39:04,974 | james.imapserver | ID=1305034987 Connection closed for 127.0.0.1
+INFO  20:39:27,001 | james.imapserver | ID=2130316539 Connection established from 127.0.0.1
+INFO  20:39:28,006 | james.imapserver | ID=2130316539 Connection closed for 127.0.0.1
+INFO  20:41:26,990 | james.imapserver | ID=1922471487 Connection established from 127.0.0.1
+INFO  20:41:27,589 | james.imapserver | ID=1922471487 Connection closed for 127.0.0.1
+INFO  20:43:26,987 | james.imapserver | ID=165808335 Connection established from 127.0.0.1
+INFO  20:43:27,589 | james.imapserver | ID=165808335 Connection closed for 127.0.0.1
+INFO  20:45:26,995 | james.imapserver | ID=1904353708 Connection established from 127.0.0.1
+INFO  20:45:27,578 | james.imapserver | ID=1904353708 Connection closed for 127.0.0.1
+INFO  20:47:26,989 | james.imapserver | ID=1959572322 Connection established from 127.0.0.1
+INFO  20:47:27,917 | james.imapserver | ID=1959572322 Connection closed for 127.0.0.1
+INFO  20:49:26,985 | james.imapserver | ID=1723242255 Connection established from 127.0.0.1
+INFO  20:49:27,977 | james.imapserver | ID=1723242255 Connection closed for 127.0.0.1
+INFO  20:51:26,988 | james.imapserver | ID=547438576 Connection established from 127.0.0.1
+INFO  20:51:27,863 | james.imapserver | ID=547438576 Connection closed for 127.0.0.1
+INFO  20:53:26,988 | james.imapserver | ID=755868697 Connection established from 127.0.0.1
+INFO  20:53:38,721 | james.imapserver | ID=276077962 Connection established from 127.0.0.1
+INFO  20:53:39,043 | james.imapserver | ID=276077962 Connection closed for 127.0.0.1
+INFO  20:55:38,710 | james.imapserver | ID=1304921447 Connection established from 127.0.0.1
+INFO  20:55:38,850 | james.imapserver | ID=1304921447 Connection closed for 127.0.0.1
+INFO  20:57:38,721 | james.imapserver | ID=822078596 Connection established from 127.0.0.1
+INFO  20:57:38,825 | james.imapserver | ID=822078596 Connection closed for 127.0.0.1
+INFO  20:59:38,710 | james.imapserver | ID=1868435792 Connection established from 127.0.0.1
+INFO  20:59:38,837 | james.imapserver | ID=1868435792 Connection closed for 127.0.0.1
+INFO  21:01:38,711 | james.imapserver | ID=834409599 Connection established from 127.0.0.1
+INFO  21:01:38,828 | james.imapserver | ID=834409599 Connection closed for 127.0.0.1
+INFO  21:03:38,709 | james.imapserver | ID=2071773734 Connection established from 127.0.0.1
+INFO  21:03:38,843 | james.imapserver | ID=2071773734 Connection closed for 127.0.0.1
+INFO  21:05:38,710 | james.imapserver | ID=1253213083 Connection established from 127.0.0.1
+INFO  21:05:38,825 | james.imapserver | ID=1253213083 Connection closed for 127.0.0.1
+INFO  21:07:38,709 | james.imapserver | ID=1423751885 Connection established from 127.0.0.1
+INFO  21:07:38,877 | james.imapserver | ID=1423751885 Connection closed for 127.0.0.1
+INFO  21:09:38,716 | james.imapserver | ID=38372663 Connection established from 127.0.0.1
+INFO  21:09:38,809 | james.imapserver | ID=38372663 Connection closed for 127.0.0.1
+INFO  21:11:20,169 | james.imapserver | ID=1734909886 Connection established from 127.0.0.1
+INFO  21:12:01,752 | james.imapserver | ID=1734909886 Connection closed for 127.0.0.1
+INFO  21:12:01,887 | james.imapserver | ID=620875874 Connection established from 127.0.0.1
+INFO  21:12:02,690 | james.imapserver | ID=620875874 Connection closed for 127.0.0.1
+INFO  21:14:01,875 | james.imapserver | ID=2137200369 Connection established from 127.0.0.1
+INFO  21:14:03,050 | james.imapserver | ID=2137200369 Connection closed for 127.0.0.1
+INFO  21:14:23,433 | james.imapserver | ID=1294646886 Connection established from 127.0.0.1
+INFO  21:14:23,926 | james.imapserver | ID=1294646886 Connection closed for 127.0.0.1
+INFO  21:14:36,963 | james.imapserver | ID=1141148125 Connection established from 127.0.0.1
+INFO  21:14:37,535 | james.imapserver | ID=1141148125 Connection closed for 127.0.0.1
+INFO  21:16:36,967 | james.imapserver | ID=959705200 Connection established from 127.0.0.1
+INFO  21:16:37,222 | james.imapserver | ID=959705200 Connection closed for 127.0.0.1
+INFO  21:18:11,400 | james.imapserver | ID=826229124 Connection established from 127.0.0.1
+INFO  21:18:11,928 | james.imapserver | ID=826229124 Connection closed for 127.0.0.1
+INFO  21:20:04,211 | james.imapserver | ID=1532221334 Connection established from 127.0.0.1
+INFO  21:20:25,713 | james.imapserver | ID=1532221334 Connection closed for 127.0.0.1
+INFO  21:20:25,937 | james.imapserver | ID=424066865 Connection established from 127.0.0.1
+INFO  21:20:59,833 | james.imapserver | ID=424066865 Connection closed for 127.0.0.1
+INFO  21:21:00,374 | james.imapserver | ID=1438296888 Connection established from 127.0.0.1
+INFO  21:22:00,108 | james.imapserver | ID=1438296888 Connection closed for 127.0.0.1
+INFO  21:22:00,331 | james.imapserver | ID=48588802 Connection established from 127.0.0.1
+INFO  21:22:00,766 | james.imapserver | ID=48588802 Connection closed for 127.0.0.1
+INFO  21:23:27,031 | james.imapserver | ID=755868697 Logout client nwtis.nastava.foi.hr (127.0.0.1) because it idled for too long...
+INFO  21:23:27,037 | james.imapserver | ID=755868697 Connection closed for 127.0.0.1
+INFO  21:24:00,664 | james.imapserver | ID=1228987091 Connection established from 127.0.0.1
+INFO  21:24:13,096 | james.imapserver | ID=1228987091 Connection closed for 127.0.0.1
+INFO  21:24:13,693 | james.imapserver | ID=1371105431 Connection established from 127.0.0.1
+INFO  21:25:11,462 | james.imapserver | ID=1371105431 Connection closed for 127.0.0.1
+INFO  21:25:11,664 | james.imapserver | ID=1860224900 Connection established from 127.0.0.1
+INFO  21:29:59,292 | james.imapserver | ID=1860224900 Connection closed for 127.0.0.1
+INFO  21:29:59,664 | james.imapserver | ID=1207853223 Connection established from 127.0.0.1
+INFO  21:32:30,612 | james.imapserver | ID=1207853223 Connection closed for 127.0.0.1
+INFO  21:36:11,912 | james.imapserver | ID=1393244740 Connection established from 127.0.0.1
+INFO  21:36:12,374 | james.imapserver | ID=1393244740 Connection closed for 127.0.0.1
+INFO  21:37:15,165 | james.imapserver | ID=1950362384 Connection established from 127.0.0.1
+INFO  21:37:51,249 | james.imapserver | ID=1950362384 Connection closed for 127.0.0.1
+INFO  21:41:34,234 | james.imapserver | ID=753862590 Connection established from 127.0.0.1
+INFO  21:41:35,015 | james.imapserver | ID=753862590 Connection closed for 127.0.0.1
+INFO  21:43:34,157 | james.imapserver | ID=498618947 Connection established from 127.0.0.1
+INFO  21:43:34,612 | james.imapserver | ID=498618947 Connection closed for 127.0.0.1
+INFO  21:45:34,142 | james.imapserver | ID=724513089 Connection established from 127.0.0.1
+INFO  21:45:34,401 | james.imapserver | ID=724513089 Connection closed for 127.0.0.1
+INFO  21:47:34,145 | james.imapserver | ID=1033634492 Connection established from 127.0.0.1
+INFO  21:47:34,441 | james.imapserver | ID=1033634492 Connection closed for 127.0.0.1
+INFO  21:49:34,133 | james.imapserver | ID=1076822801 Connection established from 127.0.0.1
+INFO  21:49:34,369 | james.imapserver | ID=1076822801 Connection closed for 127.0.0.1
+INFO  21:51:34,135 | james.imapserver | ID=112632106 Connection established from 127.0.0.1
+INFO  21:51:34,319 | james.imapserver | ID=112632106 Connection closed for 127.0.0.1
+INFO  21:53:34,137 | james.imapserver | ID=1478264048 Connection established from 127.0.0.1
+INFO  21:53:34,317 | james.imapserver | ID=1478264048 Connection closed for 127.0.0.1
+INFO  21:55:34,136 | james.imapserver | ID=1548498542 Connection established from 127.0.0.1
+INFO  21:55:34,315 | james.imapserver | ID=1548498542 Connection closed for 127.0.0.1
+INFO  21:57:34,135 | james.imapserver | ID=10619261 Connection established from 127.0.0.1
+INFO  21:57:34,340 | james.imapserver | ID=10619261 Connection closed for 127.0.0.1
+INFO  21:59:34,145 | james.imapserver | ID=1016982838 Connection established from 127.0.0.1
+INFO  21:59:34,370 | james.imapserver | ID=1016982838 Connection closed for 127.0.0.1
+INFO  22:08:20,438 | james.imapserver | ID=1878688969 Connection established from 127.0.0.1
+INFO  22:08:20,796 | james.imapserver | ID=1878688969 Connection closed for 127.0.0.1
+INFO  22:08:34,440 | james.imapserver | ID=1839890791 Connection established from 127.0.0.1
+INFO  22:08:34,707 | james.imapserver | ID=1839890791 Connection closed for 127.0.0.1
+INFO  22:10:34,443 | james.imapserver | ID=1328188778 Connection established from 127.0.0.1
+INFO  22:10:34,643 | james.imapserver | ID=1328188778 Connection closed for 127.0.0.1
+INFO  22:12:34,458 | james.imapserver | ID=717662836 Connection established from 127.0.0.1
+INFO  22:12:35,044 | james.imapserver | ID=717662836 Connection closed for 127.0.0.1
+INFO  22:14:34,437 | james.imapserver | ID=483739426 Connection established from 127.0.0.1
+INFO  22:14:34,806 | james.imapserver | ID=483739426 Connection closed for 127.0.0.1
+INFO  22:16:34,440 | james.imapserver | ID=691907932 Connection established from 127.0.0.1
+INFO  22:16:34,764 | james.imapserver | ID=691907932 Connection closed for 127.0.0.1
+INFO  22:18:34,445 | james.imapserver | ID=2116029037 Connection established from 127.0.0.1
+INFO  22:18:34,645 | james.imapserver | ID=2116029037 Connection closed for 127.0.0.1
+INFO  22:19:13,802 | james.imapserver | ID=963968922 Connection established from 127.0.0.1
+INFO  22:19:14,112 | james.imapserver | ID=963968922 Connection closed for 127.0.0.1
+INFO  22:20:43,366 | james.imapserver | ID=78295126 Connection established from 127.0.0.1
+INFO  22:20:43,793 | james.imapserver | ID=78295126 Connection closed for 127.0.0.1
+INFO  22:21:14,699 | james.imapserver | ID=576162070 Connection established from 127.0.0.1
+INFO  22:21:15,028 | james.imapserver | ID=576162070 Connection closed for 127.0.0.1
+INFO  22:23:00,730 | james.imapserver | ID=1634419751 Connection established from 127.0.0.1
+INFO  22:23:01,291 | james.imapserver | ID=1634419751 Connection closed for 127.0.0.1
+INFO  22:23:08,077 | james.imapserver | ID=2115676104 Connection established from 127.0.0.1
+INFO  22:23:08,335 | james.imapserver | ID=2115676104 Connection closed for 127.0.0.1
+INFO  22:24:40,258 | james.imapserver | ID=911929956 Connection established from 127.0.0.1
+INFO  22:24:40,612 | james.imapserver | ID=911929956 Connection closed for 127.0.0.1
+INFO  22:26:40,251 | james.imapserver | ID=1742954254 Connection established from 127.0.0.1
+INFO  22:26:40,469 | james.imapserver | ID=1742954254 Connection closed for 127.0.0.1
+INFO  22:28:40,245 | james.imapserver | ID=653092448 Connection established from 127.0.0.1
+INFO  22:28:40,444 | james.imapserver | ID=653092448 Connection closed for 127.0.0.1
+INFO  22:30:40,245 | james.imapserver | ID=828525934 Connection established from 127.0.0.1
+INFO  22:30:40,571 | james.imapserver | ID=828525934 Connection closed for 127.0.0.1
+INFO  22:32:40,245 | james.imapserver | ID=2059733868 Connection established from 127.0.0.1
+INFO  22:32:40,480 | james.imapserver | ID=2059733868 Connection closed for 127.0.0.1
+INFO  22:33:32,061 | james.imapserver | ID=159805173 Connection established from 196.52.43.109
+WARN  22:33:32,850 | james.imapserver | ID=159805173 Error while processing imap request: java.nio.channels.ClosedChannelException - null
+WARN  22:33:32,850 | james.imapserver | ID=159805173 Error while processing imap request: java.lang.NullPointerException - null
+WARN  22:33:32,850 | james.imapserver | ID=159805173 Error while processing imap request: java.lang.NullPointerException - null
+WARN  22:33:32,851 | james.imapserver | ID=159805173 Error while processing imap request: java.lang.NullPointerException - null
+INFO  22:33:32,851 | james.imapserver | ID=159805173 Connection closed for 196.52.43.109
+WARN  22:33:32,852 | james.imapserver | ID=159805173 Error while processing imap request: java.lang.NullPointerException - null
+INFO  22:34:40,251 | james.imapserver | ID=282870445 Connection established from 127.0.0.1
+INFO  22:34:40,474 | james.imapserver | ID=282870445 Connection closed for 127.0.0.1
+INFO  22:36:40,251 | james.imapserver | ID=294009504 Connection established from 127.0.0.1
+INFO  22:36:40,428 | james.imapserver | ID=294009504 Connection closed for 127.0.0.1
+INFO  22:38:40,250 | james.imapserver | ID=1429062635 Connection established from 127.0.0.1
+INFO  22:38:40,413 | james.imapserver | ID=1429062635 Connection closed for 127.0.0.1
+INFO  22:40:40,260 | james.imapserver | ID=1395783469 Connection established from 127.0.0.1
+INFO  22:40:40,442 | james.imapserver | ID=1395783469 Connection closed for 127.0.0.1
+INFO  22:42:40,291 | james.imapserver | ID=1881288820 Connection established from 127.0.0.1
+INFO  22:42:40,708 | james.imapserver | ID=1881288820 Connection closed for 127.0.0.1
+INFO  22:44:40,268 | james.imapserver | ID=157396454 Connection established from 127.0.0.1
+INFO  22:44:40,502 | james.imapserver | ID=157396454 Connection closed for 127.0.0.1
+INFO  22:46:40,273 | james.imapserver | ID=801947433 Connection established from 127.0.0.1
+INFO  22:46:40,441 | james.imapserver | ID=801947433 Connection closed for 127.0.0.1
+INFO  22:48:40,280 | james.imapserver | ID=1676437985 Connection established from 127.0.0.1
+INFO  22:48:40,453 | james.imapserver | ID=1676437985 Connection closed for 127.0.0.1
+INFO  22:50:40,281 | james.imapserver | ID=889193022 Connection established from 127.0.0.1
+INFO  22:50:40,472 | james.imapserver | ID=889193022 Connection closed for 127.0.0.1
+INFO  22:52:40,292 | james.imapserver | ID=949330156 Connection established from 127.0.0.1
+INFO  22:52:40,457 | james.imapserver | ID=949330156 Connection closed for 127.0.0.1
+INFO  22:57:13,993 | james.imapserver | ID=1203231511 Connection established from 127.0.0.1
+INFO  22:57:14,465 | james.imapserver | ID=1203231511 Connection closed for 127.0.0.1
+INFO  22:59:13,965 | james.imapserver | ID=1559027778 Connection established from 127.0.0.1
+INFO  22:59:14,202 | james.imapserver | ID=1559027778 Connection closed for 127.0.0.1
+INFO  23:01:13,966 | james.imapserver | ID=1904795094 Connection established from 127.0.0.1
+INFO  23:01:14,203 | james.imapserver | ID=1904795094 Connection closed for 127.0.0.1
+INFO  23:03:13,968 | james.imapserver | ID=2133930226 Connection established from 127.0.0.1
+INFO  23:03:14,197 | james.imapserver | ID=2133930226 Connection closed for 127.0.0.1
+INFO  23:03:55,075 | james.imapserver | ID=162644090 Connection established from 127.0.0.1
+INFO  23:03:56,120 | james.imapserver | ID=162644090 Connection closed for 127.0.0.1
+INFO  23:05:55,053 | james.imapserver | ID=646678965 Connection established from 127.0.0.1
+INFO  23:05:55,241 | james.imapserver | ID=646678965 Connection closed for 127.0.0.1
+INFO  23:07:15,911 | james.imapserver | ID=48710239 Connection established from 127.0.0.1
+INFO  23:07:16,135 | james.imapserver | ID=48710239 Connection closed for 127.0.0.1
+INFO  23:08:52,213 | james.imapserver | ID=781397661 Connection established from 127.0.0.1
+INFO  23:08:52,534 | james.imapserver | ID=781397661 Connection closed for 127.0.0.1
+INFO  23:10:40,231 | james.imapserver | ID=628121056 Connection established from 127.0.0.1
+INFO  23:10:42,029 | james.imapserver | ID=628121056 Connection closed for 127.0.0.1
+INFO  23:12:39,940 | james.imapserver | ID=583087903 Connection established from 127.0.0.1
+INFO  23:12:40,551 | james.imapserver | ID=583087903 Connection closed for 127.0.0.1
+INFO  23:14:39,910 | james.imapserver | ID=254876441 Connection established from 127.0.0.1
+INFO  23:14:40,464 | james.imapserver | ID=254876441 Connection closed for 127.0.0.1
+INFO  23:16:39,914 | james.imapserver | ID=1364926841 Connection established from 127.0.0.1
+INFO  23:16:40,317 | james.imapserver | ID=1364926841 Connection closed for 127.0.0.1
+INFO  23:18:39,911 | james.imapserver | ID=45118039 Connection established from 127.0.0.1
+INFO  23:18:40,329 | james.imapserver | ID=45118039 Connection closed for 127.0.0.1
+INFO  23:20:39,909 | james.imapserver | ID=556018293 Connection established from 127.0.0.1
+INFO  23:20:40,533 | james.imapserver | ID=556018293 Connection closed for 127.0.0.1
+INFO  23:22:39,912 | james.imapserver | ID=710542964 Connection established from 127.0.0.1
+INFO  23:22:40,311 | james.imapserver | ID=710542964 Connection closed for 127.0.0.1
+INFO  23:23:56,692 | james.imapserver | ID=479937652 Connection established from 127.0.0.1
+INFO  23:23:57,973 | james.imapserver | ID=479937652 Connection closed for 127.0.0.1
+INFO  23:24:31,978 | james.imapserver | ID=923510333 Connection established from 127.0.0.1
+INFO  23:24:32,172 | james.imapserver | ID=923510333 Connection closed for 127.0.0.1
+INFO  23:24:56,623 | james.imapserver | ID=1685940162 Connection established from 127.0.0.1
+INFO  23:24:56,842 | james.imapserver | ID=1685940162 Connection closed for 127.0.0.1
+INFO  23:26:56,582 | james.imapserver | ID=1405095832 Connection established from 127.0.0.1
+INFO  23:26:56,656 | james.imapserver | ID=1405095832 Connection closed for 127.0.0.1
+INFO  23:30:45,640 | james.imapserver | ID=406304626 Connection established from 127.0.0.1
+INFO  23:30:45,890 | james.imapserver | ID=406304626 Connection closed for 127.0.0.1
+INFO  23:32:45,625 | james.imapserver | ID=1138890164 Connection established from 127.0.0.1
+INFO  23:32:45,701 | james.imapserver | ID=1138890164 Connection closed for 127.0.0.1
+INFO  23:34:45,636 | james.imapserver | ID=632392575 Connection established from 127.0.0.1
+INFO  23:34:45,722 | james.imapserver | ID=632392575 Connection closed for 127.0.0.1
+INFO  23:36:45,626 | james.imapserver | ID=612099374 Connection established from 127.0.0.1
+INFO  23:36:45,702 | james.imapserver | ID=612099374 Connection closed for 127.0.0.1
+INFO  23:38:19,450 | james.imapserver | ID=927360539 Connection established from 127.0.0.1
+INFO  23:38:19,691 | james.imapserver | ID=927360539 Connection closed for 127.0.0.1
+INFO  23:39:21,864 | james.imapserver | ID=1380294945 Connection established from 127.0.0.1
+INFO  23:39:22,055 | james.imapserver | ID=1380294945 Connection closed for 127.0.0.1
+INFO  23:41:21,853 | james.imapserver | ID=1395834509 Connection established from 127.0.0.1
+INFO  23:41:21,926 | james.imapserver | ID=1395834509 Connection closed for 127.0.0.1
+INFO  23:43:21,861 | james.imapserver | ID=1068670332 Connection established from 127.0.0.1
+INFO  23:43:21,991 | james.imapserver | ID=1068670332 Connection closed for 127.0.0.1
+INFO  23:45:21,857 | james.imapserver | ID=1938874658 Connection established from 127.0.0.1
+INFO  23:45:21,960 | james.imapserver | ID=1938874658 Connection closed for 127.0.0.1
+INFO  23:47:21,857 | james.imapserver | ID=211448412 Connection established from 127.0.0.1
+INFO  23:47:21,922 | james.imapserver | ID=211448412 Connection closed for 127.0.0.1
+INFO  23:48:34,984 | james.imapserver | ID=1937922754 Connection established from 127.0.0.1
+INFO  23:48:35,299 | james.imapserver | ID=1937922754 Connection closed for 127.0.0.1
+INFO  23:50:34,966 | james.imapserver | ID=758474583 Connection established from 127.0.0.1
+INFO  23:50:35,060 | james.imapserver | ID=758474583 Connection closed for 127.0.0.1
+INFO  23:52:34,965 | james.imapserver | ID=1231607142 Connection established from 127.0.0.1
+INFO  23:52:35,031 | james.imapserver | ID=1231607142 Connection closed for 127.0.0.1
+INFO  23:54:34,966 | james.imapserver | ID=434258572 Connection established from 127.0.0.1
+INFO  23:54:35,037 | james.imapserver | ID=434258572 Connection closed for 127.0.0.1
+INFO  23:56:34,966 | james.imapserver | ID=1199552370 Connection established from 127.0.0.1
+INFO  23:56:35,033 | james.imapserver | ID=1199552370 Connection closed for 127.0.0.1
+INFO  23:58:34,964 | james.imapserver | ID=438976916 Connection established from 127.0.0.1
+INFO  23:58:35,037 | james.imapserver | ID=438976916 Connection closed for 127.0.0.1
+INFO  23:59:05,640 | james.imapserver | ID=36653803 Connection established from 127.0.0.1
+INFO  23:59:05,899 | james.imapserver | ID=36653803 Connection closed for 127.0.0.1

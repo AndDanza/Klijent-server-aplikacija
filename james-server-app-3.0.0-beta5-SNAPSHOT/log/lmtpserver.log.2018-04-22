@@ -1,0 +1,9 @@
+INFO  00:17:18,930 | james.lmtpserver | Dispose LMTP Service
+INFO  00:17:18,933 | james.lmtpserver | Dispose LMTP Service done
+INFO  09:28:18,889 | james.lmtpserver | LMTP Service disabled by configuration
+INFO  12:22:27,014 | james.lmtpserver | Dispose LMTP Service
+INFO  12:22:27,015 | james.lmtpserver | Dispose LMTP Service done
+INFO  15:19:27,063 | james.lmtpserver | LMTP Service disabled by configuration
+INFO  19:44:29,542 | james.lmtpserver | Dispose LMTP Service
+INFO  19:44:29,544 | james.lmtpserver | Dispose LMTP Service done
+INFO  23:24:02,143 | james.lmtpserver | LMTP Service disabled by configuration

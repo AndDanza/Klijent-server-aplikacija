@@ -1,0 +1,22 @@
+INFO  05:48:23,568 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  05:48:23,573 | james.smtpserver | SMTP Service is running on: nbkermek4
+INFO  05:48:23,575 | james.smtpserver | SMTP Service handler hello name is: nbkermek4
+INFO  05:48:23,578 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  05:48:23,581 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  05:48:23,586 | james.smtpserver | This SMTP server requires authentication.
+INFO  05:48:23,590 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  05:48:24,390 | james.smtpserver | Init SMTP Service done
+INFO  05:57:51,671 | james.smtpserver | Id='1728956907' User='' Connection established from 127.0.0.1
+INFO  05:57:51,856 | james.smtpserver | Id='1728956907' User='' Successfully spooled mail Mail1461038271785-f5e4f666-0b3f-4b0d-8ffe-31aeffbb2b23 from pero@localhost on sams.nikonimaging.com/127.0.0.1 for [pero@localhost]
+INFO  05:57:51,869 | james.smtpserver | Id='1728956907' User='' Connection closed for 127.0.0.1
+INFO  05:58:37,392 | james.smtpserver | Id='566032165' User='' Connection established from 127.0.0.1
+INFO  05:58:37,425 | james.smtpserver | Id='566032165' User='' Successfully spooled mail Mail1461038317415-ad048893-1ab2-4b89-b607-1d24797306fd from pero@localhost on sams.nikonimaging.com/127.0.0.1 for [pero@localhost]
+INFO  05:58:37,437 | james.smtpserver | Id='566032165' User='' Connection closed for 127.0.0.1
+INFO  08:49:28,811 | james.smtpserver | Id='1222168078' User='' Connection established from 127.0.0.1
+INFO  08:49:28,858 | james.smtpserver | Id='1222168078' User='' Successfully spooled mail Mail1461048568846-66d10bc4-0989-4584-996d-d941f31f565a from pero@localhost on sams.nikonimaging.com/127.0.0.1 for [pero@localhost]
+INFO  08:49:28,865 | james.smtpserver | Id='1222168078' User='' Connection closed for 127.0.0.1
+INFO  08:50:58,002 | james.smtpserver | Id='1284960871' User='' Connection established from 127.0.0.1
+INFO  08:50:58,048 | james.smtpserver | Id='1284960871' User='' Successfully spooled mail Mail1461048658021-93cf1662-63db-43b9-b30f-af33eaa1aa64 from pero@localhost on sams.nikonimaging.com/127.0.0.1 for [pero@localhost]
+INFO  08:50:58,054 | james.smtpserver | Id='1284960871' User='' Connection closed for 127.0.0.1
+INFO  19:41:48,283 | james.smtpserver | Dispose SMTP Service
+INFO  19:41:48,298 | james.smtpserver | Dispose SMTP Service done

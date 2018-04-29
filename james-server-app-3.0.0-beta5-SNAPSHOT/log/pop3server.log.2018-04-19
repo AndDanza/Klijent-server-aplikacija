@@ -1,0 +1,32 @@
+INFO  17:59:20,427 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  17:59:20,429 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  17:59:20,429 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:59:20,430 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  17:59:20,431 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  17:59:20,530 | james.pop3server | Init POP3 Service done
+INFO  18:00:12,749 | james.pop3server | Dispose POP3 Service
+INFO  18:00:12,753 | james.pop3server | Dispose POP3 Service done
+INFO  18:11:07,184 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  18:11:07,186 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  18:11:07,188 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:11:07,189 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  18:11:07,189 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  18:11:07,273 | james.pop3server | Init POP3 Service done
+INFO  18:12:17,843 | james.pop3server | Dispose POP3 Service
+INFO  18:12:17,846 | james.pop3server | Dispose POP3 Service done
+INFO  18:16:14,931 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  18:16:14,943 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  18:16:14,951 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:16:14,956 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  18:16:14,959 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  18:16:15,282 | james.pop3server | Init POP3 Service done
+INFO  18:27:42,098 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  18:27:42,098 | james.pop3server | POP3 Service is running on: DESKTOP-TL7D46P
+INFO  18:27:42,113 | james.pop3server | POP3 Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:27:42,113 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  18:27:42,113 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  18:27:42,192 | james.pop3server | Init POP3 Service done
+INFO  19:05:06,828 | james.pop3server | Id='104679289' User='' Connection established from 92.242.236.200
+INFO  19:05:06,845 | james.pop3server | Id='104679289' User='' Connection closed for 92.242.236.200
+INFO  20:45:12,694 | james.pop3server | Dispose POP3 Service
+INFO  20:45:12,700 | james.pop3server | Dispose POP3 Service done

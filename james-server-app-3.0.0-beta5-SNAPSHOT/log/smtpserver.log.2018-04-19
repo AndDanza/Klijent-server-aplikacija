@@ -1,0 +1,40 @@
+INFO  17:59:19,996 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  17:59:20,000 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  17:59:20,006 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  17:59:20,010 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  17:59:20,011 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  17:59:20,013 | james.smtpserver | This SMTP server requires authentication.
+INFO  17:59:20,013 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  17:59:20,394 | james.smtpserver | Init SMTP Service done
+INFO  18:00:12,757 | james.smtpserver | Dispose SMTP Service
+INFO  18:00:12,768 | james.smtpserver | Dispose SMTP Service done
+INFO  18:11:06,849 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  18:11:06,850 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  18:11:06,851 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:11:06,852 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  18:11:06,853 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  18:11:06,854 | james.smtpserver | This SMTP server requires authentication.
+INFO  18:11:06,855 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  18:11:07,156 | james.smtpserver | Init SMTP Service done
+INFO  18:12:17,847 | james.smtpserver | Dispose SMTP Service
+INFO  18:12:17,853 | james.smtpserver | Dispose SMTP Service done
+INFO  18:16:14,150 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  18:16:14,152 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  18:16:14,153 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:16:14,156 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  18:16:14,157 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  18:16:14,158 | james.smtpserver | This SMTP server requires authentication.
+INFO  18:16:14,159 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  18:16:14,881 | james.smtpserver | Init SMTP Service done
+INFO  18:27:41,754 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  18:27:41,754 | james.smtpserver | SMTP Service is running on: DESKTOP-TL7D46P
+INFO  18:27:41,754 | james.smtpserver | SMTP Service handler hello name is: DESKTOP-TL7D46P
+INFO  18:27:41,754 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  18:27:41,754 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  18:27:41,754 | james.smtpserver | This SMTP server requires authentication.
+INFO  18:27:41,770 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  18:27:42,067 | james.smtpserver | Init SMTP Service done
+INFO  19:05:06,848 | james.smtpserver | Id='1789938332' User='' Connection established from 92.242.236.200
+INFO  19:05:06,857 | james.smtpserver | Id='1789938332' User='' Connection closed for 92.242.236.200
+INFO  20:45:12,701 | james.smtpserver | Dispose SMTP Service
+INFO  20:45:12,707 | james.smtpserver | Dispose SMTP Service done

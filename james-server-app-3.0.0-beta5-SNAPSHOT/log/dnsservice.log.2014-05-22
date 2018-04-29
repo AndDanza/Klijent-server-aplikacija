@@ -1,0 +1,7 @@
+INFO  19:41:58,136 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  19:41:58,165 | james.dnsservice | Adding autodiscovered server 161.53.120.3
+INFO  19:41:58,166 | james.dnsservice | Adding autodiscovered server 192.168.1.1
+INFO  19:41:58,166 | james.dnsservice | Adding autodiscovered search path Home.
+INFO  19:41:58,168 | james.dnsservice | DNS Server is: 161.53.120.3
+INFO  19:41:58,169 | james.dnsservice | DNS Server is: 192.168.1.1
+INFO  19:41:58,191 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
